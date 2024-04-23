@@ -1,22 +1,75 @@
-<div style="margin-top: 50px;" class="mb-3">
-    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Marka Ara">
-</div>
-<div *ngIf="filterText" class="alert alert-success" style="opacity: 0.8;">
- {{filterText}} aradınız.
-</div>
-
-<app-bootcamp-card></app-bootcamp-card>
-
-<ul class="list-group" style="opacity: 0.8;">
-    <li routerLink="/home-page" [class]="getListModels()">Markalar</li>
-</ul>
-<div class="mb-3" style="opacity: 0.8;">
-    <select class="form-select" size="5" aria-label="size 3 select example">
-        <option style="background-color: rgb(29, 29, 27);" (click)="onSelectedBootcamp(bootcamp.id)"
-        [ngClass]="{
-            active:selectedBootcampId===bootcamp.id
-        }"
-        [class]="getCurrentBootcampClass(bootcamp)"
-        *ngFor="let bootcamp of bootcampList | filterBootcampPipe:filterText" value="1">{{bootcamp.name}}</option>
-    </select>
+<div class="container-fluid bg-secondary bg-opacity-50">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 text-success">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+      >
+        <a
+          routerLink="/homepage"
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
+        >
+          <span class="fs-5 d-none d-sm-inline">Menu</span>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          id="menu"
+        >
+          <li>
+            <a
+              routerLink="#submenu2"
+              data-bs-toggle="collapse"
+              class="nav-link text-dark px-0 align-middle"
+            >
+              <i class="fs-4 bi-bootstrap"></i>
+              <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a
+            >
+            <ul
+              class="collapse nav flex-column ms-1"
+              id="submenu2"
+              data-bs-parent="#menu"
+            >
+              <li class="w-100">
+                <a href="#" class="nav-link px-0">
+                  <span class="d-none d-sm-inline">Item</span> 1</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              routerLink="/homepage"
+              class="nav-link px-0 text-dark align-middle"
+            >
+              <i class="fs-4 bi-people"></i>
+              <span class="ms-1 d-none d-sm-inline">Customers</span>
+            </a>
+          </li>
+        </ul>
+        <hr />
+      </div>
+    </div>
+    <div class="col py-3">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>BootcampState</th>
+            <th>Created Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bootcamp of bootcampList">
+            <td>{{ bootcamp.name }}</td>
+            <td>{{ bootcamp.instructorFirstName }}</td>
+            <td>{{ bootcamp.instructorLastName }}</td>
+            <td>{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</td>
+            <td>{{ bootcamp.endDate | date : "dd/MM/yyyy" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -15,50 +15,46 @@ import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-c
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterOutlet,RouterModule,CommonModule,HttpClientModule,NavbarComponent,FormsModule,SharedModule,BootcampCardComponent],
-  templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
-})
-export class HomepageComponent implements OnInit{
 
-  @Input() selectedBootcampId!: string;
-  @Output() bootcampSelected = new EventEmitter<string>();
-  bootcampList:GetlistBootcampResponse[] = [];
-  bootcampState:GetlistBootcampstateResponse[] = [];
-  currentBootcamp!:GetlistBootcampResponse;
-  filterText ="";
-  
-  constructor(private httpClient:HttpClient){}
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    CommonModule,
+    HttpClientModule,
+    NavbarComponent,
+  ],
+           
+  templateUrl: './homepage.component.html',
+  styleUrl: './homepage.component.scss',
+})
+export class HomepageComponent implements OnInit {
+  bootcampList: GetlistBootcampResponse[] = [];
+  bootcampState: GetlistBootcampstateResponse[] = [];
+
+
+  constructor(private httpClient: HttpClient) {}
+  erenPortNumber: number = 5278;
 
   ngOnInit(): void {
     this.getListModels();
   }
- getListModels(){
-    this.httpClient.get<DataResult<GetlistBootcampResponse[]>>("http://localhost:5278/api/Bootcamps")
-    .subscribe({
-      next:(response:DataResult<GetlistBootcampResponse[]>)=>{
-        console.log("Cevap geldi :",response);
-        this.bootcampList=response.data;
-      },
-      error:(error)=>{console.log("cevap hatalı :",error)},
-      complete:()=>{console.log("istek sonlandı")}
-    })
-  }
-  onSelectedBootcamp(bootcampId:string){
-    this.selectedBootcampId =bootcampId;
-    this.bootcampSelected.emit(this.selectedBootcampId);
-  }
 
-  setCurrentBootcamp(bootcamp:GetlistBootcampResponse) {
-    this.currentBootcamp = bootcamp;
+  getListModels() {
+    this.httpClient
+      .get<DataResult<GetlistBootcampResponse[]>>(
+        'http://localhost:5278/api/Bootcamps?PageIndex=0&PageSize=10'
+      )
+      .subscribe({
+        next: (response: DataResult<GetlistBootcampResponse[]>) => {
+          console.log('Cevap geldi :', response);
+          this.bootcampList = response.items;
+        },
+        error: (error) => {
+          console.log('cevap hatalı :', error);
+        },
+        complete: () => {
+          console.log('istek sonlandı');
+        },
+      });
   }
-
-  getCurrentBootcampClass(bootcamp:GetlistBootcampResponse){
-    if (bootcamp=this.currentBootcamp){
-      return "list-group-item active"
-    } else {
-      return "list-group-item"
-    }
-  }
-
 }
