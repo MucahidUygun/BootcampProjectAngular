@@ -1,15 +1,21 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GetlistBootcampResponse } from '../../models/responses/bootcamp/getlist-bootcamp-response';
 import { GetlistBootcampstateResponse } from '../../models/responses/bootcampstate/getlist-bootcampstate-response';
 import { DataResult } from '../../models/DataResult';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
+import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-card.component';
+
+
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
+
   imports: [
     RouterOutlet,
     RouterModule,
@@ -17,6 +23,7 @@ import { DataResult } from '../../models/DataResult';
     HttpClientModule,
     NavbarComponent,
   ],
+           
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
@@ -24,12 +31,14 @@ export class HomepageComponent implements OnInit {
   bootcampList: GetlistBootcampResponse[] = [];
   bootcampState: GetlistBootcampstateResponse[] = [];
 
+
   constructor(private httpClient: HttpClient) {}
   erenPortNumber: number = 5278;
 
   ngOnInit(): void {
     this.getListModels();
   }
+
   getListModels() {
     this.httpClient
       .get<DataResult<GetlistBootcampResponse[]>>(
