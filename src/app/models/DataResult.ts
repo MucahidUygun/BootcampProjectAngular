@@ -1,5 +1,9 @@
 export interface DataResult<T> {
-    data:T;
-    success:boolean;
-    message:string;
+  items: T;
+  index: number;
+  size: number;
+  count: number;
+  pages: number;
+  hasPrevious: boolean;
+  hasNext: boolean;
 }

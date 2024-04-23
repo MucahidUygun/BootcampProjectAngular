@@ -10,29 +10,42 @@ import { DataResult } from '../../models/DataResult';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RouterOutlet,RouterModule,CommonModule,HttpClientModule,NavbarComponent],
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    CommonModule,
+    HttpClientModule,
+    NavbarComponent,
+  ],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
+  styleUrl: './homepage.component.scss',
 })
-export class HomepageComponent implements OnInit{
+export class HomepageComponent implements OnInit {
+  bootcampList: GetlistBootcampResponse[] = [];
+  bootcampState: GetlistBootcampstateResponse[] = [];
 
-  bootcampList:GetlistBootcampResponse[] = [];
-  bootcampState:GetlistBootcampstateResponse[] = [];
-  
-  constructor(private httpClient:HttpClient){}
+  constructor(private httpClient: HttpClient) {}
+  erenPortNumber: number = 5278;
 
   ngOnInit(): void {
     this.getListModels();
   }
- getListModels(){
-    this.httpClient.get<DataResult<GetlistBootcampResponse[]>>("http://localhost:5278/api/Bootcamps")
-    .subscribe({
-      next:(response:DataResult<GetlistBootcampResponse[]>)=>{
-        console.log("Cevap geldi :",response);
-        this.bootcampList=response.data;
-      },
-      error:(error)=>{console.log("cevap hatalı :",error)},
-      complete:()=>{console.log("istek sonlandı")}
-    })
+  getListModels() {
+    this.httpClient
+      .get<DataResult<GetlistBootcampResponse[]>>(
+        'http://localhost:5278/api/Bootcamps?PageIndex=0&PageSize=10'
+      )
+      .subscribe({
+        next: (response: DataResult<GetlistBootcampResponse[]>) => {
+          console.log('Cevap geldi :', response);
+          this.bootcampList = response.items;
+        },
+        error: (error) => {
+          console.log('cevap hatalı :', error);
+        },
+        complete: () => {
+          console.log('istek sonlandı');
+        },
+      });
   }
-  }
+}
