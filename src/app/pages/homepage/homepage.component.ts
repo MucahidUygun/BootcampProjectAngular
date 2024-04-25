@@ -1,16 +1,24 @@
-import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { GetlistBootcampResponse } from '../../models/responses/bootcamp/getlist-bootcamp-response';
-import { GetlistBootcampstateResponse } from '../../models/responses/bootcampstate/getlist-bootcampstate-response';
-import { DataResult } from '../../models/DataResult';
+import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/getlist-bootcamp-response';
+import { GetlistBootcampstateResponse } from '../../features/models/responses/bootcampstate/getlist-bootcampstate-response';
+import { DataResult } from '../../features/models/DataResult';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-card.component';
-
-
+import { BootcampCardComponent } from '../../features/components/bootcamp-card/bootcamp-card.component';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-homepage',
@@ -23,17 +31,15 @@ import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-c
     HttpClientModule,
     NavbarComponent,
   ],
-           
+
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
   bootcampList: GetlistBootcampResponse[] = [];
   bootcampState: GetlistBootcampstateResponse[] = [];
-
-
+  private readonly apiUrl: string = `${environment.API_URL}/Bootcamps?PageIndex=0&PageSize=10`;
   constructor(private httpClient: HttpClient) {}
-  erenPortNumber: number = 5278;
 
   ngOnInit(): void {
     this.getListModels();
@@ -41,13 +47,13 @@ export class HomepageComponent implements OnInit {
 
   getListModels() {
     this.httpClient
-      .get<DataResult<GetlistBootcampResponse[]>>(
-        'http://localhost:5278/api/Bootcamps?PageIndex=0&PageSize=10'
-      )
+      .get<DataResult<GetlistBootcampResponse[]>>(this.apiUrl)
       .subscribe({
         next: (response: DataResult<GetlistBootcampResponse[]>) => {
           console.log('Cevap geldi :', response);
           this.bootcampList = response.items;
+          console.log(response.index);
+          console.log(response.size);
         },
         error: (error) => {
           console.log('cevap hatalı :', error);
