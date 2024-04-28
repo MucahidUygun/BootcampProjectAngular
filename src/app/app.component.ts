@@ -1,12 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptor } from './core/interceptors/error/ErrorInterceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { SharedModule } from './shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { authInterceptor } from './core/interceptors/auth/auth.interceptor';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavbarComponent,HomepageComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: authInterceptor,
+      multi: true, // Birden fazla interceptor zincirlenmesine izin ver
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    }
+  ],
+  imports: [RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule,HttpClientModule,CommonModule,FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

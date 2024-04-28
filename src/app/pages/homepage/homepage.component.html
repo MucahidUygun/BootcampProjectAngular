@@ -61,10 +61,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let bootcamp of bootcampList">
+          <tr *ngFor="let bootcamp of bootcamps.items">
             <td>{{ bootcamp.name }}</td>
-            <td>{{ bootcamp.instructorFirstName }}</td>
-            <td>{{ bootcamp.instructorLastName }}</td>
+            <!-- <td>{{ bootcamp.instructorFirstName }}</td>
+            <td>{{ bootcamp.instructorLastName }}</td> -->
             <td>{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</td>
             <td>{{ bootcamp.endDate | date : "dd/MM/yyyy" }}</td>
           </tr>

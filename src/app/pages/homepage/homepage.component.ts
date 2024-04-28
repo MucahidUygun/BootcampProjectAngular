@@ -3,13 +3,11 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { GetlistBootcampResponse } from '../../models/responses/bootcamp/getlist-bootcamp-response';
-import { GetlistBootcampstateResponse } from '../../models/responses/bootcampstate/getlist-bootcampstate-response';
-import { DataResult } from '../../models/DataResult';
+import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/GetListBootcampResponse';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared.module';
-import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-card.component';
-
+import { BootcampService } from '../../features/services/concretes/bootcamp.service';
+import { BootcampListItem } from '../../features/models/responses/bootcamp/bootcampItemDto';
+import { PageRequest } from '../../core/models/requests/PageRequest';
 
 
 @Component({
@@ -22,39 +20,30 @@ import { BootcampCardComponent } from '../../components/bootcamp-card/bootcamp-c
     CommonModule,
     HttpClientModule,
     NavbarComponent,
+    FormsModule
   ],
-           
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
-  bootcampList: GetlistBootcampResponse[] = [];
-  bootcampState: GetlistBootcampstateResponse[] = [];
+  bootcamps: BootcampListItem = {
+    index: 0,
+    size: 0,
+    count: 0,
+    hasNext: false,
+    hasPrevious: false,
+    pages: 0,
+    items: [],
+  };
 
-
-  constructor(private httpClient: HttpClient) {}
-  erenPortNumber: number = 5278;
-
+  constructor(private bootcampService: BootcampService) {}
+  readonly PAGE_SIZE = 3;
   ngOnInit(): void {
-    this.getListModels();
+    this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
   }
 
-  getListModels() {
-    this.httpClient
-      .get<DataResult<GetlistBootcampResponse[]>>(
-        'http://localhost:5278/api/Bootcamps?PageIndex=0&PageSize=10'
-      )
-      .subscribe({
-        next: (response: DataResult<GetlistBootcampResponse[]>) => {
-          console.log('Cevap geldi :', response);
-          this.bootcampList = response.items;
-        },
-        error: (error) => {
-          console.log('cevap hatalı :', error);
-        },
-        complete: () => {
-          console.log('istek sonlandı');
-        },
-      });
-  }
-}
+  getBootcamps(pageRequest: PageRequest) {
+    this.bootcampService.getList(pageRequest).subscribe((response) => {
+      this.bootcamps = response;
+    });
+  }}
