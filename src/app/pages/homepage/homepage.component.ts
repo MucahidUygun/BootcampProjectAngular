@@ -3,7 +3,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/GetListBootcampResponse';
 import { FormsModule } from '@angular/forms';
 import { BootcampService } from '../../features/services/concretes/bootcamp.service';
 import { BootcampListItem } from '../../features/models/responses/bootcamp/bootcampItemDto';
