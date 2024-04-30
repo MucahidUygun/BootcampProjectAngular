@@ -10,6 +10,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { authInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { FormsModule } from '@angular/forms';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +30,7 @@ import { FormsModule } from '@angular/forms';
       multi: true,
     }
   ],
-  imports: [RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule,HttpClientModule,CommonModule,FormsModule],
+  imports: [MdbModalModule,MdbFormsModule,RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

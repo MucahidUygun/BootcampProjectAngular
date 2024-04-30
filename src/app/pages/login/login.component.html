@@ -1,11 +1,165 @@
-<form [formGroup]="loginForm">
-    <div  class="form-group">
-      <label for="exampleInputEmail1">E-posta Adresiniz</label>
-      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-posta adresinizi giriniz.">
+<div id="wrapper" class="fade-in">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card login-container">
+          <mdb-tabs [pills]="true" [fill]="true">
+            <mdb-tab title="Login">
+              <form>
+                <div class="text-center mb-3">
+                  <p>Sign in with:</p>
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                  </button>
+                </div>
+
+                <p class="text-center">or:</p>
+
+                <!-- Email input -->
+                <form [formGroup]="loginForm">
+                  <div class="form-group">
+                    <mdb-form-control class="mb-4">
+                      <input mdbInput formControlName="email" type="email" id="logiNE" class="form-control" />
+                      <label mdbLabel class="form-label" for="logiNE">Email</label>
+                    </mdb-form-control>
+                  </div>
+
+                  <!-- Password input -->
+                  <div class="form-group">
+                    <mdb-form-control class="mb-4">
+                      <input mdbInput formControlName="password" type="password" id="loginP" class="form-control" />
+                      <label mdbLabel class="form-label" for="loginP">Password</label>
+                    </mdb-form-control>
+                  </div>
+
+                  <!-- 2 column grid layout -->
+                  <div class="row mb-4">
+                    <div class="col-md-6 d-flex justify-content-center">
+                      <!-- Checkbox -->
+                      <div class="form-check mb-3 mb-md-0">
+                        <input mdbCheckbox class="form-check-input" type="checkbox" value="" id="loginCheck"
+                          [checked]="false" />
+                        <label class="form-check-label" for="loginCheck"> Beni hatırla </label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 d-flex justify-content-center">
+                      <!-- Simple link -->
+                      <a routerLink="#!">Forgot password?</a>
+                    </div>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button mdbRipple type="submit" class="btn btn-primary btn-block mb-4" (click)="login()"> Giriş Yap
+                  </button>
+                </form>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                  <p>Not a member? <a routerLink="#!">Register</a></p>
+                </div>
+              </form>
+            </mdb-tab>
+            <mdb-tab title="Register">
+              <form>
+                <div class="text-center mb-3">
+                  <p>Sign up with:</p>
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+
+                  <button mdbRipple type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                  </button>
+                </div>
+
+                <p class="text-center">or:</p>
+
+                <!-- Name input -->
+                <form [formGroup]="registerForm">
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="firstName" type="text" id="registerName" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerName">Name</label>
+                  </mdb-form-control>
+
+                  <!-- LastName input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="lastName" type="text" id="registerLastName" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerLastName">LastName</label>
+                  </mdb-form-control>
+                  <!-- Username input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="userName" type="text" id="registerUsername" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerUsername">Username</label>
+                  </mdb-form-control>
+
+                  <!-- Email input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="email" type="email" id="registerEmail" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerEmail">Email</label>
+                  </mdb-form-control>
+                  <!-- ID input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="nationalIdentity" type="text" id="registerID" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+                    <label mdbLabel class="form-label" for="registerID">Kimlik</label>
+                  </mdb-form-control>
+                  
+                  <!-- Birth input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="dateOfBirth" type="date" id="registerDate" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerDate">Doğum tarihi</label>
+                  </mdb-form-control>
+                  <!-- about input -->
+                  <mdb-form-control class="mb-4">
+                    <textarea mdbInput formControlName="about" type="date" id="registerAbout" class="form-control"> </textarea>
+                    <label mdbLabel class="form-label" for="registerAbout">Hakkımda</label>
+                  </mdb-form-control>
+                  <!-- Password input -->
+                  <mdb-form-control class="mb-4">
+                    <input mdbInput formControlName="password" type="password" id="registerPassword" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerPassword">Password</label>
+                  </mdb-form-control>
+
+                  <!-- Repeat Password input -->
+                  <mdb-form-control class="mb-4">
+                    <input formControlName="passwordConfirm" mdbInput type="password" id="registerRepeatPassword" class="form-control" />
+                    <label mdbLabel class="form-label" for="registerRepeatPassword">Repeat password</label>
+                  </mdb-form-control>
+
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-center mb-4">
+                    <input mdbCheckbox formControlName="isConfirm" class="form-check-input me-2" type="checkbox" value="" id="registerCheck" [checked]="true" aria-label="registerCheckHelpText" />
+                    <label class="form-check-label" for="registerCheck"> I have read and agree to the terms</label>
+                  </div>
+
+                  <!-- Submit button -->
+                  <button mdbRipple type="submit" class="btn btn-primary btn-block mb-3" (click)="register()">Sign in</button>
+                </form>
+              </form>
+            </mdb-tab>
+          </mdb-tabs>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Şifreniz</label>
-      <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary" (click)="login()">Gönder</button>
-  </form>
+  </div>
+</div>

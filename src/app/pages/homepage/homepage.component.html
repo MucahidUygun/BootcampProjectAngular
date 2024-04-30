@@ -1,75 +1,199 @@
-<div class="container-fluid bg-secondary bg-opacity-50">
-  <div class="row flex-nowrap">
-    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 text-success">
-      <div
-        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
-      >
-        <a
-          routerLink="/homepage"
-          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-        >
-          <span class="fs-5 d-none d-sm-inline">Menu</span>
-        </a>
-        <ul
-          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-          id="menu"
-        >
-          <li>
-            <a
-              routerLink="#submenu2"
-              data-bs-toggle="collapse"
-              class="nav-link text-dark px-0 align-middle"
-            >
-              <i class="fs-4 bi-bootstrap"></i>
-              <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a
-            >
-            <ul
-              class="collapse nav flex-column ms-1"
-              id="submenu2"
-              data-bs-parent="#menu"
-            >
-              <li class="w-100">
-                <a href="#" class="nav-link px-0">
-                  <span class="d-none d-sm-inline">Item</span> 1</a
-                >
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a
-              routerLink="/homepage"
-              class="nav-link px-0 text-dark align-middle"
-            >
-              <i class="fs-4 bi-people"></i>
-              <span class="ms-1 d-none d-sm-inline">Customers</span>
-            </a>
-          </li>
-        </ul>
-        <hr />
-      </div>
+<!-- <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+        alt="Trendy Pants and Shoes"
+        class="img-fluid rounded-start"
+      />
     </div>
-    <div class="col py-3">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>BootcampState</th>
-            <th>Created Date</th>
-            <th>End Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bootcamp of bootcamps.items">
-            <td>{{ bootcamp.name }}</td>
-            <!-- <td>{{ bootcamp.instructorFirstName }}</td>
-            <td>{{ bootcamp.instructorLastName }}</td> -->
-            <td>{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</td>
-            <td>{{ bootcamp.endDate | date : "dd/MM/yyyy" }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a wider card with supporting text below as a natural lead-in to
+          additional content. This content is a little bit longer.
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
     </div>
   </div>
 </div>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+        alt="Trendy Pants and Shoes"
+        class="img-fluid rounded-start"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a wider card with supporting text below as a natural lead-in to
+          additional content. This content is a little bit longer.
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+        alt="Trendy Pants and Shoes"
+        class="img-fluid rounded-start"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          This is a wider card with supporting text below as a natural lead-in to
+          additional content. This content is a little bit longer.
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div> -->
+	<!-- Wrapper -->
+		<div id="wrapper" class="fade-in">
+
+			<!-- Intro -->
+				<div id="intro">
+					<h1>
+					Pair 5 </h1><br /><br /><br /><br /><br />
+					<!-- <p>aaaa<br /> -->
+					<!-- aaa</p><br /> -->
+					<ul class="actions">
+						<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+					</ul>
+				</div>
+
+			<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li class="active"><a href="index.html">Bootcamps</a></li>
+						<li><a href="generic.html" class="nav-link disabled">Biz kimiz?[Kullanım dışı]</a></li>
+						<li><a href="elements.html" class="nav-link disabled">Diğer Çalışmalar[Kullanım dışı]</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</nav>
+
+			<!-- Main -->
+				<div id="main">
+
+					<!-- Featured Post -->
+						<article class="post featured">
+							<header class="major">
+								<tr class="date" *ngFor="let bootcamp of bootcamps.items">{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</tr>
+								<h2><a href="#">Ürünler</a></h2>
+								<p>Bu alanda eğitmenlerin/şirketin, göstermiş olduğu eğitimler/ürünler yer alıyor.</p>
+							</header>
+							<a href="#" class="image main"><img src="https://res.cloudinary.com/dyxgqsz0w/image/upload/v1713530679/samples/imagecon-group.jpg" alt="a" /></a>
+							<ul class="actions special">
+								<tr *ngFor="let bootcamp of bootcamps.items">
+									<p>Eğitmen/Şirket :{{ bootcamp.name  }}</p>
+								</tr>
+								
+								<li><a href="#" class="button large">Full Story</a></li>
+							</ul>
+						</article>
+
+					<!-- Posts -->
+						<section class="posts">
+							<article>
+								<header>
+									<span class="date" *ngFor="let bootcamp of bootcamps.items">{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</span>
+									<h2>Bootcamps<br /></h2>
+								</header>
+								<a href="#" class="image fit"><img src="../../../assets/images/pic02.jpg" alt="a" /></a>
+								<tr  *ngFor="let bootcamp of bootcamps.items">
+								<p>{{ bootcamp.id }}. Çalışma </p></tr>
+								<ul class="actions special">
+									<li><a routerLink="#" class="button">Devamını oku</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<tr class="date" *ngFor="let instructor of instructors.items">
+									<p>{{ instructor.companyName }}</p>
+									<h2>Primis eget<br /></h2>
+								</header>
+								<a href="#" class="image fit"><img src="../../../assets/images/pic03.jpg" alt="" /></a>
+								<p></p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 18, 2017</span>
+									<h2><a href="#">Ante mattis<br />
+									interdum dolor</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="../../../assets/images/pic04.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+							<article>
+								<header>
+									<span class="date">April 14, 2017</span>
+									<h2><a href="#">Tempus sed<br />
+									nulla imperdiet</a></h2>
+								</header>
+								<a href="#" class="image fit"><img src="../../../assets/images/pic05.jpg" alt="" /></a>
+								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+								<ul class="actions special">
+									<li><a href="#" class="button">Full Story</a></li>
+								</ul>
+							</article>
+						</section>
+				</div>
+
+			<!-- Footer -->
+				<footer id="footer">
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li>&copy;</li><li>Design: <a href="">Pair-5</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
