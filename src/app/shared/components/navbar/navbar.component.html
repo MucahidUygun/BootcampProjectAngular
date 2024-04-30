@@ -1,16 +1,80 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 50px;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid justify-content-between">
+    <!-- Left elements -->
+    <div class="d-flex">
+      <!-- Brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" routerLink="#">
+        <img
+          src=""
+          height="20"
+          alt=""
+          loading="lazy"
+          style="margin-top: 2px;"
+        />
+      </a>
+    </div>      
+    <!-- Left links -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/homepage">Anasayfa</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/bootcamps">Bootcamps</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/projects">Projects</a>
+      </li>
+    </ul><!-- Left links -->
+    <!-- SearchBar -->
+     <nav class="navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li mdbDropdown class="nav-item dropdown" style="display: flex; align-items: center;">
+              <div style="margin-right: 10px;">
+                <input *ngIf="showSearchInput" type="search" class="form-control" placeholder="Ara" aria-label="Search" aria-describedby="search-addon"/>
+              </div>
+              <span class="nav-link" id="search-addon" style="position: relative;">
+                <i (click)="toggleSearch()" class="fas fa-search" style="cursor: pointer;"></i>
+              </span>
+        </li>
+    
+    <!-- SearchBar -->
+      <!-- Right elements -->
+        <!-- Notifications -->
+        <li mdbDropdown class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle hidden-arrow" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+            <i class="fas fa-bell"></i>
+            <!-- <span class="badge rounded-pill badge-notification bg-danger">21</span> -->
+          </a>
+          <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="#">Some news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </li> 
+        <!-- Notifications -->
+        <!-- Avatar -->
+        <li mdbDropdown class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="#">Profil</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="openModal()" routerLink="#" >Çıkış Yap</a>
+            </li>
+          </ul>
+        </li>
+        </ul></div></nav></div></nav>
+        <!-- Avatar -->
+
+      <!-- Right elements -->

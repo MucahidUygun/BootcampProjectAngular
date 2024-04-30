@@ -8,5 +8,4 @@ export interface UpdateApplicantRequest {
     nationalIdentity:string;
     email:string;
     password:string;
-    updatedDate:Date;
 }
