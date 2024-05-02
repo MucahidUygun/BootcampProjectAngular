@@ -30,9 +30,10 @@ export class NavbarComponent implements OnInit{
   ){}
   openModal() {
     this.modalRef = this.modalService.open(ModalComponent, {
-      modalClass: 'modal-dialog-centered'
+      // modalClass: 'modal-dialog-centered'
     })
   }
+
   onDropdownShow(event: MdbDropdownDirective) {
     console.log('on dropdown show: ', event);
   }
@@ -78,9 +79,7 @@ export class NavbarComponent implements OnInit{
       this.isAdmin = false;
     }
    }
-
-
-
+ 
 
    showSearchInput: boolean = false;
   toggleSearch() {

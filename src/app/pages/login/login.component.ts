@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AlertModule } from '@coreui/angular';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 
 
@@ -21,7 +23,8 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 export class LoginComponent {
   loginForm!: FormGroup
   registerForm!: FormGroup
-  constructor(private toastrService: ToastrService, private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+  constructor(private toastrService: ToastrService, private formBuilder: FormBuilder, private authService: AuthService, private router: Router,private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -66,13 +69,13 @@ export class LoginComponent {
         }
       }
     } else {
-      this.toastrService.error("Lütfen gerekli alanları doldurunuz")
+      this.toastrService.error("Lütfen gerekli alanları doldurunuz", "Hata")
     }
   }
 
   checkPasswordIsSame() {
     if (this.registerForm.value.password != this.registerForm.value.passwordConfirm) {
-      this.toastrService.error("Şifreler uyuşmuyor lütfen kontrol ediniz!");
+      this.toastrService.error("Şifreler uyuşmuyor lütfen kontrol ediniz!", "Hata");
       return false;
     }
     return true;
@@ -82,7 +85,7 @@ export class LoginComponent {
     const maxLength = 11;
     
     if (nationalIdentity.length !== maxLength) {
-        this.toastrService.error("T.C. Kimlik numarası 11 haneli olmalıdır!");
+        this.toastrService.error("T.C. Kimlik numarası 11 haneli olmalıdır!", "Hata");
         return false;
     }
     return true;
@@ -90,9 +93,10 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       let loginModel: UserLoginRequest = Object.assign({}, this.loginForm.value);
+      
       this.authService.login(loginModel).subscribe(
         response => {
-          this.toastrService.success("Hoş Geldin", "Başarılı", { timeOut: 2500 });
+          this.toastrService.error("Hoş Geldin", "Başarı", { timeOut: 2500 });
           this.router.navigate(['homepage']);
           console.log(localStorage.getItem("token"));
         },
@@ -107,5 +111,6 @@ export class LoginComponent {
     } else {
       this.toastrService.error("Lütfen tüm alanları doldurun.", "Hata");
     }
+    
   }
 }
