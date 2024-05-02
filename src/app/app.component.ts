@@ -6,7 +6,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error/ErrorInterceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from './shared/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { authInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +13,7 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { AuthService } from './features/services/concretes/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -30,10 +30,17 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
       multi: true,
     }
   ],
-  imports: [MdbModalModule,MdbFormsModule,RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
+  imports: [MdbModalModule, MdbFormsModule, RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'FinalTobetoAngular';
+  isLoggedIn: boolean;
+  constructor(private authService: AuthService) {
+    this.isLoggedIn = this.authService.loggedIn();
+  }
+  isHomePage() {
+    return window.location.pathname === '/homepage';
+  }
 }
