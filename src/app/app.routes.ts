@@ -3,10 +3,12 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from '@coreui/angular';
 import { AuthService } from './features/services/concretes/auth.service';
+import { TestComponent } from './pages/test/test.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'homepage',pathMatch:'full'},
     {path:'homepage',component:HomepageComponent},
     {path:'login' ,component:LoginComponent},
-    {path:'' ,component:NavbarComponent, canActivate:[AuthService]}
+    {path:'' ,component:NavbarComponent, canActivate:[AuthService]},
+    {path:'test',component:TestComponent}
 ];
