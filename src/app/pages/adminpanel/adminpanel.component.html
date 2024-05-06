@@ -1,0 +1,58 @@
+<nav id="nav">
+<aside class="bg-gray-800 text-gray-100 h-screen w-64 fixed top-0 left-0 flex flex-col">
+    <div class="py-4 px-6 flex items-center">
+        <h3 class="font-semibold">Admin Paneli</h3>
+    </div>
+    
+    <ul class="link">
+        <li class="px-6 py-3 text-sm border-b border-gray-700"> <a routerLink="/users" class="hover:text-white">Kullanıcı Yönetimi</a> </li>
+        <li class="px-6 py-3 text-sm border-b border-gray-700"> <a class="hover:text-white">Test</a></li>
+        <li class="active"><a routerLink="/users">Bootcamps</a></li>
+    </ul>
+
+</aside></nav>
+
+<div class="admin-bg-image">
+    <main class="ml-64 p-6">
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-white font-semibold">Kullanıcı Yönetimi</h1>
+            <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Kullanıcı Ekle</button>
+        </header>
+
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Mail</th>
+                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Ad Soyad</th>
+                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Kullanıcı Adı</th>
+                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let instructor of instructors.items">
+                    <li mdbDropdown class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hidden-arrow" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Testing</a>
+                        <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                              <a class="dropdown-item" href="#">{{instructor.id}}</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">{{instructor.id}}</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">{{instructor.id}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <td class="py-2 px-4 border-b border-gray-300">{{instructor.email }}</td>
+                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.firstName }}, {{ instructor.lastName }}</td>
+                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.userName }}</td>
+                    <td class="py-2 px-4 border-b border-gray-300">
+                        <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600" >Düzenle</button>
+                        <button class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600">Sil</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>

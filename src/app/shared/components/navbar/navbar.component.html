@@ -37,7 +37,8 @@
               <span class="nav-link" id="search-addon" style="position: relative;">
                 <i (click)="toggleSearch()" class="fas fa-search" style="cursor: pointer;"></i>
               </span>
-        </li><!-- SearchBar -->
+        </li>
+        <!-- SearchBar -->
 
       <!-- Right elements -->
         <!-- Notifications -->
@@ -62,12 +63,17 @@
         <ng-container *ngIf="isLoggedIn; else loggedOut">
           <li mdbDropdown class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-user"></i> 
             </a>
             <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li>
                 <a class="dropdown-item" routerLink="/profile">Profil</a>
               </li>
+              
+              <li><ng-container *ngIf="isAdmin;">
+                <a class="dropdown-item" routerLink="/adminpanel"><i class="fas fa-user-secret fa-fw me-2"></i>Admin Panel</a>
+              </ng-container></li>
+              
               <li>
                 <a class="dropdown-item" routerLink="/settings"><i class="fas fa-cogs fa-fw me-2"></i>Ayarlar</a>
               </li>
