@@ -96,7 +96,7 @@ export class LoginComponent {
       
       this.authService.login(loginModel).subscribe(
         response => {
-          this.toastrService.error("Hoş Geldin", "Başarı", { timeOut: 2500 });
+          this.toastrService.success("Hoş Geldin", "Başarı", { timeOut: 2500 });
           this.router.navigate(['homepage']);
           console.log(localStorage.getItem("token"));
         },

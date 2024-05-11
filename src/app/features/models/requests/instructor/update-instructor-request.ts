@@ -8,5 +8,4 @@ export interface UpdateInstructorRequest {
     nationalIdentity:string;
     email:string;
     password:string;
-    updatedDate:Date;
 }

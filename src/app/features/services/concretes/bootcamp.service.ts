@@ -15,9 +15,7 @@ import { UpdateBootcampesponse } from "../../models/responses/bootcamp/update-bo
 import { GetlistBootcampResponse } from "../../models/responses/bootcamp/getlist-bootcamp-response";
 
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root',})
 export class BootcampService extends BootcampBaseService {
   
   constructor(private httpClient: HttpClient) {

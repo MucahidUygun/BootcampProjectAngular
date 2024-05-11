@@ -1,0 +1,115 @@
+
+<!-- CREATE INSTRUCTOR -->
+<h5 align="center">CREATE INSTRUCTOR</h5>
+<div class="container">
+
+        <form [formGroup]="createForm" (submit)="createInstructorFunc()">
+            <div class="form-group">
+                <label for="userName">Kullanıcı Adı</label>
+                <input formControlName="userName" type="string" class="form-control" placeholder="Eğitmen Kullanıcı Adı">
+            </div>
+            <div class="form-group">
+                <label for="firstName">Ad</label>
+                <input formControlName="firstName" type="string" class="form-control" placeholder="Eğitmen Adı">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Soyad</label>
+                <input formControlName="lastName" type="string" class="form-control" placeholder="Eğitmen Soyadı">
+            </div>
+            <div class="form-group">
+                <label for="companyName">Kurumu</label>
+                <input formControlName="companyName" type="string" class="form-control" placeholder="Eğitmenin Çalıştığı Kurum">
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Doğum Tarihi</label>
+                <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="Doğum Tarihi">
+            </div>
+            <div class="form-group">
+                <label for="nationalIdentity">Tc Kimlik Numarası</label>
+                <input mdbInput formControlName="nationalIdentity" type="text" id="registerID" placeholder="TC Kimlik Numarası" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input formControlName="email" type="string" class="form-control" placeholder="Eğitmenin e-mail adresi">
+            </div>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input formControlName="password" type="string" class="form-control" placeholder="Şifre">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+</div>
+<!-- UPDATE INSTRUCTOR -->
+<h5 align="center">UPDATE INSTRUCTOR</h5>
+ 
+<div class="container">
+
+    <form [formGroup]="updateForm" (submit)="updateInstructorFunc()">
+        <div class="form-group">
+            <label for="id">Eğitmen ID</label>
+            <input formControlName="id" type="string" class="form-control" placeholder="Eğitmen ID">
+        </div>
+        <div class="form-group">
+            <label for="userName">Kullanıcı Adı</label>
+            <input formControlName="userName" type="string" class="form-control" placeholder="Eğitmen Kullanıcı Adı">
+        </div>
+        <div class="form-group">
+            <label for="firstName">Ad</label>
+            <input formControlName="firstName" type="string" class="form-control" placeholder="Eğitmen Adı">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Soyad</label>
+            <input formControlName="lastName" type="string" class="form-control" placeholder="Eğitmen Soyadı">
+        </div>
+        <div class="form-group">
+            <label for="companyName">Kurumu</label>
+            <input formControlName="companyName" type="string" class="form-control" placeholder="Eğitmenin Çalıştığı Kurum">
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Doğum Tarihi</label>
+            <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="Doğum Tarihi">
+        </div>
+        <div class="form-group">
+            <label for="nationalIdentity">Tc Kimlik Numarası</label>
+            <input mdbInput formControlName="nationalIdentity" type="text" id="registerID" placeholder="TC Kimlik Numarası" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input formControlName="email" type="string" class="form-control" placeholder="Eğitmenin e-mail adresi">
+        </div>
+        <div class="form-group">
+            <label for="password">Şifre</label>
+            <input formControlName="password" type="string" class="form-control" placeholder="Şifre">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+<!-- DELETE INSTRUCTOR -->
+<h5 align="center">DELETE INSTRUCTOR</h5>
+<div class="container">
+
+    <form [formGroup]="deleteForm" (submit)="deleteInstructorFunc()">
+        <div class="form-group">
+            <label for="id">Eğitmen ID</label>
+            <input formControlName="id" type="string" class="form-control" placeholder="Silinecek Eğitmenin ID'si">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<!-- GET BY INSTRUCTOR ID -->
+
+<h5 align="center">GET INSTRUCTOR BY ID</h5>
+<div class="container">
+
+    <form [formGroup]="getByIdForm" (submit)="getInstructorByIdFunc()">
+        <div class="form-group">
+            <label for="id">Eğitmen ID</label>
+            <input formControlName="id" type="string" class="form-control" placeholder="Görüntülenmek istenen eğitmenin ID'si">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
