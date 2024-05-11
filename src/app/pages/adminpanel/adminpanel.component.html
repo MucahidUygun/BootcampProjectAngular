@@ -1,0 +1,297 @@
+<!-- <nav id="nav">
+    <aside class="bg-gray-800 text-gray-100 h-screen w-64 fixed top-0 left-0 flex flex-col">
+        <div class="py-4 px-6 flex items-center">
+            <h3 class="font-semibold">Admin Paneli</h3>
+        </div>
+
+        <ul class="link">
+            <li class="px-6 py-3 text-sm border-b border-gray-700" (click)="showSection('users')">
+                <a href="javascript:void(0);" class="hover:text-white">Kullanıcı Yönetimi</a>
+            </li>
+            <li class="px-6 py-3 text-sm border-b border-gray-700" (click)="showSection('bootcamps')">
+                <a href="javascript:void(0);" class="hover:text-white">Bootcamps</a>
+            </li>
+            <li class="px-6 py-3 text-sm border-b border-gray-700" (click)="showSection('instructors')">
+                <a href="javascript:void(0);" class="hover:text-white">Instructors</a>
+            </li>
+
+        </ul>
+    </aside>
+</nav> -->
+<div class="sidebar">
+    <div class="py-4 px-6 flex items-center">
+        <h3 class="font-semibold">Admin Paneli</h3>
+    </div>
+    <ul class="nav flex-column">
+        <li class="nav-item" (click)="showSection('users')">
+            <a href="javascript:void(0);" class="nav-link">Kullanıcı Yönetimi</a>
+        </li>
+        <li class="nav-item" (click)="showSection('bootcamps')">
+            <a href="javascript:void(0);" class="nav-link">Bootcamps</a>
+        </li>
+        <li class="nav-item" (click)="showSection('instructors')">
+            <a href="javascript:void(0);" class="nav-link">Instructors</a>
+        </li>
+    </ul>
+</div>
+
+<div class="admin-bg-image">
+    <div class="container-fluid" style="position: relative; overflow-y: auto; height: 100vh;">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-12">
+                <main class="ml-64 p-6">
+                            <header class="flex justify-between items-center mb-6">
+                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'adminpanel'">Kontrol Paneli</h1>
+                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'users'">Kullanıcı Yönetimi</h1>
+                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'bootcamps' || currentSection === 'bootcampsTwo'">Bootcamp Yönetimi</h1>
+                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'instructors'">Instructor Yönetimi</h1>
+                            
+                            <div *ngIf="currentSection === 'bootcamps'">
+                                <li mdbDropdown class="nav-item dropdown">
+                                    <button type="button" class="btn btn-outline-secondary nav-link dropdown-toggle text-white py-2 px-4 btn-rounded hover:bg-blue-600" mdbRipple rippleColor="dark"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Bootcamps</button>
+                    
+                                    <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                        <li *ngFor="let item of bootcamps.items">
+                                            <a class="dropdown-item" (click)="selectBootcamp(item)">{{ item.name }}</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" (click)="showSection('bootcampsTwo')">Hepsini Görüntüle</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" (click)="showSection('bootcampsAdd')">Bootcamp ekle</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </div>
+                            <div *ngIf="currentSection === 'bootcampsTwo'">
+                                <li mdbDropdown class="nav-item dropdown">
+                                    <button type="button" class="btn btn-outline-secondary nav-link dropdown-toggle text-white py-2 px-4 btn-rounded hover:bg-blue-600" mdbRipple rippleColor="dark"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Bootcamps</button>
+                                    <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                        <li *ngFor="let item of bootcamps.items">
+                                            <a class="dropdown-item" (click)="selectBootcamp(item)">{{ item.name }}</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" (click)="showSectionss('bootcampsTwo')">Sayfaya geri dön</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </div>
+                        </header>
+                    <div *ngIf="currentSection === 'bootcampsTwo'">
+                        <table class="w-full border-collapse border-gray-300" *ngIf="bootcamps.items.length > 0">
+                            <thead>
+                                <tr>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Name</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">InstructorId</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">StateID</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">StateName</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Start Date</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">End Date</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Instructor FullName</th>
+                                  <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
+                                </tr>
+                              </thead>
+                            <tbody>
+                                <tr *ngFor="let bootcamp of bootcamps.items; let i = index" [class]="i % 2 === 0 ? 'bg-white' : '' ">
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.id }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.name }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.id }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.bootcampStateId }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.bootcampStateName }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.startDate | date }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.endDate | date }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.instructorFirstName }} , {{bootcamp.instructorLastName }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">
+                                        <ng-container *ngIf="!editing">
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow()">Düzenle</button>
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="deleteFunc()">Sil</button>
+                                          </ng-container>
+                                          <ng-container *ngIf="editing">
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="saveChanges()">Kaydet</button>
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="cancelEdit()">İptal</button>
+                                          </ng-container>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form [formGroup]="updateForm">
+                      <div *ngIf="currentSection === 'bootcamps' && selectedBootcamp">
+                        <table class="w-full border-collapse border-gray-300 bg-white">
+                          <thead>
+                            <tr>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Name</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">InstructorId</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">StateID</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">StateName</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Start Date</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">End Date</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Instructor</th>
+                              <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.id }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="text" class="form-control" formControlName="id" [(ngModel)]="selectedBootcamp.id" required/>
+                                  <mdb-error *ngIf="updateForm.get('id')?.invalid && (updateForm.get('id')?.dirty || updateForm.get('id')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('id')?.valid && (updateForm.get('id')?.dirty || updateForm.get('id')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.name }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="text" class="form-control"  formControlName="name" [(ngModel)]="selectedBootcamp.name">
+                                  <mdb-error *ngIf="updateForm.get('name')?.invalid && (updateForm.get('name')?.dirty || updateForm.get('name')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('name')?.valid && (updateForm.get('name')?.dirty || updateForm.get('name')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.instructorId }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="text" class="form-control"  formControlName="instructorId" [(ngModel)]="selectedBootcamp.instructorId">
+                                  <mdb-error *ngIf="updateForm.get('instructorId')?.invalid && (updateForm.get('instructorId')?.dirty || updateForm.get('instructorId')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('instructorId')?.valid && (updateForm.get('instructorId')?.dirty || updateForm.get('instructorId')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>                                                       
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.bootcampstateId }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="number" class="form-control"  formControlName="bootcampstateId" [(ngModel)]="selectedBootcamp.bootcampstateId">
+                                  <mdb-error *ngIf="updateForm.get('bootcampstateId')?.invalid && (updateForm.get('bootcampstateId')?.dirty || updateForm.get('bootcampstateId')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('bootcampstateId')?.valid && (updateForm.get('bootcampstateId')?.dirty || updateForm.get('bootcampstateId')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.bootcampStateName }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input type="text" [(ngModel)]="selectedBootcamp.bootcampStateName">
+                                </ng-container>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.startDate | date }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="date" class="form-control"  formControlName="startDate" [(ngModel)]="selectedBootcamp.startDate">
+                                  <mdb-error *ngIf="updateForm.get('startDate')?.invalid && (updateForm.get('startDate')?.dirty || updateForm.get('startDate')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('startDate')?.valid && (updateForm.get('startDate')?.dirty || updateForm.get('startDate')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <mdb-form-control>
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.endDate | date }}</ng-container>
+                                <ng-container *ngIf="editing">
+                                  <input mdbValidate mdbInput type="date" class="form-control" formControlName="endDate" [(ngModel)]="selectedBootcamp.endDate">
+                                  <mdb-error *ngIf="updateForm.get('endDate')?.invalid && (updateForm.get('endDate')?.dirty || updateForm.get('endDate')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                  <mdb-success *ngIf="updateForm.get('endDate')?.valid && (updateForm.get('endDate')?.dirty || updateForm.get('endDate')?.touched)"></mdb-success>
+                                </ng-container></mdb-form-control>
+                              </td>
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <ng-container *ngIf="!editing">{{ selectedBootcamp.instructorFirstName }} {{ selectedBootcamp.instructorLastName }}</ng-container>
+                                <ng-container *ngIf="editing">{{ selectedBootcamp.instructorFirstName }} {{ selectedBootcamp.instructorLastName }}
+                                </ng-container>
+                              </td> 
+                              <td class="py-2 px-4 border-b border-gray-300">
+                                <ng-container *ngIf="!editing">
+                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow()">Düzenle</button>
+                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="deleteFunc()">Sil</button>
+                                </ng-container>
+                                <ng-container *ngIf="editing">
+                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="updateFunc()">Kaydet</button>
+                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="cancelEdit()">İptal et</button>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
+                    <div *ngIf="currentSection === 'instructors'">
+                        <table *ngIf="selectedInstructorList" class="w-full border-collapse border border-gray-300 bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Name</th>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">State</th>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Start Date</th>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Instructor</th>
+                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let instructor of instructors.items; let i = index" [class]="i % 2 === 0 ? 'bg-white' : ''">
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.id }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.userName }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.companyName }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.dateOfBirth | date }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.firstName }} , {{instructor.lastName }}</td>
+                                    <td class="py-2 px-4 border-b border-gray-300">
+                                        <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Düzenle</button>
+                                        <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Sil</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="currentSection === 'bootcampsAdd'">
+                    <div class="container-fluid" style="position: relative; overflow-y: auto; height: 100vh;">
+                        <div class="row justify-content-center align-items-center" style="height: 100%;">
+                            <div class="col-md-8">
+                                <form [formGroup]="getByIdForm">
+                                    <label style="color: white;">Listenelecek Bootcamp Idsi</label>
+                                    <input formControlName="id" type="number">
+                                    <button type="submit" class="btn btn-primary" (click)="getByIdBootcamp()">Submit</button>
+                                </form>
+                                Ekle
+                                <form [formGroup]="form">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">id</label>
+                                        <input formControlName="id" type="number" class="form-control"
+                                            id="exampleInputEmail122" aria-describedby="emailHelp"
+                                            placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">name</label>
+                                        <input formControlName="name" type="text" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">instructorId</label>
+                                        <input formControlName="instructorId" type="text" class="form-control"
+                                            id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">bootcampstateId</label>
+                                        <input formControlName="bootcampstateId" type="number" class="form-control"
+                                            id="exampleInputPassword2" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Başlama tarihi</label>
+                                        <input formControlName="startDate" type="date" class="form-control"
+                                            id="exampleInputPassword4" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Bitiş tarihi</label>
+                                        <input formControlName="endDate" type="date" class="form-control"
+                                            id="exampleInputEmail5" aria-describedby="emailHelp"
+                                            placeholder="Enter email">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" (click)="postForm()">Ekle</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                </main>
+            </div>
+        </div>
+    </div>

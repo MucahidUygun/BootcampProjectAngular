@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, HostListener ,EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
@@ -51,7 +51,23 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
     this.getInstructors({ page: 0, pageSize: this.PAGE_SIZE });
-  }
+   }
+   displayIntro: boolean = false;
+
+   @HostListener('window:scroll', [])
+   onScroll(): void {
+     this.scrollFunction();
+   }
+   scrollFunction(): void {
+    if ((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) && !this.TopOfPage()) {
+        this.displayIntro = true;
+    } else {
+        this.displayIntro = false;
+    }
+}
+TopOfPage(): boolean {
+    return window.scrollY === 0;
+}
 
   getBootcamps(pageRequest: PageRequest) {
     this.bootcampService.getList(pageRequest).subscribe((response) => {
