@@ -1,73 +1,76 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CreateBootcampRequest } from '../../features/models/requests/bootcamp/create-bootcamp-request';
-import { BootcampService } from '../../features/services/concretes/bootcamp.service';
-import { ToastrService } from 'ngx-toastr/toastr/toastr.service';
 import { NotificationsService } from '../../features/services/concretes/notification-service';
-import { DeleteBootcampRequest } from '../../features/models/requests/bootcamp/delete-bootcamp-request';
-import { UpdateBootcampRequest } from '../../features/models/requests/bootcamp/update-bootcamp-request';
-import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/getlist-bootcamp-response';
+import { BootcampStateService } from '../../features/services/concretes/bootcamp-state.service';
+import { UpdateBootcampstateRequest } from '../../features/models/requests/bootcampstate/update-bootcampstate-request';
+import { GetbyidBootcampstateResponse } from '../../features/models/responses/bootcampstate/getbyid-bootcampstate-response';
+import { BootcampStateListItem } from '../../features/models/responses/bootcampstate/bootcampState-List-Item';
+import { PageRequest } from '../../core/models/requests/PageRequest';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule,CommonModule,FormsModule],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss'
 })
 export class TestComponent {
-  deleteForm!: FormGroup;
-  form!: FormGroup;
-  updateForm!: FormGroup;
-  getByIdForm!: FormGroup;
-  bootcampResponse!:GetlistBootcampResponse;
-  constructor(private formBuilder:FormBuilder,private bootcampService:BootcampService,private toastService:NotificationsService) { }
+  deleteBootcampStateForm!: FormGroup;
+  bootcampStateForm!: FormGroup;
+  updateBootcampStateForm!: FormGroup;
+  getByIdBootcampStateForm!: FormGroup;
+  bootcampStateResponse!:GetbyidBootcampstateResponse;
+  bootcampStateList!:BootcampStateListItem;
+  constructor(private formBuilder:FormBuilder,private bootcampStateService:BootcampStateService,private toastService:NotificationsService) { }
 
   ngOnInit() {
-    this.createForm();
-    this.deleteCreateForm();
-    this.updateCreateForm();
+    this.createBootcampStateForm();
+    this.deleteBootcampStateCreateForm();
+    this.updateBootcampStateCreateForm();
     this.createGetByIdBoostcamp();
+    this.getAllBootcampState({ page: 0, pageSize: 10 });
   }
 
-  createForm(){
-    this.form = this.formBuilder.group({
+  createBootcampStateForm(){
+    this.bootcampStateForm = this.formBuilder.group({
       name:['', Validators.required],
-      instructorId:['', Validators.required],
-      bootcampstateId:['', Validators.required],
-      startDate:['', Validators.required],
-      endDate:['', Validators.required]
     });
   }
 
   createGetByIdBoostcamp(){
-    this.getByIdForm = this.formBuilder.group({
+    this.getByIdBootcampStateForm = this.formBuilder.group({
       id:['', Validators.required]
     });
   }
 
-  updateCreateForm(){
-    this.updateForm = this.formBuilder.group({
+  updateBootcampStateCreateForm(){
+    this.updateBootcampStateForm = this.formBuilder.group({
       id:['', Validators.required],
       name:['', Validators.required],
-      instructorId:['', Validators.required],
-      bootcampstateId:['', Validators.required],
-      startDate:['', Validators.required],
-      endDate:['', Validators.required]
     });
   }
 
-  deleteCreateForm() {
-    this.deleteForm = this.formBuilder.group({
+  deleteBootcampStateCreateForm() {
+    this.deleteBootcampStateForm = this.formBuilder.group({
       id:['', Validators.required]
     });
   }
 
-  postForm(){
-    let createdBootcamp:CreateBootcampRequest=Object.assign({}, this.form.value)
+  getAllBootcampState(pageRequest:PageRequest){
+    this.bootcampStateService.getListBootcampState(pageRequest).subscribe(
+     (response)=>{
+      this.bootcampStateList = response
+     } 
+    );
+  }
 
-    this.bootcampService.postBootcamp(createdBootcamp).subscribe(
+  postBootcampStateForm(){
+    let createdBootcampState:CreateBootcampRequest=Object.assign({}, this.bootcampStateForm.value)
+
+    this.bootcampStateService.addBootcampState(createdBootcampState).subscribe(
       {
         next:(response)=>{
           this.toastService.showSuccess("Başarılı")
@@ -80,9 +83,9 @@ export class TestComponent {
 
   }
 
-  deleteFunc(){
-    if(this.deleteForm.valid){
-      this.bootcampService.deleteBootcamp(this.deleteForm.value.id).subscribe(
+  deleteBootcampStateFunc(){
+    if(this.deleteBootcampStateForm.valid){
+      this.bootcampStateService.deleteBootcampState(this.deleteBootcampStateForm.value.id).subscribe(
         {
           next:(response)=>{
             this.toastService.showSuccess("Başarılı")
@@ -96,12 +99,12 @@ export class TestComponent {
     }
   }
 
-  updateFunc(){
-    console.log(this.updateForm.value)
-    if (this.updateForm.valid) {
-     let updatedBootcamp:UpdateBootcampRequest = Object.assign({}, this.updateForm.value);
-     console.log(updatedBootcamp)
-     this.bootcampService.updateBootcamp(updatedBootcamp).subscribe(
+  updateBootcampStateFunc(){
+    console.log(this.updateBootcampStateForm.value)
+    if (this.updateBootcampStateForm.valid) {
+     let updatedBootcampState:UpdateBootcampstateRequest = Object.assign({}, this.updateBootcampStateForm.value);
+     console.log(updatedBootcampState)
+     this.bootcampStateService.updateBootcampState(updatedBootcampState).subscribe(
       {
         next:(response)=>{
           this.toastService.showSuccess("Başarılı")
@@ -117,15 +120,15 @@ export class TestComponent {
     }
   }
 
-  getByIdBootcamp(){
-    if (this.getByIdForm.valid) {
-      this.bootcampService.getBootcamp(this.getByIdForm.value.id)
+  getByIdBootcampState(){
+    if (this.getByIdBootcampStateForm.valid) {
+      this.bootcampStateService.getByIdBootcmapState(this.getByIdBootcampStateForm.value.id)
       .subscribe(
         {
           next:(response)=>{
-            this.bootcampResponse = response;
+            this.bootcampStateResponse = response;
             this.toastService.showSuccess("Başarılı")
-            console.log(this.bootcampResponse)
+            console.log(this.bootcampStateResponse)
           },
           error:(response)=>{
             console.log(response)
