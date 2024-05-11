@@ -22,3 +22,4 @@ export abstract class BootcampBaseService {
   abstract updateBootcamp(bootcamp:UpdateBootcampRequest): Observable<UpdateBootcampesponse>;
   abstract getBootcamp(id:number):Observable<GetlistBootcampResponse>; 
 }
+

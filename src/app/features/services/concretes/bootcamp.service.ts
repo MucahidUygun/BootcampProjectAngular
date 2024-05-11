@@ -19,6 +19,7 @@ import { GetlistBootcampResponse } from "../../models/responses/bootcamp/getlist
   providedIn: 'root',
 })
 export class BootcampService extends BootcampBaseService {
+  
   constructor(private httpClient: HttpClient) {
     super();
   }
@@ -51,34 +52,5 @@ export class BootcampService extends BootcampBaseService {
           return newResponse;
         })
       );
-  }
-  override getBootcamp(id: number): Observable<GetlistBootcampResponse> {
-    return this.httpClient.get<GetlistBootcampResponse>(`${this.apiUrl}/` + id)
-    .pipe(
-      map((response) => {
-        const newResponse: GetlistBootcampResponse = {
-          id: response.id,
-          name: response.name,
-          bootcampStateName: response.bootcampStateName,
-          bootcampStateId: response.bootcampStateId,
-          startDate: response.startDate,
-          endDate: response.endDate,
-          instructorFirstName: response.instructorFirstName,
-          instructorLastName: response.instructorLastName,
-        };
-        return newResponse;
-      })
-    )
-    ;
-  }
-  override updateBootcamp(bootcamp: UpdateBootcampRequest): Observable<UpdateBootcampesponse> {
-    return this.httpClient.put<UpdateBootcampesponse>(`${this.apiUrl}`, bootcamp);
-  }
-
-  override postBootcamp(bootcamp: CreateBootcampRequest): Observable<CreateBootcampResponse> {
-    return this.httpClient.post<CreateBootcampResponse>(this.apiUrl, bootcamp);
-  }
-  override deleteBootcamp(id: number): Observable<DeleteBootcampResponse> {
-    return this.httpClient.delete<DeleteBootcampResponse>( `${this.apiUrl}/`+ id);
   }
 }
