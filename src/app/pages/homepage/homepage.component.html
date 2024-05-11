@@ -78,8 +78,13 @@
 					<!-- <p>aaaa<br /> -->
 					<!-- aaa</p><br /> -->
 					<ul class="actions">
-						<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 					</ul>
+					<div id="BackToMain"[style.display]="displayIntro ? 'block' : 'none'">
+						<ul class="actions">
+							<li><a href="#wrapper" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
+						</ul>
+					</div>
 				</div>
 
 			<!-- Nav -->
@@ -187,9 +192,6 @@
 				<div id="copyright">
 					<ul><li>&copy;</li><li>Design: <a href="">Pair-5</a></li></ul>
 				</div>
-
-		</div>
-
 	<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>

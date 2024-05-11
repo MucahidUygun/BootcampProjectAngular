@@ -1,7 +1,8 @@
 export interface GetlistBootcampResponse {
   id: number;
   name: string;
-  bootcampStateName: number;
+  instructorId: string;
+  bootcampStateId: number;
   startDate: Date;
   endDate: Date;
   instructorFirstName: string;

@@ -14,6 +14,7 @@ import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { AuthService } from './features/services/concretes/auth.service';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ import { AuthService } from './features/services/concretes/auth.service';
       multi: true,
     }
   ],
-  imports: [MdbModalModule, MdbFormsModule, RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
+  imports: [MdbValidationModule,MdbModalModule, MdbFormsModule, RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

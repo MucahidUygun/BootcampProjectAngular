@@ -1,0 +1,293 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule,AbstractControl, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../features/services/concretes/auth.service';
+import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { CommonModule } from '@angular/common';
+import { BootcampService } from '../../features/services/concretes/bootcamp.service';
+import { BootcampListItem } from '../../features/models/responses/bootcamp/bootcampItemDto';
+import { PageRequest } from '../../core/models/requests/PageRequest';
+import { InstructorListItem } from '../../features/models/responses/instructor/instructorItemDto';
+import { InstructorService } from '../../features/services/concretes/instructor.service';
+import { NotificationsService } from '../../features/services/concretes/notification-service';
+import { DeleteBootcampRequest } from '../../features/models/requests/bootcamp/delete-bootcamp-request';
+import { UpdateBootcampRequest } from '../../features/models/requests/bootcamp/update-bootcamp-request';
+import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/getlist-bootcamp-response';
+import { CreateBootcampRequest } from '../../features/models/requests/bootcamp/create-bootcamp-request';
+import { GetlistInstructorResponse } from '../../features/models/responses/instructor/getlist-instructor-response';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { FormsModule } from '@angular/forms';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-adminpanel',
+  standalone: true,
+  imports: [MdbValidationModule,FormsModule,MdbFormsModule,ReactiveFormsModule,MdbDropdownModule,MdbRippleModule,CommonModule],
+  templateUrl: './adminpanel.component.html',
+  styleUrl: './adminpanel.component.scss'
+})
+export class AdminpanelComponent {
+  selectedBootcampList: GetlistBootcampResponse[] = [];
+  selectedInstructorList: GetlistInstructorResponse[] = [];
+  deleteForm!: FormGroup;
+  form!: FormGroup;
+  updateForm!: FormGroup;
+  getByIdForm!: FormGroup;
+  bootcampResponse!:GetlistBootcampResponse;
+  validationForm: FormGroup;
+  claims: string[] = []
+    bootcamps: BootcampListItem = {
+    index: 0,
+    size: 0,
+    count: 0,
+    hasNext: false,
+    hasPrevious: false,
+    pages: 0,
+    items: [],
+  };
+  instructors: InstructorListItem = {
+    index: 0,
+    size: 0,
+    count: 0,
+    hasNext: false,
+    hasPrevious: false,
+    pages: 0,
+    items: [],
+  };
+
+  constructor(private formBuilder:FormBuilder,private toastService:NotificationsService,private bootcampService: BootcampService,private instructorService: InstructorService,private authservice: AuthService, private router: Router) {
+    this.validationForm = new FormGroup({
+      id: new FormControl(null, Validators.required),
+      name: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
+      startDate: new FormControl(null, Validators.required),
+      bootcampstateId: new FormControl(null, Validators.required),
+      instructorId: new FormControl(null, Validators.required),
+    });
+  }
+  readonly PAGE_SIZE = 12;
+  ngOnInit(): void {
+    this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
+    this.getInstructors({ page: 0, pageSize: this.PAGE_SIZE });
+    this.createForm();
+    this.deleteCreateForm();
+    this.updateCreateForm();
+    this.createGetByIdBoostcamp();
+    
+  }
+  get id(): AbstractControl {
+    return this.validationForm.get('id')!;
+  }
+
+  get name(): AbstractControl {
+    return this.validationForm.get('name')!;
+  }
+
+  get endDate(): AbstractControl {
+    return this.validationForm.get('endDate')!;
+  }
+
+  get startDate(): AbstractControl {
+    return this.validationForm.get('startDate')!;
+  }
+  get bootcampstateId(): AbstractControl {
+    return this.validationForm.get('bootcampstateId')!;
+  }
+  get instructorId(): AbstractControl {
+    return this.validationForm.get('instructorId')!;
+  }
+
+  getBootcamps(pageRequest: PageRequest) {
+    this.bootcampService.getList(pageRequest).subscribe((response) => {
+      this.bootcamps = response;
+      console.log(response)
+      console.log(this.bootcamps)
+    });
+  }
+    getInstructors(pageRequest: PageRequest) {
+      this.instructorService.getList(pageRequest).subscribe((response) => {
+        this.instructors = response;
+      });
+  }
+  isAdmin() {
+    if (this.claims.includes("admin" && "Admin")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  currentSection: string = 'adminpanel';
+  currentSections: string = 'adminpanel';
+  showSection(section: string) {
+    this.currentSection = section;
+}
+showSections(section: string) {
+  this.currentSections = section;
+}
+showSectionss(section: string) {
+  if (section === 'adminpanel') {
+      this.currentSection = 'bootcamps';
+  }
+}
+
+
+editing: boolean = false;
+editRow() {
+  this.editing = true;
+  this.getByIdBootcamp;
+}
+
+
+cancelEdit() {
+  this.editing = false;
+}
+
+
+saveChanges() {
+  if (this.editing) {
+    console.log(this.updateForm.value)
+    if (this.updateForm.valid) {
+     let updatedBootcamp:UpdateBootcampRequest = Object.assign({}, this.updateForm.value);
+     console.log(updatedBootcamp)
+     this.bootcampService.updateBootcamp(updatedBootcamp).subscribe(
+      {
+        next:(response)=>{
+          this.toastService.showError("Başarılı")
+        },
+        error:(response)=>{
+          console.log(response)
+          this.toastService.showError("Kayıt işlemi başarısız")
+        }
+      }
+     ); 
+    }else{
+      this.toastService.showInfo("Lütfen gerekli alanları doldurunuz")
+    }
+  }
+}
+
+
+  // BOOTCAMP CRUD
+
+  createForm(){
+    this.form = this.formBuilder.group({
+      name:['', Validators.required],
+      instructorId:['', Validators.required],
+      bootcampstateId:['', Validators.required],
+      startDate:['', Validators.required],
+      endDate:['', Validators.required]
+    });
+  }
+
+  createGetByIdBoostcamp(){
+    this.getByIdForm = this.formBuilder.group({
+      id:['', Validators.required]
+    });
+  }
+
+  updateCreateForm(){
+    this.updateForm = this.formBuilder.group({
+      id:['', Validators.required],
+      name:['', Validators.required],
+      instructorId:['', Validators.required],
+      bootcampstateId:['', Validators.required],
+      startDate:['', Validators.required],
+      endDate:['', Validators.required]
+    });
+  }
+
+  deleteCreateForm() {
+    this.deleteForm = this.formBuilder.group({
+      id:['', Validators.required]
+    });
+  }
+
+  postForm(){
+    let createdBootcamp:CreateBootcampRequest=Object.assign({}, this.form.value)
+
+    this.bootcampService.postBootcamp(createdBootcamp).subscribe(
+      {
+        next:(response)=>{
+          this.toastService.showSuccess("Bootcamp ekleme işlemi başarılı")
+          window.location.reload();
+          this.router.navigate(['adminpanel']) 
+          this.showSection('bootcamps'),{ timeOut: 2500 };
+        },
+        error:(response)=>{
+          this.toastService.showError("Kayıt işlemi başarısız")
+        }
+      }
+    )
+  }
+
+  deleteFunc(){
+    console.log(this.deleteForm.value.id)
+    if(this.deleteForm.valid){
+
+    }
+    this.bootcampService.deleteBootcamp(this.selectedBootcamp.id).subscribe(
+      {
+        next:(response)=>{
+          this.toastService.showSuccess("Başarılı")
+        },
+        error:(response)=>{
+          console.log(response)
+          this.toastService.showError("Kayıt işlemi başarısız")
+        }
+      }
+    )
+  }
+
+  updateFunc(){
+    console.log(this.updateForm.value)
+    if (this.updateForm.valid) {
+     let updatedBootcamp:UpdateBootcampRequest = Object.assign({}, this.updateForm.value);
+     console.log(updatedBootcamp)
+     this.bootcampService.updateBootcamp(updatedBootcamp).subscribe(
+      {
+        next:(response)=>{
+          this.toastService.showSuccess("Başarılı")
+          this.cancelEdit()
+        },
+        error:(response)=>{
+          console.log(response)
+          this.toastService.showError("Kayıt işlemi başarısız")
+          this.cancelEdit()
+        }
+      }
+     ); 
+    }else{
+      this.toastService.showInfo("Lütfen gerekli alanları doldurunuz")
+    }
+  }
+selectedBootcamp: any;
+selectedInstructor: any;
+
+selectBootcamp(bootcamps: any) {
+  this.selectedBootcamp = bootcamps;
+}
+selectInstructor(instructors: any) {
+  this.selectedInstructor = instructors;
+}
+
+  getByIdBootcamp(){
+    if (this.getByIdForm.valid) {
+      this.bootcampService.getBootcamp(this.getByIdForm.value.id)
+      .subscribe(
+        (response) => {
+          this.selectedBootcamp = response;
+          this.toastService.showSuccess("Bootcamp başarıyla alındı.");
+          // console.log(this.selectedBootcamp);
+        },
+        (error) => {
+          console.log(error);
+          this.toastService.showError("Bootcamp alınırken bir hata oluştu.");
+        }
+      );
+    }
+  }
+  
+}

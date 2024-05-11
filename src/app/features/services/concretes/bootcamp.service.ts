@@ -53,33 +53,4 @@ export class BootcampService extends BootcampBaseService {
         })
       );
   }
-  override getBootcamp(id: number): Observable<GetlistBootcampResponse> {
-    return this.httpClient.get<GetlistBootcampResponse>(`${this.apiUrl}/` + id)
-    .pipe(
-      map((response) => {
-        const newResponse: GetlistBootcampResponse = {
-          id: response.id,
-          name: response.name,
-          bootcampStateName: response.bootcampStateName,
-          startDate: response.startDate,
-          endDate: response.endDate,
-          instructorFirstName: response.instructorFirstName,
-          instructorLastName: response.instructorLastName,
-        };
-        return newResponse;
-      })
-    )
-    ;
-  }
-
-  override updateBootcamp(bootcamp: UpdateBootcampRequest): Observable<UpdateBootcampesponse> {
-    return this.httpClient.put<UpdateBootcampesponse>(`${this.apiUrl}`, bootcamp);
-  }
-
-  override postBootcamp(bootcamp: CreateBootcampRequest): Observable<CreateBootcampResponse> {
-    return this.httpClient.post<CreateBootcampResponse>(this.apiUrl, bootcamp);
-  }
-  override deleteBootcamp(id: number): Observable<DeleteBootcampResponse> {
-    return this.httpClient.delete<DeleteBootcampResponse>( `${this.apiUrl}/`+ id);
-  }
 }
