@@ -1,0 +1,162 @@
+.admin-bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212931;
+    background-image: url("../../../assets/images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../../assets/images/bg.jpg");
+    background-size: auto, auto, cover;
+    background-position: center, center, top center;
+    background-repeat: repeat, no-repeat, no-repeat;
+    background-attachment: scroll, scroll, scroll;
+    z-index: -1;
+  }
+
+aside {
+    background-color: #4a5568;
+    color: #f7fafc;
+    height: 100vh;
+    width: 15rem;
+    margin-top: 2.3%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+    aside {
+        width: 100%; /* Küçük cihazlarda genişliği ekran genişliğine kadar genişletin */
+        height: auto; /* İçerik miktarına bağlı olarak yüksekliği otomatik olarak ayarlayın */
+        margin-top: 111%; /* Navbar'ın üstünden 3.5rem mesafede başlatın */
+        overflow-y: auto;
+    }
+}
+@media screen and (max-width: 980px) {
+
+    aside {
+        display: flex;
+        overflow-y: auto;
+    }
+}
+aside .logo {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+aside .logo img {
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+aside .logo span {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+aside ul {
+    margin-top: 1rem;
+}
+
+aside ul li {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #2d3748;
+}
+
+aside ul li a {
+    color: #cbd5e0;
+}
+
+aside ul li a:hover {
+    color: #ffffff;
+}
+
+main {
+    margin-left: 16rem;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+header {
+    margin-top: 2.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header button {
+    background-color: #4299e1;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #3182ce;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+}
+
+th {
+    background-color: #e2e8f0;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #edf2f7;
+}
+
+tr:hover {
+    background-color: #e2e8f0;
+}
+
+td button {
+    margin-right: 0.5rem;
+}
+.sidebar {
+    position: fixed;
+    top: 56px; /* Navbar yüksekliği */
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 20px;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    overflow-y: auto; /* Dikey kaydırma */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 8px 16px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .sidebar ul li:last-child {
+    border-bottom: none;
+  }
+  
