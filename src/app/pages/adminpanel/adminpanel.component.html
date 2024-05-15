@@ -19,15 +19,16 @@
     <div class="container-fluid" style="position: relative; overflow-y: auto; height: 100vh;">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-12">
-                <main class="ml-64 p-6">
-                            <header class="flex justify-between items-center mb-6">
-                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'adminpanel'">Kontrol Paneli</h1>
-                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'users'">Kullanıcı Yönetimi</h1>
-                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'bootcamps' || currentSection === 'bootcampsTwo'">Bootcamp Yönetimi</h1>
-                                <h1 class="text-white font-semibold" *ngIf="currentSection === 'instructors'">Instructor Yönetimi</h1>
-                            
-                            <div *ngIf="currentSection === 'bootcamps'">
-                                <li mdbDropdown class="nav-item dropdown">
+                <main class="ml-32 p-6">
+                            <header style="margin-top: 4%;">
+                                <h2 class="text-white " *ngIf="currentSection === 'adminpanel'">Kontrol Paneli</h2>
+                                <h2 class="text-white" *ngIf="currentSection === 'users'">Kullanıcı Yönetimi</h2>
+                                <h2 class="text-white" *ngIf="currentSection === 'bootcamps' || currentSection === 'bootcampsTwo' || currentSection === 'bootcampsAdd' ">Bootcamp Yönetimi</h2>
+                                <h2 class="text-white" *ngIf="currentSection === 'instructors' || currentSection === 'instructorsAdd' || currentSection === 'selectedInstructors'">Instructor Yönetimi</h2>
+                              </header>
+                                <div style="position: fixed; top: 0; right: 0; margin: 80px;">
+
+                                <li *ngIf="currentSection === 'bootcamps' || currentSection === 'bootcampsAdd'" mdbDropdown class="nav-item dropdown">
                                     <button type="button" class="btn btn-outline-secondary nav-link dropdown-toggle text-white py-2 px-4 btn-rounded hover:bg-blue-600" mdbRipple rippleColor="dark"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Bootcamps</button>
                     
                                     <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -42,21 +43,35 @@
                                         </li>
                                     </ul>
                                 </li>
-                            </div>
-                            <div *ngIf="currentSection === 'bootcampsTwo'">
-                                <li mdbDropdown class="nav-item dropdown">
+                              <li *ngIf="currentSection === 'instructors' || currentSection === 'instructorsAdd' || currentSection === 'selectedInstructors'" mdbDropdown class="nav-item dropdown">
+                                  <button type="button" class="btn btn-outline-secondary nav-link dropdown-toggle text-white py-2 px-4 btn-rounded hover:bg-blue-600" mdbRipple rippleColor="dark"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Instructors</button>
+                  
+                                  <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                      <li *ngFor="let item of instructors.items">
+                                          <a class="dropdown-item" (click)="selectInstructor(item) ">{{ item.userName }}</a>
+                                      </li>
+                                      <li>
+                                          <a class="dropdown-item" (click)="showSection('selectedInstructors')">Hepsini Görüntüle</a>
+                                      </li>
+                                      <li>
+                                          <a class="dropdown-item" (click)="showSection('instructorsAdd')">Instructor ekle</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                                <li *ngIf="currentSection === 'bootcampsTwo'" mdbDropdown class="nav-item dropdown">
                                     <button type="button" class="btn btn-outline-secondary nav-link dropdown-toggle text-white py-2 px-4 btn-rounded hover:bg-blue-600" mdbRipple rippleColor="dark"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">Bootcamps</button>
                                     <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                                         <li *ngFor="let item of bootcamps.items">
-                                            <a class="dropdown-item" (click)="selectBootcamp(item)">{{ item.name }}</a>
+                                            <a class="dropdown-item" (click)="selectBootcamp(item); showSection('bootcamps')">{{ item.name }}</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" (click)="showSectionss('bootcampsTwo')">Sayfaya geri dön</a>
+                                          <a class="dropdown-item" (click)="showSection('bootcampsAdd')">Bootcamp ekle</a>
+                                      </li>
+                                        <li>
+                                            <a class="dropdown-item" (click)="showSection('bootcamps')">Sayfaya geri dön</a>
                                         </li>
                                     </ul>
-                                </li>
-                            </div>
-                        </header>
+                                </li></div>
                     <div *ngIf="currentSection === 'bootcampsTwo'">
                         <table class="w-full border-collapse border-gray-300" *ngIf="bootcamps.items.length > 0">
                             <thead>
@@ -84,7 +99,7 @@
                                     <td class="py-2 px-4 border-b border-gray-300">{{ bootcamp.instructorFirstName }} , {{bootcamp.instructorLastName }}</td>
                                     <td class="py-2 px-4 border-b border-gray-300">
                                         <ng-container *ngIf="!editing">
-                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow()">Düzenle</button>
+                                            <!-- <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow(selectedBootcamp.id)">Düzenle</button> -->
                                             <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="deleteFunc()">Sil</button>
                                           </ng-container>
                                           <ng-container *ngIf="editing">
@@ -181,7 +196,7 @@
                               </td> 
                               <td class="py-2 px-4 border-b border-gray-300">
                                 <ng-container *ngIf="!editing">
-                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow()">Düzenle</button>
+                                  <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow(selectedBootcamp.id)">Düzenle</button>
                                   <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="deleteFunc()">Sil</button>
                                 </ng-container>
                                 <ng-container *ngIf="editing">
@@ -194,33 +209,127 @@
                         </table>
                       </div>
                     </form>
-                    <div *ngIf="currentSection === 'instructors'">
-                        <table *ngIf="selectedInstructorList" class="w-full border-collapse border border-gray-300 bg-white">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Name</th>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">State</th>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Start Date</th>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Instructor</th>
-                                    <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let instructor of instructors.items; let i = index" [class]="i % 2 === 0 ? 'bg-white' : ''">
-                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.id }}</td>
-                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.userName }}</td>
-                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.companyName }}</td>
-                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.dateOfBirth | date }}</td>
-                                    <td class="py-2 px-4 border-b border-gray-300">{{ instructor.firstName }} , {{instructor.lastName }}</td>
-                                    <td class="py-2 px-4 border-b border-gray-300">
-                                        <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Düzenle</button>
-                                        <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Sil</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form [formGroup]="getByIdFormI">
+                        <div *ngIf="currentSection === 'selectedInstructors'">
+                            <table  class="w-full border-collapse border border-gray-300 bg-white" *ngIf="instructors.items.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">User Name</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Full Name</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Company</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">DateOfBirth</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Identity</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Email</th>
+                                        <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let instructor of instructors.items; let i = index" [class]="i % 2 === 0 ? 'bg-white' : ''">
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.id }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.userName }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.firstName }} , {{instructor.lastName }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.companyName }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.dateOfBirth | date }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.nationalIdentity }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-300">{{ instructor.email }}</td>
+                                        
+                                        
+                                        <td class="py-2 px-4 border-b border-gray-300">
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Düzenle</button>
+                                            <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out">Sil</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div></form>
+                        <form [formGroup]="getByIdFormI">
+                            <div *ngIf="currentSection === 'instructors' && selectedInstructor">
+                                <table  class="w-full border-collapse border border-gray-300 bg-white" *ngIf="instructors.items.length > 0">
+                                    <thead>
+                                        <tr>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">ID</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">User Name</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Full Name</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Company</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">DateOfBirth</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Identity</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Email</th>
+                                          <th class="py-2 px-4 bg-gray-200 border-b border-gray-300">Settings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <mdb-form-control>
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.id }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input mdbValidate mdbInput type="text" class="form-control" formControlName="id" [(ngModel)]="selectedInstructor.id" [value]="selectedInstructor.id">
+                                              <mdb-error *ngIf="updateFormI.get('id')?.invalid && (updateFormI.get('id')?.dirty || updateFormI.get('id')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                              <mdb-success *ngIf="updateFormI.get('id')?.valid && (updateFormI.get('id')?.dirty || updateFormI.get('id')?.touched)"></mdb-success>
+                                            </ng-container></mdb-form-control>
+                                          </td>
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <mdb-form-control>
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.userName }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input mdbValidate mdbInput type="text" class="form-control"  formControlName="userName" [(ngModel)]="selectedInstructor.userName" [value]="selectedInstructor.userName">
+                                              <mdb-error *ngIf="updateFormI.get('userName')?.invalid && (updateFormI.get('userName')?.dirty || updateFormI.get('userName')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                              <mdb-success *ngIf="updateFormI.get('userName')?.valid && (updateFormI.get('userName')?.dirty || updateFormI.get('userName')?.touched)"></mdb-success>
+                                            </ng-container></mdb-form-control>
+                                          </td>
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.firstName }} {{ selectedInstructor.lastName }}</ng-container>
+                                            <ng-container *ngIf="editing">{{ selectedInstructor.firstName }} {{ selectedInstructor.lastName }}</ng-container>
+                                          </td> 
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <mdb-form-control>
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.companyName }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input mdbValidate mdbInput type="text" class="form-control"  formControlName="companyName" [(ngModel)]="selectedInstructor.companyName" [value]="selectedInstructor.companyName">
+                                              <mdb-error *ngIf="updateFormI.get('companyName')?.invalid && (updateFormI.get('companyName')?.dirty || updateFormI.get('companyName')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                              <mdb-success *ngIf="updateFormI.get('companyName')?.valid && (updateFormI.get('companyName')?.dirty || updateFormI.get('companyName')?.touched)"></mdb-success>
+                                            </ng-container></mdb-form-control>
+                                          </td>                                                       
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <mdb-form-control>
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.dateOfBirth }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input mdbValidate mdbInput type="date" class="form-control"  formControlName="dateOfBirth" [(ngModel)]="selectedInstructor.dateOfBirth" [value]="selectedInstructor.dateOfBirth">
+                                              <mdb-error *ngIf="updateFormI.get('dateOfBirth')?.invalid && (updateFormI.get('dateOfBirth')?.dirty || updateFormI.get('dateOfBirth')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                              <mdb-success *ngIf="updateFormI.get('dateOfBirth')?.valid && (updateFormI.get('dateOfBirth')?.dirty || updateFormI.get('dateOfBirth')?.touched)"></mdb-success>
+                                            </ng-container></mdb-form-control>
+                                          </td>
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.nationalIdentity }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input type="number" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" [(ngModel)]="selectedInstructor.nationalIdentity" [value]="selectedInstructor.nationalIdentity">
+                                            </ng-container>
+                                          </td>
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <mdb-form-control>
+                                            <ng-container *ngIf="!editing">{{ selectedInstructor.email | date }}</ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <input mdbValidate mdbInput type="text" class="form-control"  formControlName="email" [(ngModel)]="selectedInstructor.email" [value]="selectedInstructor.email">
+                                              <mdb-error *ngIf="updateFormI.get('email')?.invalid && (updateFormI.get('email')?.dirty || updateFormI.get('email')?.touched)">Boş bırakılmamalı.</mdb-error>
+                                              <mdb-success *ngIf="updateFormI.get('email')?.valid && (updateFormI.get('email')?.dirty || updateFormI.get('email')?.touched)"></mdb-success>
+                                            </ng-container></mdb-form-control>
+                                        </td>
+
+                                          <td class="py-2 px-4 border-b border-gray-300">
+                                            <ng-container *ngIf="!editing">
+                                              <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="editRow(selectedInstructor.id)">Düzenle</button>
+                                              <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="deleteFunc()">Sil</button>
+                                            </ng-container>
+                                            <ng-container *ngIf="editing">
+                                              <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="updateInstructorFunc()">Kaydet</button>
+                                              <button class="btn btn-info btn-sm mr-2 btn-rounded transition-colors duration-300 ease-in-out" (click)="cancelEdit()">İptal et</button>
+                                            </ng-container>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                </table>
+                            </div></form>
                     <div *ngIf="currentSection === 'bootcampsAdd'">
                     <div class="container-fluid" style="position: relative; overflow-y: auto; height: 100vh;">
                         <div class="row justify-content-center align-items-center" style="height: 100%;">
@@ -270,6 +379,106 @@
                             </div>
                         </div>
                     </div> 
+                </div>
+                <div *ngIf="currentSection === 'instructors'">
+<!-- CREATE INSTRUCTOR -->
+<h5 align="center">CREATE INSTRUCTOR</h5>
+<div class="container">
+        <form [formGroup]="formI" (submit)="createInstructorFunc()">
+            <div class="form-group">
+                <label for="userName">Kullanıcı Adı</label>
+                <input formControlName="userName" type="string" class="form-control" placeholder="Eğitmen Kullanıcı Adı">
+            </div>
+            <div class="form-group">
+                <label for="firstName">Ad</label>
+                <input formControlName="firstName" type="string" class="form-control" placeholder="Eğitmen Adı">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Soyad</label>
+                <input formControlName="lastName" type="string" class="form-control" placeholder="Eğitmen Soyadı">
+            </div>
+            <div class="form-group">
+                <label for="companyName">Kurumu</label>
+                <input formControlName="companyName" type="string" class="form-control" placeholder="Eğitmenin Çalıştığı Kurum">
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Doğum Tarihi</label>
+                <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="Doğum Tarihi">
+            </div>
+            <div class="form-group">
+                <label for="nationalIdentity">Tc Kimlik Numarası</label>
+                <input mdbInput formControlName="nationalIdentity" type="text" id="registerID" placeholder="TC Kimlik Numarası" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input formControlName="email" type="string" class="form-control" placeholder="Eğitmenin e-mail adresi">
+            </div>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input formControlName="password" type="string" class="form-control" placeholder="Şifre">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+</div>
+<!-- UPDATE INSTRUCTOR -->
+<h5 align="center">UPDATE INSTRUCTOR</h5>
+ 
+<div class="container">
+
+    <form [formGroup]="updateFormI" (submit)="updateInstructorFunc()">
+        <div class="form-group">
+            <label for="id">Eğitmen ID</label>
+            <input formControlName="id" type="string" class="form-control" placeholder="Eğitmen ID">
+        </div>
+        <div class="form-group">
+            <label for="userName">Kullanıcı Adı</label>
+            <input formControlName="userName" type="string" class="form-control" placeholder="Eğitmen Kullanıcı Adı">
+        </div>
+        <div class="form-group">
+            <label for="firstName">Ad</label>
+            <input formControlName="firstName" type="string" class="form-control" placeholder="Eğitmen Adı">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Soyad</label>
+            <input formControlName="lastName" type="string" class="form-control" placeholder="Eğitmen Soyadı">
+        </div>
+        <div class="form-group">
+            <label for="companyName">Kurumu</label>
+            <input formControlName="companyName" type="string" class="form-control" placeholder="Eğitmenin Çalıştığı Kurum">
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Doğum Tarihi</label>
+            <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="Doğum Tarihi">
+        </div>
+        <div class="form-group">
+            <label for="nationalIdentity">Tc Kimlik Numarası</label>
+            <input mdbInput formControlName="nationalIdentity" type="text" id="registerID" placeholder="TC Kimlik Numarası" class="form-control" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input formControlName="email" type="string" class="form-control" placeholder="Eğitmenin e-mail adresi">
+        </div>
+        <div class="form-group">
+            <label for="password">Şifre</label>
+            <input formControlName="password" type="string" class="form-control" placeholder="Şifre">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+<!-- DELETE INSTRUCTOR -->
+<h5 align="center">DELETE INSTRUCTOR</h5>
+<div class="container">
+
+    <form [formGroup]="deleteFormI" (submit)="deleteInstructorFunc()">
+        <div class="form-group">
+            <label for="id">Eğitmen ID</label>
+            <input formControlName="id" type="string" class="form-control" placeholder="Silinecek Eğitmenin ID'si">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
                 </div>
                 </main>
             </div>
