@@ -7,7 +7,7 @@ import { DeleteBootcampResponse } from "../../models/responses/bootcamp/delete-b
 import { UpdateBootcampRequest } from "../../models/requests/bootcamp/update-bootcamp-request";
 import { CreateBootcampResponse } from "../../models/responses/bootcamp/create-bootcamp-response";
 import { UpdateBootcampesponse } from "../../models/responses/bootcamp/update-bootcamp-response";
-import { GetlistBootcampResponse } from "../../models/responses/bootcamp/getlist-bootcamp-response";
+import { GetlistBootcampResponse } from "../../models/responses/bootcamp/GetListBootcampResponse";
 
 
 @Injectable({
@@ -22,4 +22,3 @@ export abstract class BootcampBaseService {
   abstract updateBootcamp(bootcamp:UpdateBootcampRequest): Observable<UpdateBootcampesponse>;
   abstract getBootcamp(id:number):Observable<GetlistBootcampResponse>; 
 }
-

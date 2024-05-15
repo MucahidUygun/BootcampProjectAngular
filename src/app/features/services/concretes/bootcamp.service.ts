@@ -18,7 +18,7 @@ import { GetlistBootcampResponse } from "../../models/responses/bootcamp/getlist
 @Injectable({
   providedIn: 'root',
 })
-export class BootcampService extends BootcampBaseService {
+export abstract class BootcampService extends BootcampBaseService {
   
   constructor(private httpClient: HttpClient) {
     super();
@@ -52,5 +52,15 @@ export class BootcampService extends BootcampBaseService {
           return newResponse;
         })
       );
+  }
+  override updateBootcamp(bootcamp: UpdateBootcampRequest): Observable<UpdateBootcampesponse> {
+    return this.httpClient.put<UpdateBootcampesponse>(`${this.apiUrl}`, bootcamp);
+  }
+
+  override postBootcamp(bootcamp: CreateBootcampRequest): Observable<CreateBootcampResponse> {
+    return this.httpClient.post<CreateBootcampResponse>(this.apiUrl, bootcamp);
+  }
+  override deleteBootcamp(id: number): Observable<DeleteBootcampResponse> {
+    return this.httpClient.delete<DeleteBootcampResponse>( `${this.apiUrl}/`+ id);
   }
 }
