@@ -15,11 +15,13 @@ import { DeleteBootcampRequest } from '../../features/models/requests/bootcamp/d
 import { UpdateBootcampRequest } from '../../features/models/requests/bootcamp/update-bootcamp-request';
 import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/getlist-bootcamp-response';
 import { CreateBootcampRequest } from '../../features/models/requests/bootcamp/create-bootcamp-request';
-import { GetlistInstructorResponse } from '../../features/models/responses/instructor/getlist-instructor-response';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { Router } from '@angular/router';
+import { GetlistInstructorResponse } from '../../features/models/responses/instructor/getlist-instructor-response';
+import { CreateInstructorRequest } from '../../features/models/requests/instructor/create-instructor-request';
+import { UpdateInstructorRequest } from '../../features/models/requests/instructor/update-instructor-request';
 
 @Component({
   selector: 'app-adminpanel',
@@ -29,16 +31,14 @@ import { Router } from '@angular/router';
   styleUrl: './adminpanel.component.scss'
 })
 export class AdminpanelComponent {
-  selectedBootcampList: GetlistBootcampResponse[] = [];
+  // Instructor
   selectedInstructorList: GetlistInstructorResponse[] = [];
-  deleteForm!: FormGroup;
-  form!: FormGroup;
-  updateForm!: FormGroup;
-  getByIdForm!: FormGroup;
-  bootcampResponse!:GetlistBootcampResponse;
-  validationForm: FormGroup;
-  claims: string[] = []
-    bootcamps: BootcampListItem = {
+  deleteFormI!: FormGroup;
+  updateFormI!: FormGroup;
+  getByIdFormI!: FormGroup;
+  formI!:FormGroup;
+  instructorResponse!: GetlistInstructorResponse;
+  instructors: InstructorListItem = {
     index: 0,
     size: 0,
     count: 0,
@@ -47,7 +47,17 @@ export class AdminpanelComponent {
     pages: 0,
     items: [],
   };
-  instructors: InstructorListItem = {
+  //Bootcamp
+  selectedBootcampList: GetlistBootcampResponse[] = [];
+  deleteForm!: FormGroup;
+  form!: FormGroup;
+  updateForm!: FormGroup;
+  getByIdForm!: FormGroup; 
+  bootcampResponse!:GetlistBootcampResponse;
+
+  validationForm: FormGroup;
+  claims: string[] = []
+    bootcamps: BootcampListItem = {
     index: 0,
     size: 0,
     count: 0,
@@ -67,7 +77,7 @@ export class AdminpanelComponent {
       instructorId: new FormControl(null, Validators.required),
     });
   }
-  readonly PAGE_SIZE = 12;
+  readonly PAGE_SIZE = 25;
   ngOnInit(): void {
     this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
     this.getInstructors({ page: 0, pageSize: this.PAGE_SIZE });
@@ -75,7 +85,10 @@ export class AdminpanelComponent {
     this.deleteCreateForm();
     this.updateCreateForm();
     this.createGetByIdBoostcamp();
-    
+    this.createInstructorForm();
+    this.updateInstructorForm();
+    this.deleteInstructorForm();
+    this.getInstructorByIdForm();
   }
   get id(): AbstractControl {
     return this.validationForm.get('id')!;
@@ -133,18 +146,30 @@ showSectionss(section: string) {
   }
 }
 
-
 editing: boolean = false;
-editRow() {
+
+editRow(type: string) {
   this.editing = true;
-  this.getByIdBootcamp;
+  if (type === 'bootcamp') {
+    this.getByIdBootcamp();
+  } else if (type === 'instructor') {
+    this.getInstructorByIdFunc();
+  }
 }
 
+
+// editRowBootcamp() {
+//   this.editing = true;
+//   this.getByIdBootcamp;
+// }
+// editRowInstructor(){
+//   this.editing = true;
+//   this.getInstructorByIdFunc;
+// }
 
 cancelEdit() {
   this.editing = false;
 }
-
 
 saveChanges() {
   if (this.editing) {
@@ -168,10 +193,143 @@ saveChanges() {
     }
   }
 }
+saveChangesForInstructors() {
+  if (this.editing) {
+    console.log(this.updateFormI.value)
+    if (this.updateFormI.valid) {
+     let updatedInstructor:UpdateInstructorRequest = Object.assign({}, this.updateFormI.value);
+     console.log(updatedInstructor)
+     this.instructorService.updateInstructor(updatedInstructor).subscribe(
+      {
+        next:(response)=>{
+          this.toastService.showError("Başarılı")
+        },
+        error:(response)=>{
+          console.log(response)
+          this.toastService.showError("Kayıt işlemi başarısız")
+        }
+      }
+     ); 
+    }else{
+      this.toastService.showInfo("Lütfen gerekli alanları doldurunuz")
+    }
+  }
+}
+
+// Instructor CRUD
+createInstructorForm(){
+  this.formI = this.formBuilder.group({
+    userName:['',Validators.required],
+    firstName:['', Validators.required],
+    lastName:['', Validators.required],
+    companyName:['', Validators.required],
+    dateOfBirth:['', Validators.required],
+    nationalIdentity:['', Validators.required],
+    email:['', Validators.required],
+    password:['', Validators.required,],
+    
+  });
+}
+updateInstructorForm(){
+  this.updateFormI = this.formBuilder.group({
+    id:['', Validators.required],
+    userName:['', Validators.required],
+    firstName:['', Validators.required],
+    lastName:['', Validators.required],
+    companyName:['', Validators.required],
+    dateOfBirth:['', Validators.required],
+    nationalIdentity:['',Validators.required],
+    email:['', Validators.required],
+    password:['', Validators.required],
+    
+  })
+}
+deleteInstructorForm(){
+  this.deleteFormI = this.formBuilder.group({
+    id:['', Validators.required]
+  })
+}
+getInstructorByIdForm(){
+  this.getByIdFormI = this.formBuilder.group({
+    id:['', Validators.required]
+  })
+}
+createInstructorFunc(){
+  let createInstructor:CreateInstructorRequest=Object.assign({}, this.formI.value)
+
+  this.instructorService.postInstructor(createInstructor).subscribe(
+    {
+      next:(response)=>{
+        console.log(response)
+        this.toastService.showSuccess("Eğitmen başarıyla oluşturuldu.")
+        this.getInstructorByIdFunc()
+      },
+      error:(response)=>{
+        console.log(response)
+        this.toastService.showError("Eksik yada hatalı bir giriş yaptınız.")
+      }
+    }
+  )
+
+}
+deleteInstructorFunc() {
+  console.log(this.deleteFormI.value.id)
+  if (this.deleteFormI.valid) {
+    this.instructorService.deleteInstructor(this.deleteFormI.value.id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.toastService.showSuccess("Silme işlemi başarıyla gerçekleştirildi.");
+      },
+      error: (response) => {
+        console.log(response);
+        this.toastService.showError("Eksik veya hatalı bir giriş yaptınız.");
+      }
+    });
+  } else {
+    this.toastService.showError("Lütfen gerekli alanları doldurunuz.");
+  }
+}
+updateInstructorFunc(){
+  console.log(this.updateFormI.value)
+  if (this.updateFormI.valid) {
+   let updatedInstructor:UpdateInstructorRequest = Object.assign({}, this.updateFormI.value);
+   console.log(updatedInstructor)
+   this.instructorService.updateInstructor(updatedInstructor).subscribe(
+    {
+      next:(response)=>{
+        console.log(response)
+        this.toastService.showSuccess("Eğitmen bilgileri başarıyla güncellendi.")
+      },
+      error:(response)=>{
+        console.log(response)
+        this.toastService.showError("Hatalı bir giriş yaptınız.")
+      }
+    }
+   ); 
+  }else{
+    this.toastService.showError("Lütfen gerekli alanları doldurunuz")
+  }
+}
+getInstructorByIdFunc() {
+  if (this.getByIdFormI.valid) {
+    this.instructorService.getInstructor(this.getByIdFormI.value.id).subscribe({
+      next: (response) => {
+        this.instructorResponse = response;
+        this.toastService.showSuccess("Eğitmen başarıyla getirildi.");
+        console.log(this.instructorResponse);
+      },
+      error: (response) => {
+        console.log(response);
+        this.toastService.showError("Eksik veya hatalı bir giriş yaptınız.");
+      }
+    });
+  } else {
+    this.toastService.showError("Lütfen geçerli bir eğitmen ID giriniz.");
+  }
+}
 
 
   // BOOTCAMP CRUD
-
   createForm(){
     this.form = this.formBuilder.group({
       name:['', Validators.required],
@@ -214,7 +372,7 @@ saveChanges() {
           this.toastService.showSuccess("Bootcamp ekleme işlemi başarılı")
           window.location.reload();
           this.router.navigate(['adminpanel']) 
-          this.showSection('bootcamps'),{ timeOut: 2500 };
+          this.showSectionss('bootcamps'),{ timeOut: 2500 };
         },
         error:(response)=>{
           this.toastService.showError("Kayıt işlemi başarısız")
