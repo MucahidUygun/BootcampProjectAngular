@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { ApplicationStateService } from '../../features/services/concretes/application-state.service';
-import { NotificationsService } from '../../features/services/concretes/notification-service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { GetlistApplicationstateResponse } from '../../features/models/responses/applicationstate/getlist-applicationstate-response';
-import { PageRequest } from '../../core/models/requests/PageRequest';
-import { CreateApplicationstateRequest } from '../../features/models/requests/applicationstate/create-applicationstate-request';
-import { UpdateApplicationstateRequest } from '../../features/models/requests/applicationstate/update-applicationstate-request';
-import { GetbyidApplicationstateResponse } from '../../features/models/responses/applicationstate/getbyid-applicationstate-response';
+import { GetlistApplicationstateResponse } from '../../../features/models/responses/applicationstate/getlist-applicationstate-response';
+import { GetbyidApplicationstateResponse } from '../../../features/models/responses/applicationstate/getbyid-applicationstate-response';
+import { ApplicationStateService } from '../../../features/services/concretes/application-state.service';
+import { NotificationsService } from '../../../features/services/concretes/notification-service';
+import { CreateApplicationstateRequest } from '../../../features/models/requests/applicationstate/create-applicationstate-request';
+import { UpdateApplicationstateRequest } from '../../../features/models/requests/applicationstate/update-applicationstate-request';
+import { PageRequest } from '../../../core/models/requests/PageRequest';
 
 @Component({
   selector: 'app-application-state',

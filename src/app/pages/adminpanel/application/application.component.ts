@@ -2,18 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ApplicationService } from '../../features/services/concretes/application.service';
-import { NotificationsService } from '../../features/services/concretes/notification-service';
-import { GetlistApplicationResponse } from '../../features/models/responses/application/getlist-application-response';
-import { PageRequest } from '../../core/models/requests/PageRequest';
-import { CreateApplicationRequest } from '../../features/models/requests/application/create-application-request';
-import { BootcampService } from '../../features/services/concretes/bootcamp.service';
-import { ApplicationStateService } from '../../features/services/concretes/application-state.service';
-import { GetlistBootcampResponse } from '../../features/models/responses/bootcamp/GetListBootcampResponse';
-import { GetlistApplicationstateResponse } from '../../features/models/responses/applicationstate/getlist-applicationstate-response';
-import { UpdateApplicationRequest } from '../../features/models/requests/application/update-application-request';
-import { ApplicantService } from '../../features/services/concretes/applicant.service';
-import { GetlistApplicantResponse } from '../../features/models/responses/applicant/getlist-applicant-response';
+import { GetlistApplicationResponse } from '../../../features/models/responses/application/getlist-application-response';
+import { GetlistBootcampResponse } from '../../../features/models/responses/bootcamp/GetListBootcampResponse';
+import { GetlistApplicationstateResponse } from '../../../features/models/responses/applicationstate/getlist-applicationstate-response';
+import { GetlistApplicantResponse } from '../../../features/models/responses/applicant/getlist-applicant-response';
+import { CreateApplicationRequest } from '../../../features/models/requests/application/create-application-request';
+import { BootcampService } from '../../../features/services/concretes/bootcamp.service';
+import { ApplicationStateService } from '../../../features/services/concretes/application-state.service';
+import { ApplicationService } from '../../../features/services/concretes/application.service';
+import { NotificationsService } from '../../../features/services/concretes/notification-service';
+import { ApplicantService } from '../../../features/services/concretes/applicant.service';
+import { UpdateApplicationRequest } from '../../../features/models/requests/application/update-application-request';
+import { PageRequest } from '../../../core/models/requests/PageRequest';
 
 @Component({
   selector: 'app-application',

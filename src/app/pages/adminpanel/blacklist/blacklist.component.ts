@@ -1,16 +1,16 @@
 import { CommonModule, DatePipe, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { GetlistApplicantResponse } from '../../features/models/responses/applicant/getlist-applicant-response';
-import { GetlistBlacklistResponse } from '../../features/models/responses/blacklist/getlist-blacklist-response';
-import { CreateBlacklistRequest } from '../../features/models/requests/blacklist/create-blacklist-request';
-import { BlacklistService } from '../../features/services/concretes/blacklist.service';
-import { ApplicantService } from '../../features/services/concretes/applicant.service';
-import { NotificationsService } from '../../features/services/concretes/notification-service';
-import { PageRequest } from '../../core/models/requests/PageRequest';
-import { UpdateBlacklistRequest } from '../../features/models/requests/blacklist/update-blacklistre-quest';
-import { formatDateString, formatDateToDateObject } from '../../core/helpers/form-date';
+import { RouterModule } from '@angular/router'
+import { GetlistApplicantResponse } from '../../../features/models/responses/applicant/getlist-applicant-response';
+import { GetlistBlacklistResponse } from '../../../features/models/responses/blacklist/getlist-blacklist-response';
+import { CreateBlacklistRequest } from '../../../features/models/requests/blacklist/create-blacklist-request';
+import { BlacklistService } from '../../../features/services/concretes/blacklist.service';
+import { ApplicantService } from '../../../features/services/concretes/applicant.service';
+import { NotificationsService } from '../../../features/services/concretes/notification-service';
+import { PageRequest } from '../../../core/models/requests/PageRequest';
+import { UpdateBlacklistRequest } from '../../../features/models/requests/blacklist/update-blacklistre-quest';
+import { formatDateString } from '../../../core/helpers/form-date';
 
 @Component({
   selector: 'app-blacklist',
@@ -60,10 +60,6 @@ export class BlacklistComponent {
       this.blacklistService.getList(pageRequest).subscribe(
         (response)=>{
           this.blacklists=response.items;
-          this.blacklists.forEach(list => {
-            console.log(formatDateToDateObject(list.date))
-            list.date = formatDateToDateObject(list.date);
-          });
         }
       )
     }
