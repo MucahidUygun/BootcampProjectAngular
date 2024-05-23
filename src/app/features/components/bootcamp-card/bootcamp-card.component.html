@@ -1,16 +1,60 @@
-<div class="card mb-3">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+<div class="cards-container">
+  <ng-container *ngFor="let item of bootcamps.items">
+    <div class="card">
+      <a href="#" class="block rounded-t-lg overflow-hidden">
+        <img
+          class="object-cover w-full h-56"
+          [src]="item.imagePath"
+          alt="test"
+        />
+      </a>
+      <div class="p-5">
+        <a href="#">
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            {{ item.name }}
+          </h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          Some information about bootcamp, we can enter manually
+        </p>
+        <div class="flex items-center">
+          <button
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            (click)="viewDetails(item.id)"
+          >
+            Detay
+          </button>
+          <span class="ml-12">
+            {{ item.instructorFirstName }} {{ item.instructorLastName }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<!-- component -->
+<div class="pagination-container">
+  <div class="pagination">
+    <div class="arrow" (click)="previousOnClick()">
+      <p class="arrow-text">Previous</p>
+    </div>
+    <div class="page-numbers">
+      <ng-container *ngFor="let page of totalPages()">
+        <p
+          class="page-number"
+          [class.current-page]="page === currentPageNumber"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </p>
+      </ng-container>
+    </div>
+    <div class="arrow" (click)="nextOnClick()">
+      <p class="arrow-text">Next</p>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-    </div>
-    <img src="..." class="card-img-bottom" alt="...">
-  </div>
+</div>

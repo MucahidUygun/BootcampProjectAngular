@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error/ErrorInterceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from './shared/shared.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { authInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { FormsModule } from '@angular/forms';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
@@ -29,7 +29,8 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true,
-    }
+    },
+    DatePipe
   ],
   imports: [MdbValidationModule,MdbModalModule, MdbFormsModule, RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
   templateUrl: './app.component.html',

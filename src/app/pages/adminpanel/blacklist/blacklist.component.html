@@ -1,0 +1,48 @@
+<div>
+    <table>
+        <thead>
+            <th>Üye İsmi</th>
+            <th>Kara Listeye Alınma Sebebi</th>
+            <th>Bitiş Tarihi</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let blacklist of blacklists">
+                <select [(ngModel)]="blacklist.applicantId" (ngModelChange)="onOptionsChange(blacklist,$event)">
+                    <option *ngFor="let applicant of applicants" [value]="applicant.id" [selected]="applicant.userName">
+                        {{applicant.userName}}
+                    </option>
+                </select>
+                <td>
+                    <input [value]="blacklist.reason" [(ngModel)]="blacklist.reason">
+                </td>
+                <td>
+                    <input [(ngModel)]="blacklist.date"  type="date">
+                </td>
+                <td><button (click)="deleteBlacklistFunc(blacklist.id)">Sil</button></td>
+                <td><button (click)="updateBlacklistFunc(blacklist)">Güncelle</button></td>
+            </tr>
+            <tr>
+                <td>
+                    <select [(ngModel)]="createdBlackList.applicantId" (ngModelChange)="onOptionsChange(createdBlackList,$event)">
+                        <option disabled selected value="">
+                            {{defaultMessage}}
+                        </option>
+                        <option *ngFor="let applicant of applicants" [value]="applicant.id">
+                            {{applicant.userName}}
+                    </option>
+                    </select>
+                </td>
+                <td>
+                    <input [value]="createdBlackList.reason" [(ngModel)]="createdBlackList.reason" placeholder="Lütfen Bir Değer Giriniz">
+                </td>
+                <td>
+                    <input [value]="createdBlackList.date" type="date" [(ngModel)]="createdBlackList.date">
+                </td>
+                <td>
+                    <button (click)="postBlacklistFunc()">Ekle</button>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

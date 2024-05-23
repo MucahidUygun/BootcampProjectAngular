@@ -7,4 +7,5 @@ export interface GetlistBootcampResponse {
   endDate: Date;
   instructorFirstName: string;
   instructorLastName: string;
+  imagePath: string;
 }

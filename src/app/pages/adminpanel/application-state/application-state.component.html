@@ -1,0 +1,26 @@
+<div class="table-responsive-sm">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Başvuru ismi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let state of applicationStates">
+                <td>{{ state.id }}</td>
+                <input [(ngModel)]="state.name">
+                <td><button (click)="updateApplicationStateFunc(state.id,state.name)">Güncelle</button></td>
+                <td><button (click)="deleteApplicationStateFunc(state.id)">Sil</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input placeholder="Başvuru Durumu İsmi" [(ngModel)]="stateName">
+                </td>
+                <td><button (click)="postApplicationStateFunc()">Ekle</button></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

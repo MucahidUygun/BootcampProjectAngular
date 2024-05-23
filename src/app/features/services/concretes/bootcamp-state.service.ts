@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BootcampBaseService } from '../abstracts/bootcamp-base.service';
 import { Observable, map } from 'rxjs';
 import { PageRequest } from '../../../core/models/requests/PageRequest';
-import { CreateBootcampRequest } from '../../models/requests/bootcamp/create-bootcamp-request';
-import { UpdateBootcampRequest } from '../../models/requests/bootcamp/update-bootcamp-request';
-import { BootcampListItem } from '../../models/responses/bootcamp/bootcampItemDto';
-import { CreateBootcampResponse } from '../../models/responses/bootcamp/create-bootcamp-response';
-import { DeleteBootcampResponse } from '../../models/responses/bootcamp/delete-bootcamp-response';
-import { GetlistBootcampResponse } from '../../models/responses/bootcamp/getlist-bootcamp-response';
-import { UpdateBootcampesponse } from '../../models/responses/bootcamp/update-bootcamp-response';
 import { HttpClient } from '@angular/common/http';
 import { BootcampStateBaseService } from '../abstracts/bootcamp-state-base.service';
 import { CreateBootcampstateRequest } from '../../models/requests/bootcampstate/create-bootcampstate-request';

@@ -1,0 +1,80 @@
+<div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Başvuran İsmi</th>
+                <th scope="col">Bootcamp İsmi</th>
+                <th scope="col">Başvuru Durumu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let application of applications">
+                <td>
+                    <select [(ngModel)]="application.applicantId" (ngModelChange)="onOptionsChange(application,$event)">
+                        <option *ngFor="let applicant of applicants" [value]="applicant.id"
+                            [selected]="applicant.userName">
+                            {{applicant.userName}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select [(ngModel)]="application.bootcampId" (ngModelChange)="onOptionsChange(application,$event)">
+                        <option *ngFor="let bootcamp of bootcamps" [value]="bootcamp.id" [selected]="bootcamp.name">
+                            {{bootcamp.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select [(ngModel)]="application.applicationStateId"
+                        (ngModelChange)="onOptionsChange(application,$event)">
+                        <option *ngFor="let state of applicationStates" [value]="state.id" [selected]="state.name">
+                            {{state.name}}
+                        </option>
+                    </select>
+                </td>
+                <td><button (click)="deleteApplicationFunc(application.id)">Sil</button></td>
+                <td><button (click)="updateApplicationFunc(application)">Güncelle</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select [(ngModel)]="createdApplication.applicantId" (ngModelChange)="onOptionsChange(createdApplication,$event)" >
+                        <option disabled selected value= "">
+                            {{defaultMessage}}
+                        </option>
+                        <option *ngFor="let applicant of applicants" [value]="applicant.id">
+                                {{applicant.userName}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select [(ngModel)]="createdApplication.bootcampId" (ngModelChange)="onOptionsChange(createdApplication,$event)">
+                        <option disabled selected value= "0">
+                            {{defaultMessage}}
+                        </option>
+                        <option *ngFor="let bootcamp of bootcamps" [value]="bootcamp.id">
+                            {{bootcamp.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select  [(ngModel)]="createdApplication.applicationStateId"
+                        (ngModelChange)="onOptionsChange(createdApplication,$event)">
+                        <option disabled selected value= 0>
+                            {{defaultMessage}}
+                        </option>
+                        <option *ngFor="let state of applicationStates" [value]="state.id">
+                            {{state.name}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <button (click)="postApplicationFunc()">Ekle</button>
+                </td>
+                <td>
+                    <button (click)="clearApplicationFunc()">Temizle</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
