@@ -1,11 +1,15 @@
 // @import "bootstrap/scss/bootstrap.scss";
 // Font Awesome
-@import '@fortawesome/fontawesome-free/css/all.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.css";
 
 // MDB SCSS
 @import "../node_modules/mdb-angular-ui-kit/assets/scss/mdb.scss";
 
 .navbar-container {
-    max-width: 50%; 
-    margin: 0 auto; 
+  max-width: 50%;
+  margin: 0 auto;
 }

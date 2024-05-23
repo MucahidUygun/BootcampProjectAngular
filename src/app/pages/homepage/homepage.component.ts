@@ -1,5 +1,15 @@
-import { Component, HostListener ,EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import {
+  Component,
+  HostListener,
+  EventEmitter,
+  Input,
+  NgModule,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -9,7 +19,7 @@ import { BootcampListItem } from '../../features/models/responses/bootcamp/bootc
 import { PageRequest } from '../../core/models/requests/PageRequest';
 import { InstructorListItem } from '../../features/models/responses/instructor/instructorItemDto';
 import { InstructorService } from '../../features/services/concretes/instructor.service';
-
+import { BootcampCardComponent } from '../../features/components/bootcamp-card/bootcamp-card.component';
 
 @Component({
   selector: 'app-homepage',
@@ -21,7 +31,8 @@ import { InstructorService } from '../../features/services/concretes/instructor.
     CommonModule,
     HttpClientModule,
     NavbarComponent,
-    FormsModule
+    FormsModule,
+    BootcampCardComponent,
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
@@ -46,36 +57,39 @@ export class HomepageComponent implements OnInit {
     items: [],
   };
 
-  constructor(private bootcampService: BootcampService,private instructorService: InstructorService) {}
-  readonly PAGE_SIZE = 3;
+  constructor(
+    private bootcampService: BootcampService,
+    private instructorService: InstructorService,
+    private router: Router
+  ) {}
+  readonly PAGE_SIZE = 4;
   ngOnInit(): void {
-    this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
     this.getInstructors({ page: 0, pageSize: this.PAGE_SIZE });
-   }
-   displayIntro: boolean = false;
+  }
+  displayIntro: boolean = false;
 
-   @HostListener('window:scroll', [])
-   onScroll(): void {
-     this.scrollFunction();
-   }
-   scrollFunction(): void {
-    if ((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) && !this.TopOfPage()) {
-        this.displayIntro = true;
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    this.scrollFunction();
+  }
+  scrollFunction(): void {
+    if (
+      (document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20) &&
+      !this.TopOfPage()
+    ) {
+      this.displayIntro = true;
     } else {
-        this.displayIntro = false;
+      this.displayIntro = false;
     }
-}
-TopOfPage(): boolean {
+  }
+  TopOfPage(): boolean {
     return window.scrollY === 0;
-}
+  }
 
-  getBootcamps(pageRequest: PageRequest) {
-    this.bootcampService.getList(pageRequest).subscribe((response) => {
-      this.bootcamps = response;
+  getInstructors(pageRequest: PageRequest) {
+    this.instructorService.getList(pageRequest).subscribe((response) => {
+      this.instructors = response;
     });
   }
-    getInstructors(pageRequest: PageRequest) {
-      this.instructorService.getList(pageRequest).subscribe((response) => {
-        this.instructors = response;
-      });
-  }}
+}
