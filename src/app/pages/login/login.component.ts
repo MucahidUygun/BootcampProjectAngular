@@ -12,6 +12,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -20,7 +21,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
   styleUrl: './login.component.scss'
 })
 
-export class LoginComponent {
+export class LoginComponent{
   loginForm!: FormGroup
   registerForm!: FormGroup
   modalRef: MdbModalRef<ModalComponent> | null = null;
@@ -30,6 +31,7 @@ export class LoginComponent {
     this.createLoginForm();
     this.createRegisterForm();
   }
+
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({

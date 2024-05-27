@@ -1,13 +1,9 @@
-body {
-  background-color: #f8f9fa;
-}
-
 .login-container {
-  max-width: 400px;
-  margin: 200px auto;
+  max-width: 450px;
+  margin: 150px auto;
   padding: 25px;
   background-color: #fff;
-  border-radius: 25px;
+  border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -26,19 +22,141 @@ body {
   text-align: center;
 }
 
-.login-bg-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+// .login-bg-image {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: #212931;
+//   background-image: url("../../../assets/images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../../assets/images/bg.jpg");
+//   background-size: auto, auto, cover;
+//   background-position: center, center, top center;
+//   background-repeat: repeat, no-repeat, no-repeat;
+//   background-attachment: scroll, scroll, scroll;
+//   z-index: -1;
+// }
+
+html, body {
+  overflow: hidden; /* Tüm scrollbar'ları gizler */
   height: 100%;
-  background-color: #212931;
-  background-image: url("../../../assets/images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../../assets/images/bg.jpg");
-  background-size: auto, auto, cover;
-  background-position: center, center, top center;
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-attachment: scroll, scroll, scroll;
-  z-index: -1;
+  margin: 0;
+  padding: 0;
 }
 
+.grainy-gradient-intro:before {
+  background: #c3ccea;
+  filter: url(#f);
+  overflow: hidden; /* Bu elementteki scrollbar'ı gizler */
+}
+
+.grainy-gradient-intro:before, .grainy-gradient-intro:after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  --grad: radial-gradient(at 50%, red, rgba(255, 0, 0, 0.3) 55%, transparent 80%);
+  --mask: var(--grad), var(--grad);
+  -webkit-mask: var(--mask);
+  -webkit-mask-composite: source-in;
+  mask: var(--mask);
+  -webkit-mask-composite: source-in, xor;
+  mask-composite: intersect;
+  mix-blend-mode: unset;
+  content: "";
+  overflow: hidden; /* Bu elementlerdeki scrollbar'ları gizler */
+}
+
+.grainy-gradient-intro:after {
+  overflow: hidden;
+  background: linear-gradient(90deg, #760dfe 20%, #f51b26, #fd9900);
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Webkit tabanlı tarayıcılarda scrollbar'ları gizler */
+}
+
+* {
+  scrollbar-width: none; /* Firefox'ta scrollbar'ları gizler */
+}
+
+/* Ekstra scrollbar'ları gizlemek için */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tüm potansiyel scrollbar'ları hedef alır */
+body, html, .grainy-gradient-intro, .grainy-gradient-intro:before, .grainy-gradient-intro:after {
+  overflow: hidden !important;
+}
+
+// html, body { height: 100%; }
+// body {
+//   background:radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, #000 100%);
+//   overflow: hidden;
+//   overflow-x: hidden;
+//   overflow-y: hidden;
+// }
+// .ocean { 
+//   height: 5%;
+//   width:100%;
+//   position:absolute;
+//   bottom:0;
+//   left:0;
+//   background: #30cfd0;
+// }
+
+// .wave {
+//   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+//   position: absolute;
+//   top: -198px;
+//   width: 6400px;
+//   height: 198px;
+//   animation: wave 8s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+//   transform: translate3d(0, 0, 0);
+// }
+
+// .wave:nth-of-type(2) {
+//   top: -175px;
+//   animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+//   opacity: 1;
+// }
+// .wave:nth-of-type(3) {
+//   top: -225px;
+//   animation: wave 6s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+//   opacity: 1;
+// }
+
+// @keyframes wave {
+//   0% {
+//     margin-left: 0;
+//   }
+//   100% {
+//     margin-left: -1600px;
+//   }
+// }
+
+// @keyframes swell {
+//   0%, 100% {
+//     transform: translate3d(0,-25px,0);
+//   }
+//   50% {
+//     transform: translate3d(0,5px,0);
+//   }
+// }
+// .stars {
+//   position:absolute;
+//   top:0;
+//   left:0;
+//   right:0;
+//   bottom:0;
+//   width:100%;
+//   height:100%;
+//   display:block;
+// }
+
+// .stars {
+//   background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+//   z-index:0;
+// }
 

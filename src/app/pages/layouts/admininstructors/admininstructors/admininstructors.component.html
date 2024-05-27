@@ -1,0 +1,170 @@
+    <form [formGroup]="updateFormI">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 pt-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="mb-0">Instructors</h2>
+                <div>
+                    <button type="button" class="btn btn-secondary" (click)="openAddInstructorModal()">Instructor Ekle</button>
+                    <!-- <button type="button" class="btn btn-secondary" (click)="openInstructorDetailModal(selectedInstructor)">Detay</button> -->
+                </div>
+            </div>
+              <form [formGroup]="deleteFormI">
+                <div class="d-flex mb-3">
+                  <select class="form-select me-3" formControlName="id">
+                    <option *ngFor="let instructor of instructors.items" [ngValue]="instructor.id">{{ instructor.id }}</option>
+                  </select>
+                  <button type="button" class="btn btn-secondary" (click)="refresh()">Yenile</button>
+                  <ng-container *ngIf="editedInstructor">
+                    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Değişiklikleri iptal et</button>
+                  </ng-container>
+                  <button type="button" class="btn btn-secondary" (click)="deleteInstructor()">Sil</button>
+                </div>
+              </form>
+              
+              <div class="table-responsive">
+                <table mat-table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>User Name</th>
+                      <th>Full Name</th>
+                      <th>Şifre</th>
+                      <th>Company</th>
+                      <th>DateOfBirth</th>
+                      <th>Identity</th>
+                      <th>Email</th>
+                      <th>Settings</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let instructor of instructors.items; let i = index">
+                      <tr (click)="editableRowIndex === null ? editRow(i) : null">
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showId">
+                            <input type="text" class="form-control" formControlName="id" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showId>{{ instructor.id }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showUserName">
+                            <input type="text" class="form-control" formControlName="userName" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showUserName>{{ instructor.userName }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showFullName">
+                            <input type="text" class="form-control" formControlName="firstName" [attr.disabled]="editableRowIndex !== i" />
+                            <input type="text" class="form-control" formControlName="lastName" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showFullName>{{ instructor.firstName }} {{ instructor.lastName }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showPassword">
+                            <input type="password" class="form-control" formControlName="password" />
+                          </ng-container>
+                          <ng-template #showPassword>
+                            <span>***************</span>
+                          </ng-template>
+                        </td>
+                                          
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showCompanyName">
+                            <input type="text" class="form-control" formControlName="companyName" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showCompanyName>{{ instructor.companyName }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showDateOfBirth">
+                            <input type="date" class="form-control" formControlName="dateOfBirth" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showDateOfBirth>{{ instructor.dateOfBirth | date }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showIdentity">
+                            <input type="text" class="form-control" formControlName="nationalIdentity" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showIdentity>{{ instructor.nationalIdentity }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i; else showEmail">
+                            <input type="email" class="form-control" formControlName="email" [attr.disabled]="editableRowIndex !== i" />
+                          </ng-container>
+                          <ng-template #showEmail>{{ instructor.email }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="editableRowIndex === i">
+                            <button class="btn btn-info btn-sm" (click)="saveChangesForInstructors()">Kaydet</button>
+                          </ng-container>
+                          <ng-container *ngIf="editableRowIndex !== i">
+                            <button class="btn btn-info btn-sm" (click)="editRow(i)">Düzenle</button>
+                          </ng-container>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div mdbModal class="modal modal-xl" id="addInstructorModal" tabindex="-1" aria-labelledby="addInstructorModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+        <div class="modal-dialog  modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+        <h5 class="modal-title" id="addInstructorModalLabel">Instructor Oluştur</h5>
+        <button type="button" class="btn btn-secondary btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="closeAddInstructorModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formI">
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="userName" type="text" class="form-control" id="userName"
+              placeholder="User Name">
+            <label mdbLabel class="form-label" for="userName">User Name</label>
+          </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="firstName" type="string" class="form-control"
+                placeholder="Eğitmen Adı">
+            <label mdbLabel class="form-label" for="firstName">Ad</label>
+        </mdb-form-control>
+        <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="lastName" type="string" class="form-control"
+                placeholder="Eğitmen Soyadı">
+            <label mdbLabel class="form-label" for="lastName">Soyad</label>
+        </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="password" type="password" class="form-control" id="password"
+              placeholder="Şifre">
+            <label mdbLabel class="form-label" for="password">Şifre</label>
+          </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="companyName" type="text" class="form-control" id="company"
+              placeholder="Company">
+            <label mdbLabel class="form-label" for="company">Company</label>
+          </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="dateOfBirth" type="date" class="form-control" id="dateOfBirth"
+              placeholder="Date of Birth">
+            <label mdbLabel class="form-label" for="dateOfBirth">Date of Birth</label>
+          </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="nationalIdentity" type="text" id="registerID"
+                placeholder="TC Kimlik Numarası" class="form-control" maxlength="11"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" />
+            <label mdbLabel class="form-label" for="nationalIdentity">Tc Kimlik Numarası</label>
+        </mdb-form-control>
+          <mdb-form-control class="mb-4">
+            <input mdbInput formControlName="email" type="email" class="form-control" id="email"
+              placeholder="Email">
+            <label mdbLabel class="form-label" for="email">Email</label>
+          </mdb-form-control>
+          <div class="form-group text-center">
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeAddInstructorModal()">İptal et</button>
+            <button type="button" class="btn btn-light" mdbRipple rippleColor="dark"
+              (click)="createInstructorFunc()">Tamamla</button>
+            </div>
+          </div>
+        </form>
+      </div>

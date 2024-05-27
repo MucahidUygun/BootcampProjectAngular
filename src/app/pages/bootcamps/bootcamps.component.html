@@ -1,0 +1,257 @@
+<!-- <div class="welcome-container position-relative overflow-hidden">
+    <video autoplay muted loop class="welcome-video position-absolute top-50 start-50 w-100 h-100 object-cover tranat">
+      <source src="https://res.cloudinary.com/dyxgqsz0w/video/upload/samples/cld-sample-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="welcome-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    <div class="welcome-content position-absolute top-50 start-50 translate-middle text-center text-white">
+      <img src="logo eklenecek" alt="Logo" class="logo mb-5" style="max-width: 300px;">
+      <h1 class="welcome-heading display-2 fw-bold mb-4">Hoş Geldiniz!</h1>
+      <p class="welcome-text lead mb-5">Gelişmiş ve keyifli bir deneyim için hazır mısınız?</p>
+      <div class="welcome-buttons mb-5">
+        <a href="homepage" class="btn btn-primary btn-lg me-3 px-5 py-3 rounded-pill" mdbRipple>Keşfetmeye Başla</a>
+        <a href="login" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill" mdbRipple>Giriş Yap / Kayıt Ol</a>
+      </div>
+      <div class="additional-info mb-5">
+        <h3 class="mb-3">Neden Biz?</h3>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Gelişmiş özellikler sunuyoruz.</li>
+          <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Kullanıcı dostu arayüzümüz ile kolay kullanım sağlıyoruz.</li>
+          <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Hızlı ve güvenilir bir platform sunuyoruz.</li>
+        </ul>
+      </div>
+      <div class="social-media-icons mb-5">
+        <a href="#" class="me-3 text-white"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="me-3 text-white"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="me-3 text-white"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="me-3 text-white"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <p class="mt-5">&copy; 2024. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+   -->
+   <div id="wrapper" class="fade-in">
+    <div id="intro">
+      <h1>Pair<br />
+        5</h1>
+      <p>Merhaba<br />
+        ve hoşgeldiniz.</p>
+      <ul class="actions">
+        <li><a href="bootcamps/#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+      </ul>
+      <div id="BackToMain" [style.display]="displayIntro ? 'block' : 'none'">
+        <ul class="actions">
+          <li><a href="bootcamps/#wrapper" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
+        </ul>
+      </div>
+    </div>
+    <nav id="nav">
+      <ul class="links">
+        <li class="active"><a href="/bootcamps">Bootcamps</a></li>
+        <li><a href="generic.html" class="nav-link disabled">Biz kimiz?[Kullanım dışı]</a></li>
+        <li><a href="elements.html" class="nav-link disabled">Diğer Çalışmalar[Kullanım dışı]</a></li>
+      </ul>
+      <ul class="icons">
+        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+      </ul>
+    </nav>
+  
+    <div id="main" class="fade-in">
+      
+      <article class="post featured">
+        <header class="major">
+          <tr class="date">
+            <h3>BOOTCAMPS</h3>
+          </tr>
+  
+          <!-- <p>Bu alanda eğitmenlerin/şirketin, göstermiş olduğu eğitimler/ürünler yer alıyor.</p> -->
+        </header>
+        <div class="carousel-inner rounded-9 shadow-4-strong">
+          <mdb-carousel [indicators]="true" [animation]="'fade'">
+            <mdb-carousel-item>
+              <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.jpg" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </div>
+            </mdb-carousel-item>
+  
+            <mdb-carousel-item>
+              <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.jpg" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </mdb-carousel-item>
+  
+            <mdb-carousel-item>
+              <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.jpg" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </div>
+            </mdb-carousel-item>
+          </mdb-carousel>
+        </div>
+      </article>
+      <section class="posts">
+        <article *ngFor="let bootcamp of bootcamps.items">
+          <div class="card border text-center border-primary shadow-0" (click)="toggleCardBody(bootcamp.id)">
+            <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="img-fluid" />
+              <a routerLink="#">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+            <div class="card-body" [ngClass]="{ 'd-none': !isOpen[bootcamp.id] }">
+              <h5 class="card-title">{{bootcamp.name}}</h5>
+              <div class="card-body justify-content-between align-items-center mb-2 pb-2">
+                <p class="fw-bold text-muted small text-uppercase">
+                Başlama Tarihi : {{ bootcamp.startDate}}
+                </p>
+                <p class="fw-bold text-muted small text-uppercase">
+                 Bitiş Tarihi : {{ bootcamp.endDate}}
+                </p>
+                <p class="fw-bold h1 mb-1">{{bootcamp.name}}</p>
+                <p class="text-muted mb-0">{{ bootcamp.instructorId}}</p>
+              </div>
+              <hr style="background-color: hsl(0, 0%, 75%)" />
+              <blockquote>
+                <p class="card-text">
+                  This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                  {{ bootcamp.id }}
+                </p>
+              </blockquote>
+              <hr style="background-color: hsl(0, 0%, 75%)" />
+  
+              <p class="text-uppercase text-muted small fw-bold">Eğitmen Bilgileri</p>
+              <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                  <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+                    style="width: 45px; height: 45px" />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <p class="fw-bold mb-1">{{ bootcamp.instructorFirstName}} {{
+                    bootcamp.instructorLastName}}</p>
+                  <p class="text-muted mb-0">{{ bootcamp.bootcampStateName }} - {{
+                    bootcamp.bootcampStateId}}</p>
+                </div>
+              </div>
+  
+            </div>
+            <div class="card-footer">
+              <small class="date">Kurs numarası : {{ bootcamp.id }} - Son Düzenlenme: {{ bootcamp.startDate |
+                date : "dd/MM/yyyy" }}</small>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  
+    <footer id="footer">
+      <section>
+        <h3 class="fw-bold text-center mb-4">Sosyal medya</h3>
+        <ul class="icons text-center mb-5">
+          <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+  
+           <section class="border border-primary card p-4 mb-lg-10 mb-5">
+          <h3 class="fw-bold text-center mb-4">Bizimle iletişime geç</h3>
+          <div class="row gx-xl-5">
+            <div class="col-lg-5  mb-5 mb-lg-0">
+            <form> 
+  
+              <div class="form-outline border mb-3" data-mdb-input-init>
+              <input mdbInput type="text" id="form4Example1" class="form-control" />
+              <label mdbLabel class="form-label" for="form4Example1">Ad Soyad</label>
+              </div>
+              <div class="form-group">
+                <input mdbInput type="password" id="loginP" class="form-control" />
+                <label mdbLabel class="form-label" for="loginP">Şifre</label>
+              </div>
+              <div class="form-outline border mb-3" data-mdb-input-init>
+              <input type="email" id="form4Example2" class="form-control" />
+              <label class="form-label" for="form4Example2">Email</label>
+              </div>
+        
+              <div class="form-outline border mb-3">
+              <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+              <label class="form-label" for="form4Example3">Mesaj</label>
+              </div>
+  
+              <button type="submit" class="btn btn-primary btn-block mb-4">Gönder</button>
+            </form>
+        
+            </div>
+        
+            <div class="col-lg-7 mb-4 mb-lg-0">
+        
+            <div class="row gx-lg-5">
+              <div class="col-md-6 mb-4 mb-md-5">
+              <div class="d-flex align-items-start">
+                <div class="p-3 badge-primary rounded-4">
+                <i class="fas fa-headset fa-lg fa-fw"></i>
+                </div>
+                <div class="ms-4">
+                <p class="fw-bold mb-1">Teknik destek</p>
+                <p class="text-muted mb-0">pair5gmail.com</p>
+                <p class="text-muted mb-0">+1 234-567-89</p>
+                </div>
+              </div>
+              </div>
+        
+              <div class="col-md-6 mb-4 mb-md-5">
+              <div class="d-flex align-items-start">
+                <div class="p-3 badge-primary rounded-4">
+                <i class="fas fa-newspaper fa-lg fa-fw"></i>
+                </div>
+                <div class="ms-4">
+                <p class="fw-bold mb-1">Bootcampler</p>
+                <p class="text-muted mb-0">pair5gmail.com</p>
+                <p class="text-muted mb-0">+1 234-567-88</p>
+                </div>
+              </div>
+              </div>
+        
+              <div class="col-md-6 mb-4 mb-md-5">
+              <div class="d-flex align-items-start">
+                <div class="p-3 badge-primary rounded-4">
+                <i class="fas fa-bug fa-lg fa-fw"></i>
+                </div>
+                <div class="ms-4">
+                <p class="fw-bold mb-1">Hata bildir</p>
+                <p class="text-muted mb-0">pair5gmail.com</p>
+                <p class="text-muted mb-0">+1 234-567-87</p>
+                </div>
+              </div>
+              </div>
+            </div>
+        
+            </div>
+        
+          </div>
+        
+          </section>
+      </section>
+    </footer>
+    <div id="copyright">
+      <ul>
+        <li>&copy;</li>
+        <li>Design: <a href="">Pair-5</a></li>
+      </ul>
+    </div>
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>

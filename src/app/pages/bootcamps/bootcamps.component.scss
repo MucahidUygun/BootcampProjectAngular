@@ -1,0 +1,107 @@
+// .welcome-container {
+//     position: relative;
+//     height: 100vh;
+//     overflow: hidden;
+//   }
+  
+//   .welcome-video {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     min-width: 100%;
+//     min-height: 100%;
+//     width: auto;
+//     height: auto;
+//     transform: translate(-50%, -50%);
+//     z-index: -1;
+//   }
+  
+//   .welcome-overlay {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 0, 0.5); 
+//   }
+  
+//   .welcome-content {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     text-align: center;
+//     color: white;
+//     z-index: 1;
+//   }
+  
+//   .logo {
+//     width: 200px;
+//   }
+  
+//   .welcome-heading {
+//     font-size: 3.5rem;
+//     margin-bottom: 20px;
+//   }
+  
+//   .welcome-text {
+//     font-size: 1.8rem;
+//     margin-bottom: 30px;
+//   }
+  
+//   .btn-primary:hover {
+//     background-color: #0056b3;
+//   }
+#BackToMain {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999; 
+}
+
+.card-body {
+  transition: height 0.3s;
+}
+
+.d-none {
+  display: none !important;
+}
+
+#introCarousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+  height: 100vh;
+}
+
+.carousel-item:nth-child(1) {
+  background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(2) {
+  background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(3) {
+  background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+  #introCarousel {
+    margin-top: -58.59px;
+  }
+  #introCarousel,
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item.active {
+    height: 50vh;
+  }
+}

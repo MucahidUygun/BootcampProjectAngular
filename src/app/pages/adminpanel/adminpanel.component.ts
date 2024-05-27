@@ -18,15 +18,19 @@ import { CreateBootcampRequest } from '../../features/models/requests/bootcamp/c
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { GetlistInstructorResponse } from '../../features/models/responses/instructor/getlist-instructor-response';
 import { CreateInstructorRequest } from '../../features/models/requests/instructor/create-instructor-request';
 import { UpdateInstructorRequest } from '../../features/models/requests/instructor/update-instructor-request';
+import { AdminbootcampComponent } from '../layouts/adminbootcamp/adminbootcamp/adminbootcamp.component';
+import { AdmininstructorsComponent } from '../layouts/admininstructors/admininstructors/admininstructors.component';
+import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
+
 
 @Component({
   selector: 'app-adminpanel',
   standalone: true,
-  imports: [MdbValidationModule,FormsModule,MdbFormsModule,ReactiveFormsModule,MdbDropdownModule,MdbRippleModule,CommonModule],
+  imports: [RouterModule,MdbValidationModule,FormsModule,MdbFormsModule,ReactiveFormsModule,MdbDropdownModule,MdbRippleModule,CommonModule,AdminbootcampComponent,AdmininstructorsComponent,AdminLayoutComponent],
   templateUrl: './adminpanel.component.html',
   styleUrl: './adminpanel.component.scss'
 })
@@ -67,6 +71,7 @@ export class AdminpanelComponent {
     items: [],
   };
 
+
   constructor(private formBuilder:FormBuilder,private toastService:NotificationsService,private bootcampService: BootcampService,private instructorService: InstructorService,private authservice: AuthService, private router: Router) {
     this.validationForm = new FormGroup({
       id: new FormControl(null, Validators.required),
@@ -75,7 +80,7 @@ export class AdminpanelComponent {
       startDate: new FormControl(null, Validators.required),
       bootcampstateId: new FormControl(null, Validators.required),
       instructorId: new FormControl(null, Validators.required),
-    });
+    }); 
   }
   readonly PAGE_SIZE = 25;
   ngOnInit(): void {
@@ -132,6 +137,62 @@ export class AdminpanelComponent {
       return false;
     }
   }
+
+  sidebarOpen: boolean = false;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+    if (this.sidebarOpen) {
+      document.querySelector('.sidebar')?.classList.remove('open');
+      this.sidebarOpen = !this.sidebarOpen;
+    } else {
+      document.querySelector('.sidebar')?.classList.add('open');
+      document.querySelector('.sidebar')?.classList.remove('open');
+    }
+  }
+// TEST
+openBootcampDetailModal(bootcamp: any) {
+  this.selectedBootcamp = bootcamp;
+  const modalElement = document.getElementById('bootcampDetailModal');
+  if (modalElement) {
+    modalElement.classList.add('show');
+    modalElement.style.display = 'block';
+    document.body.classList.add('modal-open');
+  }
+}
+openAddBootcampModal() {
+    const modalElement = document.getElementById('addContactModal');
+    if (modalElement) {
+      modalElement.classList.add('show');
+      modalElement.style.display = 'block';
+      document.body.classList.add('modal-open');
+    }
+  }
+  closeAddBootcampModal() {
+    const modalElement = document.getElementById('addContactModal');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.style.display = 'none';
+      document.body.classList.remove('modal-open'); 
+    }
+  }
+
+refresh(): void {
+  // Refresh contacts list
+}
+
+editing: boolean = false;
+editContact(bootcampId: number) {
+  this.selectedBootcamp = this.bootcamps.items.find((b: any) => b.id === bootcampId);
+  if (this.selectedBootcamp) {
+    this.getByIdBootcamp();
+    this.updateForm.patchValue(this.selectedBootcamp);
+    this.editing = true;
+    
+  }
+}
+
+// //////////////
   currentSection: string = 'adminpanel';
   currentSections: string = 'adminpanel';
   showSection(section: string) {
@@ -146,7 +207,7 @@ showSectionss(section: string) {
   }
 }
 
-editing: boolean = false;
+
 
 editRow(type: string) {
   this.editing = true;
@@ -156,16 +217,10 @@ editRow(type: string) {
     this.getInstructorByIdFunc();
   }
 }
-
-
-// editRowBootcamp() {
-//   this.editing = true;
-//   this.getByIdBootcamp;
-// }
-// editRowInstructor(){
-//   this.editing = true;
-//   this.getInstructorByIdFunc;
-// }
+editRows() {
+  this.editing = true;
+  this.getByIdBootcamp();
+}
 
 cancelEdit() {
   this.editing = false;
@@ -215,7 +270,6 @@ saveChangesForInstructors() {
     }
   }
 }
-
 // Instructor CRUD
 createInstructorForm(){
   this.formI = this.formBuilder.group({
@@ -227,7 +281,6 @@ createInstructorForm(){
     nationalIdentity:['', Validators.required],
     email:['', Validators.required],
     password:['', Validators.required,],
-    
   });
 }
 updateInstructorForm(){
@@ -241,7 +294,6 @@ updateInstructorForm(){
     nationalIdentity:['',Validators.required],
     email:['', Validators.required],
     password:['', Validators.required],
-    
   })
 }
 deleteInstructorForm(){
@@ -256,7 +308,6 @@ getInstructorByIdForm(){
 }
 createInstructorFunc(){
   let createInstructor:CreateInstructorRequest=Object.assign({}, this.formI.value)
-
   this.instructorService.postInstructor(createInstructor).subscribe(
     {
       next:(response)=>{
@@ -274,8 +325,8 @@ createInstructorFunc(){
 }
 deleteInstructorFunc() {
   console.log(this.deleteFormI.value.id)
-  if (this.deleteFormI.valid) {
-    this.instructorService.deleteInstructor(this.deleteFormI.value.id).subscribe({
+  if (this.deleteFormI.valid) {}
+    this.instructorService.deleteInstructor(this.selectedInstructor.id).subscribe({
       next: (response) => {
         console.log(response);
         this.toastService.showSuccess("Silme işlemi başarıyla gerçekleştirildi.");
@@ -285,9 +336,6 @@ deleteInstructorFunc() {
         this.toastService.showError("Eksik veya hatalı bir giriş yaptınız.");
       }
     });
-  } else {
-    this.toastService.showError("Lütfen gerekli alanları doldurunuz.");
-  }
 }
 updateInstructorFunc(){
   console.log(this.updateFormI.value)
@@ -327,8 +375,6 @@ getInstructorByIdFunc() {
     this.toastService.showError("Lütfen geçerli bir eğitmen ID giriniz.");
   }
 }
-
-
   // BOOTCAMP CRUD
   createForm(){
     this.form = this.formBuilder.group({
@@ -429,6 +475,7 @@ selectBootcamp(bootcamps: any) {
 }
 selectInstructor(instructors: any) {
   this.selectedInstructor = instructors;
+  this.form.controls['instructorId'].setValue(instructors.id);
 }
 
   getByIdBootcamp(){
@@ -438,7 +485,6 @@ selectInstructor(instructors: any) {
         (response) => {
           this.selectedBootcamp = response;
           this.toastService.showSuccess("Bootcamp başarıyla alındı.");
-          // console.log(this.selectedBootcamp);
         },
         (error) => {
           console.log(error);
@@ -447,5 +493,4 @@ selectInstructor(instructors: any) {
       );
     }
   }
-  
 }

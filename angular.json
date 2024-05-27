@@ -30,7 +30,6 @@
               "src/assets"
             ],
             "styles": [
-
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/css/noscript.css",
               "src/assets/css/main.css",
@@ -38,7 +37,6 @@
               "node_modules/mdb-ui-kit/css/mdb.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/mdb-angular-ui-kit/assets/scss/mdb.scss"
-              
             ],
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",

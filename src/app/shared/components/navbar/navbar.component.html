@@ -1,21 +1,22 @@
 <!-- Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- Navbarın sürekli görüntülenmesi için "sticky-top" yapılabilir. -->
   <div class="container-fluid justify-content-between">
+    <button class="navbar-toggler" type="button" (click)="togglerThirdExample.toggle()" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  <li class="navbar-brand" *ngIf="currentRoute === '/adminpanel'">
+    <button class="navbar-toggler" type="button" *ngIf="!sidebarOpen" (click)="toggleSidebar()" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">Sidebar</button>
+  </li>
+  <a class="navbar-brand" href="#">Logo Eklenecek...</a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03" mdbCollapse #togglerThirdExample="mdbCollapse">
+
     <!-- Left elements -->
     <div class="d-flex">
-      <!-- Brand -->
-      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" routerLink="#">
-        <img
-          src=""
-          height="20"
-          alt=""
-          loading="lazy"
-          style="margin-top: 2px;"
-        />
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center">
+        <img src="" height="20" alt="" loading="lazy" style="margin-top: 2px;"/>
       </a>
     </div>      
-    <!-- Left links -->
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">      
       <li class="nav-item">
         <a class="nav-link" routerLink="/homepage">Anasayfa</a>
       </li>
@@ -25,7 +26,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/projects">Projects</a>
       </li>
-    </ul><!-- Left links -->
+    </ul>
     <!-- SearchBar -->
      <nav class="navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -38,57 +39,100 @@
                 <i (click)="toggleSearch()" class="fas fa-search" style="cursor: pointer;"></i>
               </span>
         </li>
-        <!-- SearchBar -->
 
       <!-- Right elements -->
         <!-- Notifications -->
         <li mdbDropdown class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle hidden-arrow" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+          <a class="nav-link dropdown-toggle hidden-arrow" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
             <i class="fas fa-bell"></i>
             <!-- <span class="badge rounded-pill badge-notification bg-danger">21</span> -->
           </a>
           <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li>
-              <a class="dropdown-item" href="#">Some news</a>
+              <a class="dropdown-item" >Some news</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Another news</a>
+              <a class="dropdown-item" >Another news</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" >Something else here</a>
             </li>
           </ul>
-        </li> <!-- Notifications -->
-        <!-- Avatar -->
+        </li>
+        <!-- 
+         -->
+         <li mdbDropdown class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            
+            id="navbarDropdown"
+            role="button"
+            mdbDropdownToggle
+            aria-expanded="false"
+          >
+          <i class="flag flag-turkey"></i>
+          </a>
+          <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" >
+                <i class="flag flag-turkey"></i>Türkçe
+                <i class="fa fa-check text-success ms-2"></i
+              ></a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" ><i class="flag flag-united-kingdom"></i>English</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-china flag"></i>中文</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-japan flag"></i>日本語</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-germany flag"></i>Deutsch</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-france flag"></i>Français</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-spain flag"></i>Español</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-russia flag"></i>Русский</a>
+            </li>
+            <li>
+              <a class="dropdown-item" ><i class="flag-portugal flag"></i>Português</a>
+            </li>
+          </ul>
+        </li>
+         <!-- Avatar -->
         <ng-container *ngIf="isLoggedIn; else loggedOut">
           <li mdbDropdown class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
-              <i class="fas fa-user"></i> 
-            </a>
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (25).webp" class="rounded-circle" height="23" loading="lazy"/>( Ad Soyad)
+          </a>
             <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" routerLink="/profil">Profil</a>
+                <a class="dropdown-item" routerLink="/profile"><i class="fas fa-user fa-fw me-2"></i>Profil</a>
               </li>
-              
               <li><ng-container *ngIf="isAdmin;">
                 <a class="dropdown-item" routerLink="/adminpanel"><i class="fas fa-user-secret fa-fw me-2"></i>Admin Panel</a>
-              </ng-container></li>
-              
+              </ng-container>
+            </li>
               <li>
-                <a class="dropdown-item" routerLink="/settings"><i class="fas fa-cogs fa-fw me-2"></i>Ayarlar</a>
+                <a class="dropdown-item" routerLink="/settings"><i class="fas fa-user-cog fa-fw me-2"></i>Ayarlar</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="#" (click)="openModal()">Çıkış Yap</a>
+                <a class="dropdown-item" routerLink="" (click)="openModal()"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Çıkış Yap</a>
               </li>
             </ul>
           </li>
-        </ng-container>
-        </ul></div></nav></div></nav>
-        <!-- Avatar -->
+        </ng-container></ul></div></nav></div></div></nav>
         <ng-template #loggedOut>
           <li mdbDropdown class="nav-item dropdown">
             <a class="nav-link dropdown-toggle hidden-arrow" routerLink="/login" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
               <i class="fas fa-user"></i>
             </a>
-          </li></ng-template>
-      <!-- Right elements -->
+          </li>
+        </ng-template>

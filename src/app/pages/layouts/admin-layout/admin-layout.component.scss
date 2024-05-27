@@ -1,0 +1,27 @@
+.grainy-gradient-intro:before {
+    background: #c3ccea;
+    filter: url(#f);
+    overflow-y: visible;
+  }
+  .grainy-gradient-intro:before, .grainy-gradient-intro:after {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    --grad: radial-gradient(at 50%, red, rgba(255, 0, 0, 0.3) 55%, transparent 80%);
+    --mask: var(--grad), var(--grad);
+    -webkit-mask: var(--mask);
+    -webkit-mask-composite: source-in;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    -webkit-mask-composite: source-in, xor;
+    mask-composite: intersect;
+    mix-blend-mode: unset;
+    overflow-y: visible;
+    content: "";
+  }
+  
+  .grainy-gradient-intro:after {
+    overflow-y: visible;
+    background: linear-gradient(
+  90deg, #760dfe 20%, #f51b26, #fd9900);
+  }

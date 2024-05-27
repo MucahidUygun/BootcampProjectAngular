@@ -1,4 +1,4 @@
-<ng-container *ngIf="isLoggedIn || isHomePage(); else Navi">
+<ng-container *ngIf="(isLoggedIn || isHomePage()) && !isAdminPage(); else Navi">
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>
 </ng-container>
