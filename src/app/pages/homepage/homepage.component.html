@@ -1,202 +1,258 @@
-<!-- <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img
-        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-        alt="Trendy Pants and Shoes"
-        class="img-fluid rounded-start"
-      />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a wider card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-        <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img
-        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-        alt="Trendy Pants and Shoes"
-        class="img-fluid rounded-start"
-      />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a wider card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-        <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img
-        src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-        alt="Trendy Pants and Shoes"
-        class="img-fluid rounded-start"
-      />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a wider card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.
-        </p>
-        <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </p>
-      </div>
-    </div>
-  </div>
-</div> -->
+<!-- <div id="wrapper" class="fade-in">
+	<div id="intro">
+		<h1>Pair<br />
+			5</h1>
+		<p>Merhaba<br />
+			ve hoşgeldiniz.</p>
+		<ul class="actions">
+			<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+		</ul>
+		<div id="BackToMain" [style.display]="displayIntro ? 'block' : 'none'">
+			<ul class="actions">
+				<li><a href="#wrapper" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
+			</ul>
+		</div>
+	</div>
+	<nav id="nav">
+		<ul class="links">
+			<li class="active"><a href="index.html">Bootcamps</a></li>
+			<li><a href="generic.html" class="nav-link disabled">Biz kimiz?[Kullanım dışı]</a></li>
+			<li><a href="elements.html" class="nav-link disabled">Diğer Çalışmalar[Kullanım dışı]</a></li>
+		</ul>
+		<ul class="icons">
+			<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+			<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+		</ul>
+	</nav>
 
-	<!-- Wrapper -->
-		<div id="wrapper" class="fade-in">
+	<div id="main" class="fade-in">
+		
+		<article class="post featured">
+			<header class="major">
+				<tr class="date">
+					<h3>BOOTCAMPS</h3>
+				</tr>
 
-			<!-- Intro -->
-				<div id="intro">
-					<h1>
-					Pair 5 </h1><br /><br /><br /><br /><br />
-					<!-- <p>aaaa<br /> -->
-					<!-- aaa</p><br /> -->
-					<ul class="actions">
-						<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-					</ul>
-					<div id="BackToMain"[style.display]="displayIntro ? 'block' : 'none'">
-						<ul class="actions">
-							<li><a href="#wrapper" class="button icon solid solo fa-arrow-up scrolly">Continue</a></li>
-						</ul>
+				<p>Bu alanda eğitmenlerin/şirketin, göstermiş olduğu eğitimler/ürünler yer alıyor.</p>
+			</header>
+			<div class="carousel-inner rounded-9 shadow-4-strong">
+				<mdb-carousel [indicators]="true" [animation]="'fade'">
+					<mdb-carousel-item>
+						<img src="https://mdbcdn.b-cdn.net/img/new/slides/041.jpg" class="d-block w-100" alt="..." />
+						<div class="carousel-caption d-none d-md-block">
+							<h5>First slide label</h5>
+							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						</div>
+					</mdb-carousel-item>
+
+					<mdb-carousel-item>
+						<img src="https://mdbcdn.b-cdn.net/img/new/slides/042.jpg" class="d-block w-100" alt="..." />
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Second slide label</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						</div>
+					</mdb-carousel-item>
+
+					<mdb-carousel-item>
+						<img src="https://mdbcdn.b-cdn.net/img/new/slides/043.jpg" class="d-block w-100" alt="..." />
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Third slide label</h5>
+							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						</div>
+					</mdb-carousel-item>
+				</mdb-carousel>
+			</div>
+		</article>
+		<section class="posts">
+			<article *ngFor="let bootcamp of bootcamps.items">
+				<div class="card border text-center border-primary shadow-0" (click)="toggleCardBody(bootcamp.id)">
+					<div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+						<img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="img-fluid" />
+						<a routerLink="#">
+							<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+						</a>
+					</div>
+					<div class="card-body" [ngClass]="{ 'd-none': !isOpen[bootcamp.id] }">
+						<h5 class="card-title">{{bootcamp.name}}</h5>
+						<div class="card-body justify-content-between align-items-center mb-2 pb-2">
+							<p class="fw-bold text-muted small text-uppercase">
+							Başlama Tarihi : {{ bootcamp.startDate}}
+							</p>
+							<p class="fw-bold text-muted small text-uppercase">
+							 Bitiş Tarihi : {{ bootcamp.endDate}}
+							</p>
+							<p class="fw-bold h1 mb-1">{{bootcamp.name}}</p>
+							<p class="text-muted mb-0">{{ bootcamp.instructorId}}</p>
+						</div>
+						<hr style="background-color: hsl(0, 0%, 75%)" />
+						<blockquote>
+							<p class="card-text">
+								This is a wider card with supporting text below as a natural lead-in to
+								additional content. This content is a little bit longer.
+								{{ bootcamp.id }}
+							</p>
+						</blockquote>
+						<hr style="background-color: hsl(0, 0%, 75%)" />
+
+						<p class="text-uppercase text-muted small fw-bold">Eğitmen Bilgileri</p>
+						<div class="d-flex align-items-center">
+							<div class="flex-shrink-0">
+								<img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+									style="width: 45px; height: 45px" />
+							</div>
+							<div class="flex-grow-1 ms-3">
+								<p class="fw-bold mb-1">{{ bootcamp.instructorFirstName}} {{
+									bootcamp.instructorLastName}}</p>
+								<p class="text-muted mb-0">{{ bootcamp.bootcampStateName }} - {{
+									bootcamp.bootcampStateId}}</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="card-footer">
+						<small class="date">Kurs numarası : {{ bootcamp.id }} - Son Düzenlenme: {{ bootcamp.startDate |
+							date : "dd/MM/yyyy" }}</small>
 					</div>
 				</div>
+			</article>
+		</section>
+	</div>
 
-			<!-- Nav -->
-				<nav id="nav">
-					<ul class="links">
-						<li class="active"><a href="index.html">Bootcamps</a></li>
-						<li><a href="generic.html" class="nav-link disabled">Biz kimiz?[Kullanım dışı]</a></li>
-						<li><a href="elements.html" class="nav-link disabled">Diğer Çalışmalar[Kullanım dışı]</a></li>
-					</ul>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-					</ul>
-				</nav>
+	<footer id="footer">
+		<section>
+			<h3 class="fw-bold text-center mb-4">Sosyal medya</h3>
+			<ul class="icons text-center mb-5">
+				<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+			</ul>
 
-			<!-- Main -->
-				<div id="main">
+			   <section class="border border-primary card p-4 mb-lg-10 mb-5">
+				<h3 class="fw-bold text-center mb-4">Bizimle iletişime geç</h3>
+				<div class="row gx-xl-5">
+				  <div class="col-lg-5  mb-5 mb-lg-0">
+					<form> 
 
-					<!-- Featured Post -->
-						<article class="post featured">
-							<header class="major">
-								<tr class="date" *ngFor="let bootcamp of bootcamps.items">{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</tr>
-								<h2><a href="#">Ürünler</a></h2>
-								<p>Bu alanda eğitmenlerin/şirketin, göstermiş olduğu eğitimler/ürünler yer alıyor.</p>
-							</header>
-							<a href="#" class="image main"><img src="https://res.cloudinary.com/dyxgqsz0w/image/upload/v1713530679/samples/imagecon-group.jpg" alt="a" /></a>
-							<ul class="actions special">
-								<tr *ngFor="let bootcamp of bootcamps.items">
-									<p>Eğitmen/Şirket :{{ bootcamp.name  }}</p>
-								</tr>
-								
-								<li><a href="#" class="button large">Full Story</a></li>
-							</ul>
-						</article>
+					  <div class="form-outline border mb-3" data-mdb-input-init>
+						<input mdbInput type="text" id="form4Example1" class="form-control" />
+						<label mdbLabel class="form-label" for="form4Example1">Ad Soyad</label>
+					  </div>
+					  <div class="form-group">
+						  <input mdbInput type="password" id="loginP" class="form-control" />
+						  <label mdbLabel class="form-label" for="loginP">Şifre</label>
+					  </div>
+					  <div class="form-outline border mb-3" data-mdb-input-init>
+						<input type="email" id="form4Example2" class="form-control" />
+						<label class="form-label" for="form4Example2">Email</label>
+					  </div>
+		  
+					  <div class="form-outline border mb-3">
+						<textarea class="form-control" id="form4Example3" rows="4"></textarea>
+						<label class="form-label" for="form4Example3">Mesaj</label>
+					  </div>
 
-					<!-- Posts -->
-						<section class="posts">
-							<article>
-								<header>
-									<span class="date" *ngFor="let bootcamp of bootcamps.items">{{ bootcamp.startDate | date : "dd/MM/yyyy" }}</span>
-									<h2>Bootcamps<br /></h2>
-								</header>
-								<a href="#" class="image fit"><img src="../../../assets/images/pic02.jpg" alt="a" /></a>
-								<tr  *ngFor="let bootcamp of bootcamps.items">
-								<p>{{ bootcamp.id }}. Çalışma </p></tr>
-								<ul class="actions special">
-									<li><a routerLink="#" class="button">Devamını oku</a></li>
-								</ul>
-							</article>
-							<article>
-								<header>
-									<tr class="date" *ngFor="let instructor of instructors.items">
-									<p>{{ instructor.companyName }}</p>
-									<h2>Primis eget<br /></h2>
-								</header>
-								<a href="#" class="image fit"><img src="../../../assets/images/pic03.jpg" alt="" /></a>
-								<p></p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Story</a></li>
-								</ul>
-							</article>
-							<article>
-								<header>
-									<span class="date">April 18, 2017</span>
-									<h2><a href="#">Ante mattis<br />
-									interdum dolor</a></h2>
-								</header>
-								<a href="#" class="image fit"><img src="../../../assets/images/pic04.jpg" alt="" /></a>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Story</a></li>
-								</ul>
-							</article>
-							<article>
-								<header>
-									<span class="date">April 14, 2017</span>
-									<h2><a href="#">Tempus sed<br />
-									nulla imperdiet</a></h2>
-								</header>
-								<a href="#" class="image fit"><img src="../../../assets/images/pic05.jpg" alt="" /></a>
-								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button">Full Story</a></li>
-								</ul>
-							</article>
-						</section>
+					  <button type="submit" class="btn btn-primary btn-block mb-4">Gönder</button>
+					</form>
+		  
+				  </div>
+		  
+				  <div class="col-lg-7 mb-4 mb-lg-0">
+		  
+					<div class="row gx-lg-5">
+					  <div class="col-md-6 mb-4 mb-md-5">
+						<div class="d-flex align-items-start">
+						  <div class="p-3 badge-primary rounded-4">
+							<i class="fas fa-headset fa-lg fa-fw"></i>
+						  </div>
+						  <div class="ms-4">
+							<p class="fw-bold mb-1">Teknik destek</p>
+							<p class="text-muted mb-0">pair5gmail.com</p>
+							<p class="text-muted mb-0">+1 234-567-89</p>
+						  </div>
+						</div>
+					  </div>
+		  
+					  <div class="col-md-6 mb-4 mb-md-5">
+						<div class="d-flex align-items-start">
+						  <div class="p-3 badge-primary rounded-4">
+							<i class="fas fa-newspaper fa-lg fa-fw"></i>
+						  </div>
+						  <div class="ms-4">
+							<p class="fw-bold mb-1">Bootcampler</p>
+							<p class="text-muted mb-0">pair5gmail.com</p>
+							<p class="text-muted mb-0">+1 234-567-88</p>
+						  </div>
+						</div>
+					  </div>
+		  
+					  <div class="col-md-6 mb-4 mb-md-5">
+						<div class="d-flex align-items-start">
+						  <div class="p-3 badge-primary rounded-4">
+							<i class="fas fa-bug fa-lg fa-fw"></i>
+						  </div>
+						  <div class="ms-4">
+							<p class="fw-bold mb-1">Hata bildir</p>
+							<p class="text-muted mb-0">pair5gmail.com</p>
+							<p class="text-muted mb-0">+1 234-567-87</p>
+						  </div>
+						</div>
+					  </div>
+					</div>
+		  
+				  </div>
+		  
 				</div>
-
-			<!-- Footer -->
-				<footer id="footer">
-						<section>
-							<h3>Social</h3>
-							<ul class="icons alt">
-								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-							</ul>
-						</section>
-				</footer>
-
-			<!-- Copyright -->
-				<div id="copyright">
-					<ul><li>&copy;</li><li>Design: <a href="">Pair-5</a></li></ul>
+		  
+			  </section>
+		</section>
+	</footer>
+	<div id="copyright">
+		<ul>
+			<li>&copy;</li>
+			<li>Design: <a href="">Pair-5</a></li>
+		</ul>
+	</div>
+	
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script> -->
+	  
+	  <!-- Main navigation -->
+	  
+		<!-- Full Page Intro -->
+		<div class="view darken-3">
+		  <!-- Mask & flexbox options-->
+		  <div class="justify-content-center">
+			<!-- Content -->
+			<div class="container h-100">
+			  <!--Grid row-->
+			  <div class="row align-items-center h-100">
+				<!--Grid column-->
+				<div class="col-md-6 wow fadeInLeft">
+				  <h1 class="white-text mb-4">Better Website Design, More Conversion</h1>
+				  <p class="mb-4 pb-2 white-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt labor debitis.</p>
+				  <button type="button" routerLink="/bootcamps" class="btn btn-outline-white btn-md ml-md-0">Keşfetmeye başla</button>
+				  <button type="button" routerLink="/login" class="btn btn-white btn-md">Aramıza katıl!</button>
 				</div>
-	<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+				<!--Grid column-->
+			 
+				<!--Grid column-->
+				<div class="col-md-6 wow fadeInRight">
+				  <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/cards2.png" alt="" class="img-fluid">
+				</div>
+				<!--Grid column-->
+			  </div>
+			  <!--Grid row-->
+			</div>
+			<!-- Content -->
+		  </div>
+		  <!-- Mask & flexbox options-->
+		</div>
+		<!-- Full Page Intro -->

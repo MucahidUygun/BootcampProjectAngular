@@ -1,15 +1,11 @@
- <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Çıkış Ekranı</h5>
-        <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close" (click)="modalRef.close()"></button>
+<div mdbModal class="modal-header" id="logoutModalLabel" tabindex="-1" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+        <h5 class="modal-title" id="logoutModalLabel">Çıkış Ekranı</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body">
         <p style="text-align: center;">Gerçekten çıkış yapmak istiyor musun?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modalRef.close()">İptal et</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">İptal et</button>
         <button type="button" class="btn btn-primary" (click)="logOut()">Onayla</button>
       </div>
-    </div>
-  </div>

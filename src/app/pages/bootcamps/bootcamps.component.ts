@@ -11,25 +11,21 @@ import { InstructorListItem } from '../../features/models/responses/instructor/i
 import { InstructorService } from '../../features/services/concretes/instructor.service';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 
-declare var $: any;
-
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-bootcamps',
   standalone: true,
-
-  imports: [
+  imports: [    
     RouterOutlet,
     RouterModule,
     CommonModule,
     HttpClientModule,
     NavbarComponent,
     FormsModule,
-    MdbCarouselModule
-  ],
-  templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss',
+    MdbCarouselModule],
+  templateUrl: './bootcamps.component.html',
+  styleUrl: './bootcamps.component.scss'
 })
-export class HomepageComponent implements OnInit {
+export class BootcampsComponent {
   bootcamps: BootcampListItem = {
     index: 0,
     size: 0,
@@ -60,18 +56,6 @@ export class HomepageComponent implements OnInit {
 }
 TopOfPage(): boolean {
     return window.scrollY === 0;
-}
-ngAfterViewInit() {
-  // Carousel'in başlatılması
-  $('#introCarousel').carousel();
-}
-
-prevSlide() {
-  $('#introCarousel').carousel('prev');
-}
-
-nextSlide() {
-  $('#introCarousel').carousel('next');
 }
 
   getBootcamps(pageRequest: PageRequest) {

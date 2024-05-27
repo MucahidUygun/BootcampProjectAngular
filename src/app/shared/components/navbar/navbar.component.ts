@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { Router, RouterModule,NavigationStart  } from '@angular/router';
+import { MdbDropdownModule, MdbDropdownDirective } from 'mdb-angular-ui-kit/dropdown';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import { MdbDropdownDirective } from 'mdb-angular-ui-kit/dropdown';
 import { AuthService } from '../../../features/services/concretes/auth.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalComponent } from '../modal/modal.component';
+import { AdminpanelComponent } from '../../../pages/adminpanel/adminpanel.component';
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { filter } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule,MdbDropdownModule,MdbRippleModule,CommonModule],
+  imports: [RouterModule,MdbDropdownModule,MdbRippleModule,CommonModule,MdbCollapseModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit{
+  currentRoute: string = '';
   isLoggedIn!: boolean; 
   isAdmin!: boolean; 
   menuItems!:[];
@@ -44,6 +49,23 @@ export class NavbarComponent implements OnInit{
      console.log(this.getUserId())
      console.log(this.authService.getRoles())
      this.getUserId();
+     this.router.events
+     .pipe(
+       filter((event): event is NavigationStart => event instanceof NavigationStart)
+     )
+     .subscribe((event: NavigationStart) => {
+       this.currentRoute = event.url;
+     });
+ }
+   sidebarOpen: boolean = false;
+   toggleSidebar() {
+     this.sidebarOpen = !this.sidebarOpen;
+     if (this.sidebarOpen) {
+      document.querySelector('.sidebar')?.classList.add('open');
+      this.sidebarOpen = !this.sidebarOpen;
+     } else {
+      document.querySelector('.sidebar')?.classList.remove('open');
+     }
    }
 
    logOut(){

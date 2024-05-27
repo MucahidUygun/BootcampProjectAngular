@@ -1,0 +1,94 @@
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- Navbarın sürekli görüntülenmesi için "sticky-top" yapılabilir. -->
+    <div class="container-fluid justify-content-between">
+      <button class="navbar-toggler" type="button" (click)="togglerThirdExample.toggle()" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <a class="navbar-brand" href="#">Logo Eklenecek...</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03" mdbCollapse #togglerThirdExample="mdbCollapse">
+  
+      <!-- Left elements -->
+      <div class="d-flex">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center">
+          <img src="" height="20" alt="" loading="lazy" style="margin-top: 2px;"/>
+        </a>
+      </div>      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">      
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="current-active" routerLink="/adminpanel">Anasayfa</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="adminbootcamps">Bootcamps</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="admininstructors">İnstructors</a>
+        </li>
+      </ul>
+      <!-- SearchBar -->
+       <nav class="navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+              <li mdbDropdown class="nav-item dropdown" style="display: flex; align-items: center;">
+                <div style="margin-right: 10px;">
+                  <input *ngIf="showSearchInput" type="search" class="form-control" placeholder="Ara" aria-label="Search" aria-describedby="search-addon"/>
+                </div>
+                <span class="nav-link" id="search-addon" style="position: relative;">
+                  <i (click)="toggleSearch()" class="fas fa-search" style="cursor: pointer;"></i>
+                </span>
+          </li>
+  
+        <!-- Right elements -->
+          <!-- Notifications -->
+          <li mdbDropdown class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle hidden-arrow" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+              <i class="fas fa-bell"></i>
+              <!-- <span class="badge rounded-pill badge-notification bg-danger">21</span> -->
+            </a>
+            <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Avatar -->
+          <ng-container *ngIf="isLoggedIn; else loggedOut">
+            <li mdbDropdown class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/img (25).webp" class="rounded-circle" height="23" loading="lazy"/>( Ad Soyad)
+            </a>
+              <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                <li>
+                  <a class="dropdown-item" routerLink="/profile"><i class="fas fa-user fa-fw me-2"></i>Profil</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/settings"><i class="fas fa-user-cog fa-fw me-2"></i>Ayarlar</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="" (click)="openModal()"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Çıkış Yap</a>
+                </li>
+              </ul>
+            </li>
+          </ng-container></ul></div></nav></div></div></nav>
+          <ng-template #loggedOut>
+            <li mdbDropdown class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle hidden-arrow" routerLink="/login" id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
+                <i class="fas fa-user"></i>
+              </a>
+            </li>
+          </ng-template>
+          <router-outlet></router-outlet>
+          <section class="grainy-gradient-intro">
+            <svg height="0" width="0">
+              <filter id='f'>
+                <feTurbulence type='fractalNoise' baseFrequency='.5' />
+              </filter>
+            </svg>
+            <div class="d-flex justify-content-center align-items-center text-center" style="height: calc(100vh - 26px);">
+            </div>
+          </section>
