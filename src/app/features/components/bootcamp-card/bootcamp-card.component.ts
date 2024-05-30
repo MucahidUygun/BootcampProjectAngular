@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { BootcampListItem } from '../../models/responses/bootcamp/bootcampItemDto';
 import { BootcampService } from '../../services/concretes/bootcamp.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { PageRequest } from '../../../core/models/requests/PageRequest';
 import { CommonModule } from '@angular/common';
+import { PaginationService } from '../../services/concretes/pagination.service';
 
 @Component({
   selector: 'app-bootcamp-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './bootcamp-card.component.html',
   styleUrl: './bootcamp-card.component.scss',
 })
@@ -25,58 +26,76 @@ export class BootcampCardComponent implements OnInit {
 
   constructor(
     private bootcampService: BootcampService,
+    private paginationService: PaginationService,
     private router: Router
   ) {}
-  readonly PAGE_SIZE = 4;
+
   currentPageNumber: number = 1;
+
+  ngOnInit(): void {
+    this.getBootcamps({ page: 0, pageSize: this.paginationService.PAGE_SIZE });
+  }
 
   viewDetails(bootcampId: number): void {
     this.router.navigate(['/bootcamp-detail', bootcampId]);
   }
 
-  ngOnInit(): void {
-    this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
-  }
+  // getBootcamps(pageRequest: PageRequest): void {
+  //   this.bootcampService.getList(pageRequest).subscribe(
+  //     (response) => {
+  //       console.log('Bootcamps fetched:', response);
+  //       this.bootcamps = response;
+  //       this.updateCurrentPageNumber();
+  //     },
+  //     (error) => {
+  //       console.error('Failed to fetch bootcamps:', error);
+  //     }
+  //   );
+  // }
 
   getBootcamps(pageRequest: PageRequest): void {
-    this.bootcampService.getList(pageRequest).subscribe(
-      (response) => {
-        console.log('Bootcamps fetched:', response);
-        this.bootcamps = response;
-        this.updateCurrentPageNumber();
-      },
-      (error) => {
-        console.error('Failed to fetch bootcamps:', error);
-      }
+    this.paginationService.paginate(
+      (request) => this.bootcampService.getList(request),
+      pageRequest,
+      (response) => (this.bootcamps = response),
+      (error) => console.error('Bootcamps yuklenemedi: ', error)
     );
   }
 
   nextOnClick(): void {
-    if (this.bootcamps.hasNext) {
-      const nextPageIndex = this.bootcamps.index + 1;
-
-      this.getBootcamps({ page: nextPageIndex, pageSize: this.PAGE_SIZE });
-    }
+    this.paginationService.next(
+      (request) => this.bootcampService.getList(request),
+      this.bootcamps.index,
+      this.bootcamps.hasNext,
+      (response) => (this.bootcamps = response),
+      (error) => console.error('Failed to fetch bootcamps:', error)
+    );
   }
 
   previousOnClick(): void {
-    if (this.bootcamps.hasPrevious) {
-      const previousPageIndex = this.bootcamps.index - 1;
+    this.paginationService.previous(
+      (request) => this.bootcampService.getList(request),
+      this.bootcamps.index,
+      this.bootcamps.hasPrevious,
+      (response) => (this.bootcamps = response),
+      (error) => console.error('Failed to fetch bootcamps:', error)
+    );
+  }
 
-      this.getBootcamps({ page: previousPageIndex, pageSize: this.PAGE_SIZE });
-    }
+  goToPage(page: number): void {
+    this.paginationService.goToPage(
+      (request) => this.bootcampService.getList(request),
+      page,
+      (response) => (this.bootcamps = response),
+      (error) => console.error('Failed to fetch bootcamps:', error)
+    );
+  }
+
+  totalPages(): number[] {
+    return this.paginationService.totalPages(this.bootcamps.count);
   }
 
   updateCurrentPageNumber(): void {
     this.currentPageNumber = this.bootcamps.index + 1;
-  }
-
-  goToPage(page: number): void {
-    this.getBootcamps({ page: page - 1, pageSize: this.PAGE_SIZE });
-  }
-
-  totalPages(): number[] {
-    const total = Math.ceil(this.bootcamps.count / this.PAGE_SIZE);
-    return Array.from({ length: total }, (_, index) => index + 1);
   }
 }

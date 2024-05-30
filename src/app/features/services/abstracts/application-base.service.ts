@@ -12,17 +12,25 @@ import { UpdateApplicationRequest } from '../../models/requests/application/upda
 import { UpdateApplicationResponse } from '../../models/responses/application/update-application-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export abstract class ApplicationBaseService {
+  constructor() {}
 
-  constructor() { }
-
-  abstract getListApplications(pageRequest: PageRequest):Observable<ApplicationItemDto>;
-  abstract postApplication(application:CreateApplicationRequest):Observable<CreateApplicationResponse>;
-  abstract deleteApplication(id:number):Observable<DeleteApplicationResponse>;
-  abstract updateApplication(application:UpdateApplicationRequest):Observable<UpdateApplicationResponse>;
-  abstract getByIdApplication(id:number):Observable<GetbyidApplicationResponse>;
-
-
+  abstract getListApplications(
+    pageRequest: PageRequest
+  ): Observable<ApplicationItemDto>;
+  abstract postApplication(
+    application: CreateApplicationRequest
+  ): Observable<CreateApplicationResponse>;
+  abstract deleteApplication(id: number): Observable<DeleteApplicationResponse>;
+  abstract updateApplication(
+    application: UpdateApplicationRequest
+  ): Observable<UpdateApplicationResponse>;
+  abstract getByIdApplication(
+    id: number
+  ): Observable<GetbyidApplicationResponse>;
+  abstract addApplication(
+    createApplicationRequest: CreateApplicationRequest
+  ): Observable<CreateApplicationResponse>;
 }

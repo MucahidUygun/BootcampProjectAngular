@@ -15,63 +15,88 @@ import { UpdateApplicationRequest } from '../../models/requests/application/upda
 import { UpdateApplicationResponse } from '../../models/responses/application/update-application-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApplicationService extends ApplicationBaseService {
-  constructor(private httpClient:HttpClient){super(); }
+  constructor(private httpClient: HttpClient) {
+    super();
+  }
 
-  private readonly apiUrl= `${environment.API_URL}/ApplicationEntities`
+  private readonly apiUrl = `${environment.API_URL}/ApplicationEntities`;
 
-  override getListApplications(pageRequest: PageRequest): Observable<ApplicationItemDto> {
+  override getListApplications(
+    pageRequest: PageRequest
+  ): Observable<ApplicationItemDto> {
     const newRequest: { [key: string]: string | number } = {
       page: pageRequest.page,
       pageSize: pageRequest.pageSize,
     };
-    return this.httpClient.get<ApplicationItemDto>(this.apiUrl,
-      {
+    return this.httpClient
+      .get<ApplicationItemDto>(this.apiUrl, {
         params: newRequest,
-      }
-    ).pipe(
-      map(
-        (response)=>{
-          const newResponse:ApplicationItemDto ={
-            index:pageRequest.page,
-            size:pageRequest.pageSize,
-            count:response.count,
-            hasNext:response.hasNext,
-            hasPrevious:response.hasPrevious,
-            items:response.items,
-            pages:response.pages,
-          }
-          return newResponse
-        }
-      )
-    )
-  }
-  override postApplication(application: CreateApplicationRequest): Observable<CreateApplicationResponse> {
-    return this.httpClient.post<CreateApplicationResponse>(`${this.apiUrl}/`,application);
-  }
-  override deleteApplication(id: number): Observable<DeleteApplicationResponse> {
-    return this.httpClient.delete<DeleteApplicationResponse>(`${this.apiUrl}/` + id)
-  }
-  override updateApplication(application: UpdateApplicationRequest): Observable<UpdateApplicationResponse> {
-    return this.httpClient.put<UpdateApplicationResponse>(`${this.apiUrl}/`,application)
-  }
-  override getByIdApplication(id: number): Observable<GetbyidApplicationResponse> {
-    return this.httpClient.get<GetbyidApplicationResponse>(`${this.apiUrl}/` + id)
-    .pipe(
-      map(
-        (response)=>{
-          const newResponse:GetbyidApplicationResponse={
-            id:response.id,
-            applicantId:response.applicantId,
-            bootcampId:response.bootcampId,
-            applicationStateId:response.applicationStateId,
+      })
+      .pipe(
+        map((response) => {
+          const newResponse: ApplicationItemDto = {
+            index: pageRequest.page,
+            size: pageRequest.pageSize,
+            count: response.count,
+            hasNext: response.hasNext,
+            hasPrevious: response.hasPrevious,
+            items: response.items,
+            pages: response.pages,
           };
           return newResponse;
-        }
-      )
-    )
+        })
+      );
+  }
+  override postApplication(
+    application: CreateApplicationRequest
+  ): Observable<CreateApplicationResponse> {
+    return this.httpClient.post<CreateApplicationResponse>(
+      `${this.apiUrl}/`,
+      application
+    );
+  }
+  override deleteApplication(
+    id: number
+  ): Observable<DeleteApplicationResponse> {
+    return this.httpClient.delete<DeleteApplicationResponse>(
+      `${this.apiUrl}/` + id
+    );
+  }
+  override updateApplication(
+    application: UpdateApplicationRequest
+  ): Observable<UpdateApplicationResponse> {
+    return this.httpClient.put<UpdateApplicationResponse>(
+      `${this.apiUrl}/`,
+      application
+    );
+  }
+  override getByIdApplication(
+    id: number
+  ): Observable<GetbyidApplicationResponse> {
+    return this.httpClient
+      .get<GetbyidApplicationResponse>(`${this.apiUrl}/` + id)
+      .pipe(
+        map((response) => {
+          const newResponse: GetbyidApplicationResponse = {
+            id: response.id,
+            applicantId: response.applicantId,
+            bootcampId: response.bootcampId,
+            applicationStateId: response.applicationStateId,
+          };
+          return newResponse;
+        })
+      );
   }
 
+  override addApplication(
+    createApplicationRequest: CreateApplicationRequest
+  ): Observable<CreateApplicationResponse> {
+    return this.httpClient.post<CreateApplicationResponse>(
+      `${this.apiUrl}`,
+      createApplicationRequest
+    );
+  }
 }

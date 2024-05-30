@@ -14,8 +14,6 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BootcampService } from '../../features/services/concretes/bootcamp.service';
-import { BootcampListItem } from '../../features/models/responses/bootcamp/bootcampItemDto';
 import { PageRequest } from '../../core/models/requests/PageRequest';
 import { InstructorListItem } from '../../features/models/responses/instructor/instructorItemDto';
 import { InstructorService } from '../../features/services/concretes/instructor.service';
@@ -38,15 +36,6 @@ import { BootcampCardComponent } from '../../features/components/bootcamp-card/b
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
-  bootcamps: BootcampListItem = {
-    index: 0,
-    size: 0,
-    count: 0,
-    hasNext: false,
-    hasPrevious: false,
-    pages: 0,
-    items: [],
-  };
   instructors: InstructorListItem = {
     index: 0,
     size: 0,
@@ -58,7 +47,6 @@ export class HomepageComponent implements OnInit {
   };
 
   constructor(
-    private bootcampService: BootcampService,
     private instructorService: InstructorService,
     private router: Router
   ) {}
