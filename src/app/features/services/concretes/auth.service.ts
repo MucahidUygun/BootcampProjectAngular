@@ -1,15 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserLoginRequest } from '../../models/requests/auth/user-login-request';
-import { Observable, catchError, map } from 'rxjs';
+import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
 import { AccessTokenModel } from '../../models/responses/auth/access-token-model';
 import { TokenModel } from '../../models/responses/auth/token-model';
 import { environment } from '../../../../environments/enviroment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CreateApplicantRequest } from '../../models/requests/applicant/create-applicant-request';
 import { UserResponse } from '../../models/responses/auth/user-response';
+import { ResetPasswordRequest } from '../../../core/interceptors/auth/reset-password-Request';
+import { Router } from '@angular/router';
+import { ForgotPasswordRequest } from '../../../core/interceptors/auth/forgot-password-request';
 
 
 @Injectable({
@@ -23,27 +26,92 @@ export class AuthService {
   claims: string[] = []
 
   private readonly apiUrl: string = `${environment.API_URL}/auth`;
-  constructor(private httpClient: HttpClient, private storageService: LocalStorageService, private toastrService: ToastrService) { }
+  constructor(private httpClient: HttpClient, private storageService: LocalStorageService, private toastrService: ToastrService,private router: Router) { }
+
+  
   registerApplicant(userforRegisterRequest: CreateApplicantRequest)
     : Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>(`${this.apiUrl}/registerapplicant`, userforRegisterRequest)
-  }
-  login(userLoginRequest: UserLoginRequest)
-    : Observable<AccessTokenModel<TokenModel>> {
-    return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest)
-      .pipe(map(response => {
-        this.storageService.setToken(response.accessToken.token);
-        setTimeout(() => {
-          window.location.reload()
-        }, 400)
-        return response;
+    return this.httpClient.post<UserResponse>(`${this.apiUrl}/registerapplicant`, userforRegisterRequest).pipe(
+      switchMap((response: TokenModel) => {
+        this.storageService.setToken(response.token);
+        return this.sendVerifyEmail().pipe(
+          tap(() => {
+            this.toastrService.success("Doğrulama Maili gönderildi.");
+            localStorage.removeItem('token');
+          }
+          )
+        )
       }
-
-      ), catchError(responseError => {
-        throw responseError;
+      ),
+      catchError(error => {
+        console.log(error);
+        this.toastrService.error("Mail Gönderilemedi")
+        return throwError(error);
       })
-      )
+    )
   }
+
+  resetPassword(token: string, resetPasswordRequest: ResetPasswordRequest) {
+    var tokenn = token;
+    console.log(`Bearer ${tokenn}`)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'accept': 'application/json'
+    });
+
+    this.httpClient.post(`${this.apiUrl}/ResetPassword`, resetPasswordRequest, { headers })
+    .pipe().subscribe(
+        response => {
+          this.toastrService.success("Giriş Sayfasına Yönlendiriliyorsunuz","Şifreniz Değiştirildi.");
+          setTimeout(() => {
+            this.router.navigate(['login']);
+          }, 1500);
+        }
+      );
+    }
+  
+    login(userLoginRequest: UserLoginRequest)
+    : Observable<AccessTokenModel<TokenModel>> {
+    return this.httpClient.post<AccessTokenModel<TokenModel>>(`${this.apiUrl}/login`, userLoginRequest, { withCredentials: true })
+    .pipe(
+      tap(response => {
+        if (response.accessToken) {
+          this.storageService.setToken(response.accessToken.token);
+          this.toastrService.success('Giriş yapıldı');
+        } else {
+          this.toastrService.info('Doğrulama Kodu Gönderildi');
+        }
+      }),
+      catchError(error => {
+        console.error('Hata:', error);
+        this.toastrService.error('Giriş yapılamadı. Lütfen tekrar deneyin.');
+        return throwError(error);
+      })
+    );
+  }
+
+  sendForgotPasswordEmail(ForgotPasswordRequest: ForgotPasswordRequest): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/ForgotPassword`, ForgotPasswordRequest, { responseType: 'text' }).pipe(
+      map(response => {
+        this.toastrService.success('Forgot my password email has been sent.', 'Successful');
+
+        return response;
+      }),
+      // catchError((error) => {
+      //   return throwError(error);
+      // })
+    );
+  }
+
+  sendVerifyEmail(): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      'accept': 'application/json'
+    });
+    return this.httpClient.get(`${this.apiUrl}/EnableEmailAuthenticator`, { headers });
+  }
+
   getDecodedToken() {
     try {
       this.token = this.storageService.getToken();

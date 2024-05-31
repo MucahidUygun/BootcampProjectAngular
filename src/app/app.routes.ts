@@ -16,6 +16,8 @@ import { BootcampDetailComponent } from './features/components/bootcamp-detail/b
 import { ApplicationComponent } from './pages/adminpanel/application/application.component';
 import { BlacklistComponent } from './pages/adminpanel/blacklist/blacklist.component';
 import { ApplicationStateComponent } from './pages/adminpanel/application-state/application-state.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 
 export const routes: Routes = [
@@ -38,6 +40,8 @@ export const routes: Routes = [
     { path: 'bootcamps', component: BootcampsComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'notifications', component: NotificationsComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

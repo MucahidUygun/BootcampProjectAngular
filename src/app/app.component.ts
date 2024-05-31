@@ -16,6 +16,10 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { AuthService } from './features/services/concretes/auth.service';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { AdminModule } from './pages/layouts/admin.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +37,26 @@ import { AdminModule } from './pages/layouts/admin.module';
     },
     DatePipe
   ],
-  imports: [AdminModule,MdbValidationModule,MdbModalModule, MdbFormsModule, RouterModule, RouterOutlet, NavbarComponent, HomepageComponent, LoginComponent, SharedModule, HttpClientModule, CommonModule, FormsModule, MdbDropdownModule, MdbRippleModule],
+  imports: [
+    AdminModule,
+    MdbValidationModule,
+    MdbModalModule, 
+    MdbFormsModule, 
+    RouterModule, 
+    RouterOutlet, 
+    NavbarComponent, 
+    HomepageComponent, 
+    LoginComponent, 
+    SharedModule, 
+    HttpClientModule, 
+    CommonModule, 
+    FormsModule, 
+    MdbDropdownModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSnackBarModule
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

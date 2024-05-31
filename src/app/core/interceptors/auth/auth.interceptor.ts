@@ -7,11 +7,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = storageService.getToken();
 
-  const authRequest = req.clone({
-    setHeaders:{
-      Authorization:`Bearer ${token}`
-    }
-
-  })
-  return next(authRequest);
+  if (token) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+  }
+  return next(req);
 };

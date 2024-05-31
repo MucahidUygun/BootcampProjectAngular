@@ -68,7 +68,7 @@
   
                       <div class="col-md-6 d-flex justify-content-center">
                         <!-- Simple link -->
-                        <a routerLink="#!">Şifreni mi unuttun?</a>
+                        <a routerLink="/forgot-password">Şifreni mi unuttun?</a>
                       </div>
                     </div>
   
@@ -179,6 +179,26 @@
             </mdb-tabs>
           </div></div></div></div>
   </div>
-
+  <ng-template #verificationCodeTemplate>
+    <div class="modal-header">
+      <h5 class="modal-title">Doğrulama Kodu</h5>
+      <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>E-postanıza gelen doğrulama kodunu giriniz:</p>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="verificationCode">Doğrulama Kodu</label>
+          <input type="text" class="form-control" id="verificationCode" formControlName="authenticatorCode" placeholder="Kodunuzu girin">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Kapat</button>
+      <button type="button" class="btn btn-primary" (click)="verifyCode()">Giriş Yap</button>
+    </div>
+  </ng-template>
 
 </section>
