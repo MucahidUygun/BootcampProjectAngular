@@ -1,0 +1,42 @@
+<div>
+    <h3>Bootcamp Resmi Ekle</h3>
+    <form enctype="multipart/form-data" (ngSubmit)="add()" [formGroup]="bootcampImageCreateForm">
+      <label for="bootcampId">Bootcamp Seç:</label>
+      <select id="bootcampId" formControlName="bootcampId" style="width: 200px;">
+        <option *ngFor="let bootcamp of bootcampList.items" [value]="bootcamp.id">{{ bootcamp.name }}</option>
+      </select>
+      <label for="imagePath">Resim Yolu:</label>
+      <input type="text" formControlName="imagePath" id="imagePath">
+      <label for="file">Resim Seç:</label>
+      <input type="file" formControlName="file" name="formFile" required (change)="onFileChange($event)" id="file">
+      <button type="submit">Ekle</button>
+    </form>
+  </div>
+  <div><h3>Bootcamp Resmi Güncelle</h3>
+    <form [formGroup]="bootcampImageUpdateForm" (ngSubmit)="updateBootcampImage()">
+      <div class="form-group">
+        <label for="bootcampId">Bootcamp Seç:</label>
+      <select id="bootcampId" formControlName="bootcampId" style="width: 200px;">
+        <option *ngFor="let bootcamp of bootcampList.items" [value]="bootcamp.id">{{ bootcamp.name }}</option>
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="id">Değişecek Resim Id:</label>
+      <input type="number" formControlName="id" id="id" style="width: 200px;">
+      </div>
+      <div class="form-group">
+        <label for="formFile">Image File:</label>
+        <input type="file" formControlName="formFile" id="formFile" (change)="onFileUpdateChange($event)">
+      </div>
+      <button type="submit" [disabled]="!bootcampImageUpdateForm.valid">Update</button>
+  
+  <div><h3>Bootcamp Resimleri Listesi</h3>
+    <div class="bootcamp-image-list">
+      <ul>
+        <li *ngFor="let image of bootcampImageList?.items">
+          <img [src]="image.imagePath" alt="Bootcamp Image">
+          <button (click)="deleteBootcampImage(image.id)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>

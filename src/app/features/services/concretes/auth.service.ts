@@ -111,7 +111,10 @@ export class AuthService {
     });
     return this.httpClient.get(`${this.apiUrl}/EnableEmailAuthenticator`, { headers });
   }
-
+  verifyEmailWelcomePage(activationKey: string): Observable<any> {
+    console.log(activationKey);
+    return this.httpClient.get(`${this.apiUrl}/VerifyEmailAuthenticator?ActivationKey=${encodeURIComponent(activationKey)}`);
+  }
   getDecodedToken() {
     try {
       this.token = this.storageService.getToken();

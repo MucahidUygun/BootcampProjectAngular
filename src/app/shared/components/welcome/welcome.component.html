@@ -1,0 +1,31 @@
+<section class="grainy-gradient-intro">
+  <svg height="0" width="0">
+    <filter id='f'>
+      <feTurbulence type='fractalNoise' baseFrequency='.5' />
+    </filter>
+  </svg>
+  <div class="welcome-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+  <div class="welcome-content position-absolute top-50 start-50 translate-middle text-center text-white">
+    <img src="assets/logo.png" alt="Logo" class="logo mb-5" style="max-width: 300px;">
+    <blockquote class="text-lg mt-3 mb-5" style="margin-right: 10px;" >Aramıza hoş Geldiniz! <br> Email adresiniz başarıyla onaylandı.</blockquote>
+    <div class="welcome-buttons mb-5">
+      <button type="button" routerLink="/bootcamps" class="btn btn-white btn-md" style="margin-right: 7px;">Keşfetmeye başla!</button>
+      <button type="button" routerLink="/login" class="btn btn-white btn-md">Giriş yap</button>
+    </div>
+    <div class="additional-info mb-5">
+      <h3 class="mb-3">Neden Biz?</h3>
+      <ul class="list-unstyled">
+        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Gelişmiş özellikler sunuyoruz.</li>
+        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Kullanıcı dostu arayüzümüz ile kolay kullanım sağlıyoruz.</li>
+        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Hızlı ve güvenilir bir platform sunuyoruz.</li>
+      </ul>
+    </div>
+    <div class="social-media-icons mb-5">
+      <a href="#" class="me-3 text-white"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="me-3 text-white"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="me-3 text-white"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="me-3 text-white"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p class="mt-5">&copy; 2024. Tüm hakları saklıdır.</p>
+  </div>
+</section>

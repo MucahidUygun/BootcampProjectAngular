@@ -1,0 +1,116 @@
+.welcome-container {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    color: #fff;
+  }
+  
+  .welcome-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+  
+  .welcome-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .welcome-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+  
+  .logo {
+    max-width: 300px;
+  }
+  
+  .welcome-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-buttons .btn {
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+  }
+  
+  .additional-info h3 {
+    margin-bottom: 1rem;
+  }
+  
+  .additional-info ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .additional-info li {
+    margin-bottom: 1rem;
+  }
+  
+  .social-media-icons a {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem;
+  }
+  .grainy-gradient-intro:before {
+    background: #c3ccea;
+    filter: url(#f);
+    overflow: hidden;
+  }
+  
+  .grainy-gradient-intro:before, .grainy-gradient-intro:after {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    --grad: radial-gradient(at 50%, red, rgba(255, 0, 0, 0.3) 55%, transparent 80%);
+    --mask: var(--grad), var(--grad);
+    -webkit-mask: var(--mask);
+    -webkit-mask-composite: source-in;
+    mask: var(--mask);
+    -webkit-mask-composite: source-in, xor;
+    mask-composite: intersect;
+    mix-blend-mode: unset;
+    content: "";
+    overflow: hidden;
+  }
+  
+  .grainy-gradient-intro:after {
+    overflow: hidden;
+    background: linear-gradient(90deg, #760dfe 20%, #f51b26, #fd9900);
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    scrollbar-width: none; 
+  }
+  
+
+  body::-webkit-scrollbar,
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  
+
+  body, html, .grainy-gradient-intro, .grainy-gradient-intro:before, .grainy-gradient-intro:after {
+    overflow: hidden !important;
+  }

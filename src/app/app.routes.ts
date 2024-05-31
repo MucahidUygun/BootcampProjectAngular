@@ -18,12 +18,15 @@ import { BlacklistComponent } from './pages/adminpanel/blacklist/blacklist.compo
 import { ApplicationStateComponent } from './pages/adminpanel/application-state/application-state.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { WelcomeComponent } from './shared/components/welcome/welcome.component';
+import { BootcampImageComponent } from './pages/adminpanel/bootcampimages/bootcampimage.component.';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: 'homepage', pathMatch: 'full' },
     { path: 'homepage', component: HomepageComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'welcome', component: WelcomeComponent },
     { path: 'bootcampcards', component: BootcampCardComponent },
     { path: 'bootcamp-detail/:bootcampId', component: BootcampDetailComponent },
     { path: 'adminpanel', component: AdminLayoutComponent,
@@ -34,6 +37,7 @@ export const routes: Routes = [
             { path: 'application', component: ApplicationComponent},
             { path: 'blacklist', component: BlacklistComponent},
             { path: 'applicationstate', component: ApplicationStateComponent},
+            { path: 'bootcampimage', component: BootcampImageComponent },
         ]
     },
     { path: '', component: NavbarComponent, canActivate: [AuthService] },

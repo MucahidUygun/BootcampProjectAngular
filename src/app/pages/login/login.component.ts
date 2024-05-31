@@ -61,8 +61,12 @@ export class LoginComponent{
   }
 
   onSubmit() {
-    // Burada giriş doğrulama işlemi yapabilirsiniz
-    this.dialog.open(this.verificationCodeTemplate);
+    const modalElement = document.getElementById('verificationCodeModal');
+    if (modalElement) {
+      modalElement.classList.add('show');
+      modalElement.style.display = 'block';
+      document.body.classList.add('modal-open');
+    }
   }
 
   createForgotPasswordMail(){
@@ -149,12 +153,11 @@ login() {
       {
         next: (response)=>{
           if (response.accessToken) {
-              this.toastrService.error("Hoş Geldin", "Başarı", { timeOut: 2500 });
+              //this.toastrService.error("Hoş Geldin", "Başarı", { timeOut: 2500 });
               this.router.navigate(['homepage']);
         }
         else {
-          // this.showModal=true
-          this.toastrService.success("Doğrulama Maili Gönderildi!")
+          //this.toastrService.success("Doğrulama Maili Gönderildi!")
           this.onSubmit()
         }
       },
@@ -171,5 +174,13 @@ login() {
     this.toastrService.error("Lütfen tüm alanları doldurun.", "Hata");
   }
   
+}
+closeVCLModal() {
+  const modalElement = document.getElementById('verificationCodeModal');
+  if (modalElement) {
+    modalElement.classList.remove('show');
+    modalElement.style.display = 'none';
+    document.body.classList.remove('modal-open'); 
+  }
 }
 }
