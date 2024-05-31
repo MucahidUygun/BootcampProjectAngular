@@ -54,7 +54,7 @@ export class ApplicantService extends ApplicantBaseService {
           nationalIdentity:response.nationalIdentity,
           email:response.email,
           password:response.password,
-          updatedDate:response.updatedDate,
+          imagePath:response.imagePath,
         }
         return newResponse;
       })

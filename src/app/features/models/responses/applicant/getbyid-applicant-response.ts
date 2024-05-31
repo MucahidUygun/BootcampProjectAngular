@@ -8,5 +8,5 @@ export interface GetbyidApplicantResponse {
     nationalIdentity:string;
     email:string;
     password:string;
-    updatedDate:Date;
+    imagePath:string;
 }

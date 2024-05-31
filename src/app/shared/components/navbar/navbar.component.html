@@ -107,10 +107,10 @@
           </ul>
         </li>
          <!-- Avatar -->
-        <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <ng-container *ngIf="isLoggedIn; else loggedOut" [(ngModel)]="applicant" >
           <li mdbDropdown class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" mdbDropdownToggle aria-expanded="false">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (25).webp" class="rounded-circle" height="23" loading="lazy"/>( Ad Soyad)
+            <img [src]="applicant.imagePath" class="rounded-circle" height="23" loading="lazy"/>{{applicant.firstName}} {{applicant.lastName}}
           </a>
             <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li>

@@ -9,19 +9,23 @@ import { ModalComponent } from '../modal/modal.component';
 import { AdminpanelComponent } from '../../../pages/adminpanel/adminpanel.component';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { filter } from 'rxjs/operators';
+import { GetbyidApplicantResponse } from '../../../features/models/responses/applicant/getbyid-applicant-response';
+import { ApplicantService } from '../../../features/services/concretes/applicant.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule,MdbDropdownModule,MdbRippleModule,CommonModule,MdbCollapseModule],
+  imports: [RouterModule,MdbDropdownModule,MdbRippleModule,MdbCollapseModule,ReactiveFormsModule,FormsModule,CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit{
   currentRoute: string = '';
   isLoggedIn!: boolean; 
+  applicant:GetbyidApplicantResponse;
   isAdmin!: boolean; 
   menuItems!:[];
   userLogged!:boolean;
@@ -31,7 +35,8 @@ export class NavbarComponent implements OnInit{
   constructor(
     private authService:AuthService,
     private router:Router,
-    private modalService: MdbModalService
+    private modalService: MdbModalService,
+    private applicantService:ApplicantService
   ){}
   openModal() {
     this.modalRef = this.modalService.open(ModalComponent, {
@@ -45,10 +50,11 @@ export class NavbarComponent implements OnInit{
   
    ngOnInit(): void {
      this.getMenuItems();
-     console.log(this.getUserName());
+    //  console.log(this.getUserName());
      console.log(this.getUserId())
      console.log(this.authService.getRoles())
      this.getUserId();
+     this.getUser();
      this.router.events
      .pipe(
        filter((event): event is NavigationStart => event instanceof NavigationStart)
@@ -57,6 +63,17 @@ export class NavbarComponent implements OnInit{
        this.currentRoute = event.url;
      });
  }
+
+ getUser(){
+  this.applicantService.getByIdApplicant(this.userId).subscribe(
+    (response)=>{
+      this.applicant=response;
+      console.log(this.applicant)
+    }
+  )
+ }
+
+
    sidebarOpen: boolean = false;
    toggleSidebar() {
      this.sidebarOpen = !this.sidebarOpen;
