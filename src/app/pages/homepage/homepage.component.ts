@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 
 
+declare var $: any;
 
 @Component({
   selector: 'app-homepage',
