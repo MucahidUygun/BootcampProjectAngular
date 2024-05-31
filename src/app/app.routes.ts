@@ -14,6 +14,8 @@ import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.
 import { BootcampCardComponent } from './features/components/bootcamp-card/bootcamp-card.component';
 import { BootcampDetailComponent } from './features/components/bootcamp-detail/bootcamp-detail.component';
 import { ApplicationComponent } from './pages/adminpanel/application/application.component';
+import { BlacklistComponent } from './pages/adminpanel/blacklist/blacklist.component';
+import { ApplicationStateComponent } from './pages/adminpanel/application-state/application-state.component';
 
 
 export const routes: Routes = [
@@ -22,12 +24,14 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'bootcampcards', component: BootcampCardComponent },
     { path: 'bootcamp-detail/:bootcampId', component: BootcampDetailComponent },
-    // { path: 'application', component: ApplicationComponent},
     { path: 'adminpanel', component: AdminLayoutComponent,
         children: [
             { path: '', component: AdminpanelComponent},
             { path: 'adminbootcamps', component: AdminbootcampComponent },
-            { path: 'admininstructors', component: AdmininstructorsComponent }
+            { path: 'admininstructors', component: AdmininstructorsComponent},
+            { path: 'application', component: ApplicationComponent},
+            { path: 'blacklist', component: BlacklistComponent},
+            { path: 'applicationstate', component: ApplicationStateComponent},
         ]
     },
     { path: '', component: NavbarComponent, canActivate: [AuthService] },

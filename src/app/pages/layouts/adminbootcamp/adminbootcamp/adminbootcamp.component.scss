@@ -33,3 +33,14 @@
       margin-left: 250px;
     }
   }
+  .container-fluid {
+  margin-left: 15px;
+  padding: 1rem;
+  margin-top: 15px;
+  height: calc(100vh - 60px);
+  overflow-y: visible;
+  transition: margin-left 0.3s ease;
+  }
+  .custom-table {
+    background-color: white;
+  }

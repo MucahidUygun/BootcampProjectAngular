@@ -99,7 +99,7 @@
       </article>
       <section class="posts">
         <article *ngFor="let bootcamp of bootcamps.items">
-          <div class="card border text-center border-primary shadow-0" (click)="toggleCardBody(bootcamp.id)">
+          <div class="card border text-center border-primary shadow-0" (click)="toggleCardBody(bootcamp.id, $event)">
             <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
               <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="img-fluid" />
               <a routerLink="#">
@@ -125,9 +125,10 @@
                   additional content. This content is a little bit longer.
                   {{ bootcamp.id }}
                 </p>
+                <button type="button" class="btn btn-secondary" (click)="viewDetails(bootcamp.id); $event.stopPropagation();">Detay</button>
               </blockquote>
               <hr style="background-color: hsl(0, 0%, 75%)" />
-  
+      
               <p class="text-uppercase text-muted small fw-bold">Eğitmen Bilgileri</p>
               <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
@@ -141,7 +142,6 @@
                     bootcamp.bootcampStateId}}</p>
                 </div>
               </div>
-  
             </div>
             <div class="card-footer">
               <small class="date">Kurs numarası : {{ bootcamp.id }} - Son Düzenlenme: {{ bootcamp.startDate |
@@ -150,6 +150,7 @@
           </div>
         </article>
       </section>
+            
     </div>
   
     <footer id="footer">

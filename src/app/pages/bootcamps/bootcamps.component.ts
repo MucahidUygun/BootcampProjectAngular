@@ -1,5 +1,5 @@
 import { Component, HostListener ,EventEmitter, Input, NgModule, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, Router,RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -36,7 +36,7 @@ export class BootcampsComponent {
     items: [],
   };
 
-  constructor(private bootcampService: BootcampService) {}
+  constructor(private bootcampService: BootcampService,private router: Router) {}
   readonly PAGE_SIZE = 8;
   ngOnInit(): void {
     this.getBootcamps({ page: 0, pageSize: this.PAGE_SIZE });
@@ -66,8 +66,13 @@ TopOfPage(): boolean {
 
   isOpen: { [key: string]: boolean } = {};
 
-  toggleCardBody(id: number) {
-    this.isOpen[id.toString()] = !this.isOpen[id.toString()];
+  toggleCardBody(id: number, event: Event): void {
+    if ((event.target as HTMLElement).tagName !== 'BUTTON') {
+      this.isOpen[id] = !this.isOpen[id];
+    }
   }
-
+  
+  viewDetails(bootcampId: number): void {
+    this.router.navigate(['/bootcamp-detail', bootcampId]);
+  }
 }
